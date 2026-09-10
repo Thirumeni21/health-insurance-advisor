@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { ArrowRight, CheckCircle2, RotateCcw, Users, Wallet, Shield, HeartHandshake, Sparkles, BookOpen } from "lucide-react";
-import confetti from "canvas-confetti";
 import { UserProtectionProfile } from "@/types/questionnaire";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
@@ -28,13 +27,7 @@ export const PersonalizedInquiry: React.FC<PersonalizedInquiryProps> = ({
   const finalRef = t.stage2.finalReflection;
 
   const handleComplete = (type: "options" | "learn_more") => {
-    sound.playChime(760, 0.25);
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ["#C47B5A", "#D8B98A", "#F1E9DC", "#B98A91"],
-    });
+    sound.playChime(640, 0.2);
     setIsCompleted(true);
   };
 

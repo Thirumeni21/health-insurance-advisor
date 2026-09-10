@@ -39,9 +39,13 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
   onUpdate,
   onContinue,
 }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
-  const isValid = !!householdIncome && !!currentInsurance && !!emergencySavings;
+  const isValid =
+    !!householdIncome &&
+    !!currentInsurance &&
+    (currentInsurance === "none" || !!currentCover) &&
+    !!emergencySavings;
 
   return (
     <div className="w-full max-w-3xl mx-auto animate-fadeIn select-none z-10 relative">
@@ -112,9 +116,13 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
                 type="button"
                 onClick={() => {
                   sound.playSoftPulse();
-                  onUpdate({ currentInsurance: opt.id });
                   if (opt.id === "none") {
-                    onUpdate({ currentCover: "0" });
+                    onUpdate({ currentInsurance: "none", currentCover: "0" });
+                  } else {
+                    onUpdate({
+                      currentInsurance: opt.id,
+                      currentCover: currentCover === "0" ? undefined : (currentCover ?? undefined),
+                    });
                   }
                 }}
                 className={`min-h-[52px] p-3.5 rounded-xl text-left border transition-all flex items-start space-x-3 ${
@@ -146,34 +154,55 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
         </div>
 
         {/* 3. Existing Coverage Amount */}
-        <div className="luxury-card p-6 rounded-2xl">
-          <label className="text-xs font-mono uppercase tracking-wider text-dusty-mauve block mb-1">
-            {t.step4.coverLabel}
-          </label>
-          <p className="text-xs text-dusty-mauve/70 mb-4 font-light">
-            {t.step4.coverDesc}
-          </p>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {CURRENT_COVER_OPTIONS.map((cov) => (
-              <button
-                key={cov.id}
-                type="button"
-                onClick={() => {
-                  sound.playSoftPulse();
-                  onUpdate({ currentCover: cov.id });
-                }}
-                className={`min-h-[44px] py-3 px-2 rounded-xl text-xs font-mono text-center border transition-all ${
-                  currentCover === cov.id
-                    ? "bg-burnished-copper/20 border-burnished-copper text-warm-ivory font-medium shadow-copper-glow"
-                    : "bg-obsidian-plum/70 border-glass-border text-dusty-mauve hover:text-warm-ivory"
-                }`}
-              >
-                {cov.label}
-              </button>
-            ))}
+        {currentInsurance === "none" ? (
+          <div className="luxury-card p-5 rounded-2xl border border-glass-border/60 bg-obsidian-plum/50 flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <span className="text-xl">🛡️</span>
+              <div>
+                <p className="font-serif text-sm text-warm-ivory">
+                  {language === "ta" ? "தற்போது காப்பீடு இல்லை (₹0)" : "No Active Cover (₹0)"}
+                </p>
+                <p className="text-xs text-dusty-mauve/70 font-light mt-0.5">
+                  {language === "ta"
+                    ? "நீங்கள் தற்போது ஹெல்த் இன்ஷூரன்ஸ் இல்லை என்று குறிப்பிட்டதால் இது ₹0 ஆக அமைக்கப்பட்டுள்ளது."
+                    : "Automatically set to ₹0 since you currently have no active health insurance."}
+                </p>
+              </div>
+            </div>
+            <span className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-burnished-copper/20 text-burnished-copper border border-burnished-copper/40 whitespace-nowrap ml-3">
+              {language === "ta" ? "பொருந்தாது" : "Not Applicable"}
+            </span>
           </div>
-        </div>
+        ) : (
+          <div className="luxury-card p-6 rounded-2xl">
+            <label className="text-xs font-mono uppercase tracking-wider text-dusty-mauve block mb-1">
+              {t.step4.coverLabel}
+            </label>
+            <p className="text-xs text-dusty-mauve/70 mb-4 font-light">
+              {t.step4.coverDesc}
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {CURRENT_COVER_OPTIONS.filter((cov) => cov.id !== "0").map((cov) => (
+                <button
+                  key={cov.id}
+                  type="button"
+                  onClick={() => {
+                    sound.playSoftPulse();
+                    onUpdate({ currentCover: cov.id });
+                  }}
+                  className={`min-h-[44px] py-3 px-2 rounded-xl text-xs font-mono text-center border transition-all ${
+                    currentCover === cov.id
+                      ? "bg-burnished-copper/20 border-burnished-copper text-warm-ivory font-medium shadow-copper-glow"
+                      : "bg-obsidian-plum/70 border-glass-border text-dusty-mauve hover:text-warm-ivory"
+                  }`}
+                >
+                  {cov.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* 4. Emergency Savings Buffer */}
         <div className="luxury-card p-6 rounded-2xl">

@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { ArrowRight, CheckCircle2, Code2, Users, Wallet, Edit3, ShieldAlert } from "lucide-react";
-import confetti from "canvas-confetti";
 import { UserProtectionProfile } from "@/types/questionnaire";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
@@ -32,14 +31,7 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
     }
 
     setConsentError(false);
-    sound.playChime(760, 0.25);
-    confetti({
-      particleCount: 90,
-      spread: 75,
-      origin: { y: 0.6 },
-      colors: ["#C47B5A", "#D8B98A", "#F1E9DC", "#B98A91"],
-    });
-
+    sound.playChime(640, 0.18);
     onProceedToScenario();
   };
 

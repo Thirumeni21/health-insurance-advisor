@@ -247,17 +247,18 @@ function ProtectionAppContent() {
             currentCover={profile.insurance.existingCoverage}
             emergencySavings={profile.financial.emergencySavings}
             onUpdate={(data) => {
-              if (data.householdIncome || data.emergencySavings) {
-                setFinancial({
-                  incomeRange: data.householdIncome ?? profile.financial.incomeRange,
-                  emergencySavings: data.emergencySavings ?? profile.financial.emergencySavings,
-                });
+              const finUpdates: Partial<typeof profile.financial> = {};
+              if (data.householdIncome !== undefined) finUpdates.incomeRange = data.householdIncome;
+              if (data.emergencySavings !== undefined) finUpdates.emergencySavings = data.emergencySavings;
+              if (Object.keys(finUpdates).length > 0) {
+                setFinancial(finUpdates);
               }
-              if (data.currentInsurance || data.currentCover) {
-                setInsurance({
-                  status: data.currentInsurance ?? profile.insurance.status,
-                  existingCoverage: data.currentCover ?? profile.insurance.existingCoverage,
-                });
+
+              const insUpdates: Partial<typeof profile.insurance> = {};
+              if (data.currentInsurance !== undefined) insUpdates.status = data.currentInsurance;
+              if (data.currentCover !== undefined) insUpdates.existingCoverage = data.currentCover;
+              if (Object.keys(insUpdates).length > 0) {
+                setInsurance(insUpdates);
               }
             }}
             onContinue={() => {
