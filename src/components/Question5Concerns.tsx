@@ -85,14 +85,14 @@ export const Question5Concerns: React.FC<Question5ConcernsProps> = ({
       </div>
 
       {/* Continue Action */}
-      <div className="flex items-center justify-start">
+      <div className="flex items-center justify-center sm:justify-start">
         <button
           onClick={() => {
             sound.playChime(660, 0.15);
             onContinue();
           }}
           disabled={!isValid}
-          className={`group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 min-h-[44px] ${
+          className={`group inline-flex items-center justify-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 min-h-[48px] w-full sm:w-auto ${
             isValid
               ? "btn-primary"
               : "bg-bg-soft text-muted cursor-not-allowed border border-hairline"

@@ -13,9 +13,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStart }) => {
   const { t, language } = useLanguage();
 
   return (
-    <div className="relative min-h-[85vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-16 z-10 select-none animate-fadeIn">
+    <div className="relative min-h-[80vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-10 sm:py-16 z-10 select-none animate-fadeIn">
       {/* Category Label */}
-      <div className="mb-6 inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-bg-soft border border-hairline">
+      <div className="mb-5 sm:mb-6 inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-bg-soft border border-hairline">
         <span className="w-1.5 h-1.5 rounded-full bg-lavender-600" />
         <span className="text-xs font-semibold tracking-wider uppercase text-ink-soft">
           {t.hero.tag}
@@ -23,23 +23,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStart }) => {
       </div>
 
       {/* Hero Headline */}
-      <h1 className={`font-display font-bold text-4xl sm:text-6xl lg:text-7xl text-ink max-w-4xl mx-auto leading-[1.08] tracking-tight mb-6 ${language === "ta" ? "text-3xl sm:text-5xl lg:text-6xl" : ""}`}>
+      <h1 className={`font-display font-bold text-3xl sm:text-5xl lg:text-7xl text-ink max-w-4xl mx-auto leading-[1.12] sm:leading-[1.08] tracking-tight mb-5 sm:mb-6 ${language === "ta" ? "text-2xl sm:text-4xl lg:text-6xl leading-[1.2]" : ""}`}>
         {t.hero.title}
       </h1>
 
       {/* Subheading */}
-      <p className="font-sans text-sm sm:text-base text-ink-soft max-w-[580px] mx-auto mb-10 leading-relaxed font-normal">
+      <p className="font-sans text-xs sm:text-sm md:text-base text-ink-soft max-w-[580px] mx-auto mb-8 sm:mb-10 leading-relaxed font-normal">
         {t.hero.subtitle}
       </p>
 
       {/* Primary CTA */}
-      <div className="flex flex-col items-center justify-center space-y-3">
+      <div className="flex flex-col items-center justify-center space-y-3 w-full sm:w-auto">
         <button
           onClick={() => {
             sound.playChime(520, 0.15);
             onStart();
           }}
-          className="group inline-flex items-center space-x-3 px-8 py-4 rounded-full bg-ink hover:bg-[#2e283b] text-white text-sm font-medium tracking-wide transition-all duration-300 shadow-subtle hover:shadow-elevated hover:-translate-y-0.5"
+          className="group inline-flex items-center justify-center space-x-3 px-8 py-4 rounded-full bg-ink hover:bg-[#2e283b] text-white text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 shadow-subtle hover:shadow-elevated hover:-translate-y-0.5 w-full sm:w-auto min-h-[48px]"
         >
           <span>{t.hero.cta}</span>
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

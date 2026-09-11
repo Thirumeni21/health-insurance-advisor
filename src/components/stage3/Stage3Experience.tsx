@@ -55,8 +55,8 @@ export const Stage3Experience: React.FC<Stage3ExperienceProps> = ({
 
       {/* Top Persistent Chapter Stepper Navigation */}
       <div className="w-full max-w-4xl mx-auto px-4 pt-4 pb-2 z-20">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-3">
-          <div className="flex items-center space-x-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-hairline pb-3">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-lavender-600 animate-pulse" />
             <span className="font-mono text-xs text-ink uppercase tracking-wider font-semibold">
               {t.stage3.nav.stageTag}
@@ -68,7 +68,7 @@ export const Stage3Experience: React.FC<Stage3ExperienceProps> = ({
           </div>
 
           {/* Chapter Navigation Pills */}
-          <div className="flex items-center space-x-1.5">
+          <div className="flex items-center space-x-1.5 self-start sm:self-auto pt-1 sm:pt-0">
             {[0, 1, 2, 3, 4].map((idx) => {
               const isCurrent = idx === currentChapterIndex;
               const isPast = idx < currentChapterIndex;

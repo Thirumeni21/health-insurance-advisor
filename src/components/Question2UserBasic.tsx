@@ -52,10 +52,10 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
             {t.step2.tag}
           </span>
         </div>
-        <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-ink tracking-tight mb-3">
+        <h1 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-ink tracking-tight mb-2.5 sm:mb-3">
           {t.step2.title}
         </h1>
-        <p className="font-sans text-sm text-ink-soft max-w-md mx-auto font-normal">
+        <p className="font-sans text-xs sm:text-sm md:text-base text-ink-soft max-w-md mx-auto font-normal">
           {t.step2.subtitle}
         </p>
       </div>
@@ -248,7 +248,7 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
             onContinue();
           }}
           disabled={!isValid}
-          className={`group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 min-h-[44px] ${
+          className={`group inline-flex items-center justify-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 min-h-[48px] w-full sm:w-auto ${
             isValid
               ? "bg-ink hover:bg-[#2e283b] text-white shadow-subtle hover:shadow-elevated hover:scale-105"
               : "bg-bg-soft text-muted cursor-not-allowed border border-hairline"

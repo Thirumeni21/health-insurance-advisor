@@ -69,10 +69,10 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
             {t.step3.tag}
           </span>
         </div>
-        <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-ink tracking-tight mb-3">
+        <h1 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-ink tracking-tight mb-2.5 sm:mb-3">
           {t.step3.title}
         </h1>
-        <p className="font-sans text-sm text-ink-soft max-w-md mx-auto font-normal">
+        <p className="font-sans text-xs sm:text-sm md:text-base text-ink-soft max-w-md mx-auto font-normal">
           {t.step3.subtitle}
         </p>
       </div>
@@ -211,7 +211,7 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
             sound.playChime(580, 0.12);
             onContinue();
           }}
-          className="group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-ink hover:bg-[#2e283b] text-white shadow-subtle hover:shadow-elevated hover:scale-105 transition-all duration-300 min-h-[44px]"
+          className="group inline-flex items-center justify-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-ink hover:bg-[#2e283b] text-white shadow-subtle hover:shadow-elevated hover:scale-105 transition-all duration-300 min-h-[48px] w-full sm:w-auto"
         >
           <span>{t.step3.continue}</span>
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

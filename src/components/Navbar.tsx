@@ -36,22 +36,22 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-hairline h-[72px]">
-      <div className="max-w-editorial mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+      <div className="max-w-editorial mx-auto px-3.5 sm:px-6 lg:px-8 h-full flex items-center justify-between">
         {/* Brand */}
         <div
-          className="flex items-center space-x-3 cursor-pointer group"
+          className="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer group"
           onClick={() => {
             sound.playChime(440, 0.1);
             if (onReset) onReset();
           }}
         >
-          <div className="w-9 h-9 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center text-ink group-hover:scale-105 transition-transform">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center text-ink group-hover:scale-105 transition-transform flex-shrink-0">
             <Shield className="w-4 h-4 text-lavender-600" />
           </div>
-          <div>
+          <div className="min-w-0">
             <div className="flex items-center space-x-2">
-              <span className="font-display font-bold text-lg tracking-tight text-ink">
-                {t.nav.brand} <span className="text-muted font-sans text-xs uppercase tracking-wider font-normal">{t.nav.tagline}</span>
+              <span className="font-display font-bold text-base sm:text-lg tracking-tight text-ink whitespace-nowrap">
+                {t.nav.brand} <span className="hidden sm:inline text-muted font-sans text-xs uppercase tracking-wider font-normal">{t.nav.tagline}</span>
               </span>
             </div>
           </div>

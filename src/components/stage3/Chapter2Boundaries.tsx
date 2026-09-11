@@ -115,13 +115,13 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
           </div>
 
           {/* Filter Pills */}
-          <div className="flex items-center space-x-1.5 self-start sm:self-auto">
+          <div className="flex flex-wrap items-center gap-1.5 self-start sm:self-auto">
             <button
               onClick={() => {
                 sound.playSoftPulse();
                 setActiveCategoryFilter("all");
               }}
-              className={`px-3 py-1 rounded-full text-xs font-mono transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all ${
                 activeCategoryFilter === "all"
                   ? "bg-ink text-white font-medium"
                   : "bg-bg-soft text-ink-soft hover:text-ink border border-hairline"
@@ -134,7 +134,7 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
                 sound.playSoftPulse();
                 setActiveCategoryFilter("covered");
               }}
-              className={`px-3 py-1 rounded-full text-xs font-mono transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all ${
                 activeCategoryFilter === "covered"
                   ? "bg-sage-100 text-ink border border-sage-300 font-semibold"
                   : "bg-bg-soft text-ink-soft hover:text-ink border border-hairline"
@@ -147,7 +147,7 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
                 sound.playSoftPulse();
                 setActiveCategoryFilter("not_covered");
               }}
-              className={`px-3 py-1 rounded-full text-xs font-mono transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all ${
                 activeCategoryFilter === "not_covered"
                   ? "bg-rose-100 text-rose-800 border border-rose-200 font-semibold"
                   : "bg-bg-soft text-ink-soft hover:text-ink border border-hairline"

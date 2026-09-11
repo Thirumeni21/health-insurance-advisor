@@ -55,7 +55,7 @@ export const Chapter3Claims: React.FC<Chapter3ClaimsProps> = ({
         </div>
 
         {/* Route Selector Buttons */}
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             type="button"
             onClick={() => {

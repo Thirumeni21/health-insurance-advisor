@@ -155,21 +155,21 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
 
         {/* 3. Existing Coverage Amount */}
         {currentInsurance === "none" ? (
-          <div className="p-5 rounded-[16px] border border-hairline bg-bg-soft flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <span className="text-xl">🛡️</span>
+          <div className="p-4 sm:p-5 rounded-[16px] border border-hairline bg-bg-soft flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-start sm:items-center space-x-3">
+              <span className="text-xl flex-shrink-0 mt-0.5 sm:mt-0">🛡️</span>
               <div>
                 <p className="font-display font-medium text-sm text-ink">
                   {language === "ta" ? "தற்போது காப்பீடு இல்லை (₹0)" : "No Active Cover (₹0)"}
                 </p>
-                <p className="text-xs text-ink-soft mt-0.5">
+                <p className="text-xs text-ink-soft mt-0.5 leading-relaxed">
                   {language === "ta"
                     ? "நீங்கள் தற்போது ஹெல்த் இன்ஷூரன்ஸ் இல்லை என்று குறிப்பிட்டதால் இது ₹0 ஆக அமைக்கப்பட்டுள்ளது."
                     : "Automatically set to ₹0 since you currently have no active health insurance."}
                 </p>
               </div>
             </div>
-            <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-lavender-100 text-ink border border-hairline whitespace-nowrap ml-3">
+            <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-lavender-100 text-ink border border-hairline whitespace-nowrap self-start sm:self-auto flex-shrink-0">
               {language === "ta" ? "பொருந்தாது" : "Not Applicable"}
             </span>
           </div>
@@ -253,7 +253,7 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
             onContinue();
           }}
           disabled={!isValid}
-          className={`group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 min-h-[44px] ${
+          className={`group inline-flex items-center justify-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 min-h-[48px] w-full sm:w-auto ${
             isValid
               ? "btn-primary"
               : "bg-bg-soft text-muted cursor-not-allowed border border-hairline"

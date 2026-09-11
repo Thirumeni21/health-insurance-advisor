@@ -364,10 +364,10 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
 
         {/* Action Buttons */}
         {!isCompletedModalOpen ? (
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 pt-4 w-full sm:w-auto">
             <button
               onClick={handleCtaClick}
-              className="btn-primary min-h-[44px] px-8 py-4 text-xs group inline-flex items-center space-x-3"
+              className="btn-primary min-h-[48px] px-8 py-4 text-xs group inline-flex items-center justify-center space-x-3 w-full sm:w-auto"
             >
               <span>{ch.ctas.primary}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -375,7 +375,7 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
 
             <button
               onClick={handleCtaClick}
-              className="inline-flex items-center space-x-2 px-6 py-4 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all min-h-[44px]"
+              className="inline-flex items-center justify-center space-x-2 px-6 py-4 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all min-h-[48px] w-full sm:w-auto"
             >
               <Compass className="w-4 h-4 text-lavender-600" />
               <span>{ch.ctas.secondary}</span>

@@ -67,7 +67,7 @@ export const Chapter4Household: React.FC<Chapter4HouseholdProps> = ({
             </p>
           </div>
 
-          <div className="flex items-center space-x-1.5 self-start sm:self-auto">
+          <div className="flex flex-wrap items-center gap-1.5 self-start sm:self-auto">
             <button
               onClick={() => {
                 sound.playSoftPulse();

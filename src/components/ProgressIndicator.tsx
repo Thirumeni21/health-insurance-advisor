@@ -23,28 +23,28 @@ export const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
   const progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
 
   return (
-    <div className="w-full max-w-xl mx-auto mb-8 z-20 relative select-none">
-      <div className="flex items-center justify-between mb-3 text-xs font-sans text-muted">
+    <div className="w-full max-w-xl mx-auto mb-6 sm:mb-8 z-20 relative select-none">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5 text-xs font-sans text-muted">
         {canGoBack ? (
           <button
             onClick={onBack}
-            className="group flex items-center space-x-1.5 text-muted hover:text-ink transition-colors font-medium"
+            className="group flex items-center space-x-1.5 text-muted hover:text-ink transition-colors font-medium text-[11px] sm:text-xs"
           >
             <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5 text-lavender-600" />
             <span>{t.progress.previous}</span>
           </button>
         ) : (
-          <div className="w-10" />
+          <div className="w-8" />
         )}
 
-        <div className="flex items-center space-x-1.5 font-sans font-medium text-ink-soft">
+        <div className="flex items-center space-x-1.5 font-sans font-medium text-ink-soft text-[11px] sm:text-xs">
           <span>{t.progress.step}</span>
           <span className="text-ink font-bold">0{currentStep}</span>
           <span className="text-hairline">/</span>
           <span className="text-muted">0{totalSteps}</span>
         </div>
 
-        <span className="text-xs uppercase tracking-wider text-lavender-600 font-semibold px-2.5 py-0.5 rounded-full bg-lavender-100 border border-lavender-300">
+        <span className="text-[10px] sm:text-xs uppercase tracking-wider text-lavender-600 font-semibold px-2 sm:px-2.5 py-0.5 rounded-full bg-lavender-100 border border-lavender-300">
           {stepCategory}
         </span>
       </div>

@@ -77,8 +77,8 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-6 select-none z-10 relative animate-fadeIn">
       {/* Act Stepper Bar */}
-      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
-        <div className="flex items-center space-x-2">
+      <div className="mb-5 sm:mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-hairline pb-3 sm:pb-4">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
           <span className="w-2 h-2 rounded-full bg-lavender-600 animate-pulse" />
           <span className="font-mono text-xs text-ink uppercase tracking-wider font-semibold">
             {scenario.title[lang]}
@@ -90,7 +90,7 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
         </div>
 
         {/* Minimal Act Pills */}
-        <div className="flex items-center space-x-1.5">
+        <div className="flex items-center space-x-1.5 self-start sm:self-auto pt-1 sm:pt-0">
           {[0, 1, 2, 3, 4, 5, 6].map((idx) => {
             let pillClass = "h-1.5 rounded-full transition-all duration-300 ";
             if (idx === currentActIndex) {
@@ -201,16 +201,16 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
               : "We explore this situation not to cause alarm, but to thoughtfully observe how healthcare and finances interface in real life."}
           </div>
 
-          <div className="pt-4 flex items-center justify-center space-x-4">
+          <div className="pt-4 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto">
             <button
               onClick={handlePrevAct}
-              className="px-5 py-3 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all"
+              className="px-5 py-3 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all min-h-[44px]"
             >
               <ArrowLeft className="w-4 h-4 inline mr-1.5" /> Back
             </button>
             <button
               onClick={handleNextAct}
-              className="btn-primary min-h-[44px] px-8 py-3.5 text-xs group inline-flex items-center space-x-3"
+              className="btn-primary min-h-[44px] px-8 py-3.5 text-xs group inline-flex items-center justify-center space-x-3"
             >
               <span>{nav.seeHospitalJourney}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

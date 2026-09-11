@@ -264,10 +264,10 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
           {t.summary.transitionSub}
         </p>
 
-        <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full">
           <button
             onClick={handleLaunchScenario}
-            className="btn-primary min-h-[44px] px-8 py-4 text-xs group inline-flex items-center space-x-3"
+            className="btn-primary min-h-[48px] px-8 py-4 text-xs group inline-flex items-center justify-center space-x-3 w-full sm:w-auto"
           >
             <span>{t.summary.cta}</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -275,7 +275,7 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
 
           <button
             onClick={() => setShowJsonModal(true)}
-            className="inline-flex items-center space-x-2 px-5 py-3 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all min-h-[44px]"
+            className="inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all min-h-[48px] w-full sm:w-auto"
             title="Inspect Stage 2 Blueprint JSON"
           >
             <Code2 className="w-3.5 h-3.5 text-lavender-600" />

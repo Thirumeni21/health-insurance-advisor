@@ -23,17 +23,17 @@ export const Question1Household: React.FC<Question1HouseholdProps> = ({
   return (
     <div className="w-full max-w-3xl mx-auto animate-fadeIn select-none z-10 relative">
       {/* Title */}
-      <div className="text-center mb-10">
+      <div className="text-center mb-8 sm:mb-10">
         <div className="mb-2 inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-bg-soft border border-hairline">
           <span className="w-1.5 h-1.5 rounded-full bg-lavender-600" />
           <span className="text-xs font-semibold uppercase tracking-wider text-ink-soft">
             {t.step1.tag}
           </span>
         </div>
-        <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-ink tracking-tight mb-3">
+        <h1 className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl text-ink tracking-tight mb-2.5 sm:mb-3">
           {t.step1.title}
         </h1>
-        <p className="font-sans text-sm sm:text-base text-ink-soft max-w-md mx-auto font-normal">
+        <p className="font-sans text-xs sm:text-sm md:text-base text-ink-soft max-w-md mx-auto font-normal">
           {t.step1.subtitle}
         </p>
       </div>
@@ -99,7 +99,7 @@ export const Question1Household: React.FC<Question1HouseholdProps> = ({
             onContinue();
           }}
           disabled={!selectedType}
-          className={`group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 min-h-[44px] ${
+          className={`group inline-flex items-center justify-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 min-h-[48px] w-full sm:w-auto ${
             selectedType
               ? "bg-ink hover:bg-[#2e283b] text-white shadow-subtle hover:shadow-elevated hover:scale-105"
               : "bg-bg-soft text-muted cursor-not-allowed border border-hairline"

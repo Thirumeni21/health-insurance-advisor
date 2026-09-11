@@ -100,7 +100,7 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
             <label className="text-xs font-mono uppercase tracking-wider text-ink-soft block mb-2">
               {t.modal.relLabel}
             </label>
-            <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-1.5">
               {(["Spouse", "Child", "Mother", "Father", "Other Dependent"] as FamilyRelationship[]).map(
                 (rel) => (
                   <button
@@ -113,7 +113,7 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
                       if (rel === "Mother") setGender("female");
                       if (rel === "Father") setGender("male");
                     }}
-                    className={`min-h-[44px] py-2 px-1 text-center text-xs rounded-xl border transition-all ${
+                    className={`min-h-[44px] py-2 px-1.5 text-center text-xs rounded-xl border transition-all ${
                       relationship === rel
                         ? "bg-lavender-100 border-lavender-600 text-ink font-semibold shadow-sm"
                         : "bg-white border-hairline text-ink-soft hover:bg-bg-soft hover:text-ink"

@@ -50,7 +50,7 @@ export const InsuranceConceptsInteractive: React.FC<InsuranceConceptsInteractive
       </div>
 
       {/* 6 Concept Pills Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 mb-6">
         {conceptList.map((c) => {
           const isActive = (activeConceptId || "premium") === c.id;
           return (
@@ -68,7 +68,7 @@ export const InsuranceConceptsInteractive: React.FC<InsuranceConceptsInteractive
               }`}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="font-sans text-base font-semibold text-ink">{c.title}</span>
+                <span className="font-sans text-sm sm:text-base font-semibold text-ink">{c.title}</span>
                 {isActive && <CheckCircle2 className="w-4 h-4 text-lavender-600 flex-shrink-0" />}
               </div>
               <span className="text-[10px] font-mono text-lavender-600 uppercase tracking-wider block">{c.tag}</span>

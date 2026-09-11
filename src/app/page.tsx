@@ -150,7 +150,7 @@ function ProtectionAppContent() {
       />
 
       {/* Main Experience Body */}
-      <main className="relative z-10 flex-1 flex flex-col justify-center pt-20 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-full">
+      <main className="relative z-10 flex-1 flex flex-col justify-center pt-24 sm:pt-28 pb-12 sm:pb-16 px-3.5 sm:px-6 lg:px-8 max-w-full">
         {/* Step Progress Line */}
         {isLanguageSelected && stage !== "hero" && stage !== "summary" && stage !== "stage2" && stage !== "stage3" && (
           <ProgressIndicator
