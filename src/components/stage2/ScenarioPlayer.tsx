@@ -21,6 +21,8 @@ import { UserProtectionProfile } from "@/types/questionnaire";
 import { PersonalizedScenario, ScenarioChoiceId } from "@/types/stage2";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
+import { getCharacterForTargetPerson, getCharacterForUser } from "@/lib/characterEngine";
+import { FamilyCharacter } from "../character/FamilyCharacter";
 
 interface ScenarioPlayerProps {
   scenario: PersonalizedScenario;
@@ -74,6 +76,9 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
   const insuranceStatus = profile.insurance.status || "none";
   const insuranceNote = personalContext.insuranceLabels[insuranceStatus] || personalContext.insuranceLabels.none;
 
+  const targetChar = getCharacterForTargetPerson(scenario.targetPerson, profile.user);
+  const userChar = getCharacterForUser(profile.user);
+
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-6 select-none z-10 relative animate-fadeIn">
       {/* Act Stepper Bar */}
@@ -126,6 +131,11 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
             <span>{acts.act1_tag}</span>
           </div>
 
+          {/* Persistent Character Anchor */}
+          <div className="flex justify-center -mb-2">
+            <FamilyCharacter config={targetChar} variant="bust" size="md" pose="idle" />
+          </div>
+
           <div className="max-w-2xl mx-auto space-y-4">
             <h2 className="font-display text-3xl sm:text-5xl font-semibold text-ink leading-tight tracking-tight">
               {scenario.act1_normal.headline[lang]}
@@ -150,9 +160,7 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
 
           {/* Focus Persona Card */}
           <div className="p-5 rounded-[20px] bg-bg-soft border border-hairline max-w-md mx-auto text-left shadow-subtle flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-full bg-lavender-100 border-2 border-lavender-300 flex items-center justify-center text-ink font-display font-bold text-sm shadow-xs flex-shrink-0">
-              {scenario.targetPerson.name.substring(0, 2).toUpperCase()}
-            </div>
+            <FamilyCharacter config={targetChar} variant="avatar" size="md" />
             <div className="flex-1 min-w-0">
               <span className="text-[10px] font-mono uppercase tracking-wider text-lavender-600 font-semibold block mb-0.5">
                 {lang === "ta" ? "மையப் புள்ளி (Focus Persona)" : "Scenario Protagonist"}
@@ -188,6 +196,11 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-lavender-100 border border-hairline text-xs font-mono text-ink font-medium">
             <AlertCircle className="w-3.5 h-3.5 text-lavender-600" />
             <span>{acts.act2_tag}</span>
+          </div>
+
+          {/* Persistent Character during Interruption */}
+          <div className="flex justify-center -mb-2">
+            <FamilyCharacter config={targetChar} variant="bust" size="md" pose="thinking" />
           </div>
 
           <div className="max-w-2xl mx-auto space-y-4">
@@ -334,6 +347,12 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
 
             {/* Right: Total Banner */}
             <div className="p-6 sm:p-8 rounded-[20px] bg-lavender-100/50 border border-lavender-300 text-center space-y-3">
+              <div className="flex items-center justify-center -space-x-2 pb-1">
+                <FamilyCharacter config={targetChar} variant="avatar" size="sm" />
+                {!scenario.targetPerson.isSelfOnly && (
+                  <FamilyCharacter config={userChar} variant="avatar" size="sm" />
+                )}
+              </div>
               <span className="editorial-kicker block">
                 {bill.totalLabel}
               </span>
@@ -549,6 +568,11 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-lavender-100 text-xs font-mono text-ink border border-hairline font-medium">
             <Shield className="w-3.5 h-3.5 text-lavender-600" />
             <span>{acts.act7_tag}</span>
+          </div>
+
+          {/* Persistent Character Reflection */}
+          <div className="flex justify-center -mb-2">
+            <FamilyCharacter config={targetChar} variant="bust" size="md" pose="reflective" />
           </div>
 
           <div className="max-w-2xl mx-auto space-y-4">

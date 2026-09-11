@@ -6,6 +6,9 @@ import { HouseholdType } from "@/types/questionnaire";
 import { HOUSEHOLD_OPTIONS } from "@/data/constants";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
+import { useProtectionProfile } from "@/context/ProtectionProfileContext";
+import { getCharacterForUser } from "@/lib/characterEngine";
+import { CharacterGuideBubble } from "./character/CharacterGuideBubble";
 
 interface Question1HouseholdProps {
   selectedType: HouseholdType | null;
@@ -19,11 +22,13 @@ export const Question1Household: React.FC<Question1HouseholdProps> = ({
   onContinue,
 }) => {
   const { t } = useLanguage();
+  const { profile } = useProtectionProfile();
+  const userChar = getCharacterForUser(profile.user);
 
   return (
     <div className="w-full max-w-3xl mx-auto animate-fadeIn select-none z-10 relative">
       {/* Title */}
-      <div className="text-center mb-8 sm:mb-10">
+      <div className="text-center mb-6 sm:mb-8">
         <div className="mb-2 inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-bg-soft border border-hairline">
           <span className="w-1.5 h-1.5 rounded-full bg-lavender-600" />
           <span className="text-xs font-semibold uppercase tracking-wider text-ink-soft">
@@ -36,6 +41,17 @@ export const Question1Household: React.FC<Question1HouseholdProps> = ({
         <p className="font-sans text-xs sm:text-sm md:text-base text-ink-soft max-w-md mx-auto font-normal">
           {t.step1.subtitle}
         </p>
+      </div>
+
+      {/* Persistent Character Guide Bubble */}
+      <div className="mb-6 max-w-xl mx-auto">
+        <CharacterGuideBubble
+          character={userChar}
+          layout="compact"
+          badge={t.step1.tag}
+        >
+          {t.step1.subtitle}
+        </CharacterGuideBubble>
       </div>
 
       {/* 6 Minimal Editorial Cards */}

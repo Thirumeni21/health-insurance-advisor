@@ -5,6 +5,9 @@ import { ArrowRight, Check } from "lucide-react";
 import { CONCERN_OPTIONS } from "@/data/constants";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
+import { useProtectionProfile } from "@/context/ProtectionProfileContext";
+import { getCharacterForUser } from "@/lib/characterEngine";
+import { CharacterGuideBubble } from "./character/CharacterGuideBubble";
 
 interface Question5ConcernsProps {
   selectedConcerns: string[];
@@ -18,6 +21,8 @@ export const Question5Concerns: React.FC<Question5ConcernsProps> = ({
   onContinue,
 }) => {
   const { t } = useLanguage();
+  const { profile } = useProtectionProfile();
+  const userChar = getCharacterForUser(profile.user);
   const isValid = selectedConcerns.length > 0;
 
   const handleToggle = (id: string) => {
@@ -38,6 +43,18 @@ export const Question5Concerns: React.FC<Question5ConcernsProps> = ({
         <p className="text-xs sm:text-sm text-ink-soft max-w-md">
           {t.step5.subtitle}
         </p>
+      </div>
+
+      {/* Persistent Character Guide Bubble */}
+      <div className="mb-6">
+        <CharacterGuideBubble
+          character={userChar}
+          layout="compact"
+          pose="protective"
+          badge={t.step5.tag}
+        >
+          {t.step5.subtitle}
+        </CharacterGuideBubble>
       </div>
 
       {/* Cards List */}

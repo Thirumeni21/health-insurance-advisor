@@ -5,6 +5,9 @@ import { ArrowRight, CheckCircle2, Code2, Users, Wallet, Edit3, ShieldAlert } fr
 import { UserProtectionProfile } from "@/types/questionnaire";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
+import { getCharacterForUser, getCharacterForMember } from "@/lib/characterEngine";
+import { FamilyCharacter } from "./character/FamilyCharacter";
+import { FamilyGroupCluster } from "./character/FamilyGroupCluster";
 
 interface SummaryScreenProps {
   profile: UserProtectionProfile;
@@ -71,6 +74,11 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
         </p>
       </div>
 
+      {/* Persistent Family Protection Circle Cluster */}
+      <div className="mb-8">
+        <FamilyGroupCluster profile={profile} size="compact" />
+      </div>
+
       {/* Grid: Circle on Left, Financial on Right */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {/* Left: Protection Circle Recap */}
@@ -98,9 +106,11 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
             {/* Primary User node card */}
             <div className="p-4 rounded-[18px] bg-white border border-lavender-300 shadow-xs flex flex-col justify-between space-y-2.5">
               <div className="flex items-center justify-between">
-                <div className="w-8 h-8 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center text-ink font-display font-bold text-[11px]">
-                  YOU
-                </div>
+                <FamilyCharacter
+                  config={getCharacterForUser(profile.user)}
+                  variant="avatar"
+                  size="sm"
+                />
                 <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-lavender-50 text-lavender-600 border border-lavender-200 font-semibold">
                   Anchor
                 </span>
@@ -120,12 +130,7 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
               const relTranslated =
                 t.modal.relationships[member.relationship as keyof typeof t.modal.relationships] ||
                 member.relationship;
-              const avatarBg =
-                member.relationship === "Child"
-                  ? "bg-sage-100 border-[#d3e0ba]"
-                  : member.relationship === "Mother" || member.relationship === "Father"
-                  ? "bg-cream-100 border-[#eae3d2]"
-                  : "bg-lavender-100 border-lavender-300";
+              const memberChar = getCharacterForMember(member);
 
               return (
                 <div
@@ -133,9 +138,11 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
                   className="p-4 rounded-[18px] bg-bg-soft border border-hairline hover:border-lavender-300 flex flex-col justify-between space-y-2.5 transition-all"
                 >
                   <div className="flex items-center justify-between">
-                    <div className={`w-8 h-8 rounded-full border flex items-center justify-center text-ink font-display font-bold text-[10px] ${avatarBg}`}>
-                      {member.relationship.substring(0, 2).toUpperCase()}
-                    </div>
+                    <FamilyCharacter
+                      config={memberChar}
+                      variant="avatar"
+                      size="sm"
+                    />
                     <span
                       className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${
                         member.financiallyDependent === "yes"

@@ -10,6 +10,10 @@ import {
 import { FamilyMemberModal } from "./FamilyMemberModal";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
+import { useProtectionProfile } from "@/context/ProtectionProfileContext";
+import { getCharacterForUser, getCharacterForMember } from "@/lib/characterEngine";
+import { FamilyCharacter } from "./character/FamilyCharacter";
+import { FamilyGroupCluster } from "./character/FamilyGroupCluster";
 
 interface Question3FamilyCircleProps {
   householdType: HouseholdType | null;
@@ -31,9 +35,12 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
   onContinue,
 }) => {
   const { t } = useLanguage();
+  const { profile } = useProtectionProfile();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingMember, setEditingMember] = useState<FamilyMember | null>(null);
   const [defaultRelationship, setDefaultRelationship] = useState<FamilyRelationship>("Spouse");
+
+  const userChar = getCharacterForUser(profile.user);
 
   const openAddModal = (relationship: FamilyRelationship) => {
     sound.playChime(500, 0.1);
@@ -78,6 +85,11 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
         </p>
       </div>
 
+      {/* Persistent Family Protection Circle Cluster */}
+      <div className="mb-8">
+        <FamilyGroupCluster profile={profile} />
+      </div>
+
       {/* Add Family Member Button (only displayed above when circle already has members) */}
       {hasMembers && (
         <div className="flex items-center justify-center mb-7">
@@ -111,9 +123,11 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
         <div className="bg-white border-2 border-lavender-300 rounded-[20px] p-6 shadow-subtle hover:shadow-elevated transition-all flex flex-col justify-between">
           <div>
             <div className="flex items-start justify-between mb-4">
-              <div className="w-12 h-12 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center text-ink font-display font-bold text-sm shadow-xs flex-shrink-0">
-                YOU
-              </div>
+              <FamilyCharacter
+                config={userChar}
+                variant="avatar"
+                size="md"
+              />
               <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-lavender-100 text-[11px] font-semibold text-ink font-mono">
                 <span className="w-1.5 h-1.5 rounded-full bg-lavender-600 animate-pulse" />
                 <span>{t.step3.youBadge || "Anchor"}</span>
@@ -136,14 +150,8 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
 
         {/* Dynamic Added Members */}
         {familyMembers.map((member) => {
+          const memberChar = getCharacterForMember(member);
           const relTranslated = t.modal.relationships[member.relationship] || member.relationship;
-
-          const avatarBg =
-            member.relationship === "Child"
-              ? "bg-sage-100 border-[#d3e0ba]"
-              : member.relationship === "Mother" || member.relationship === "Father"
-              ? "bg-cream-100 border-[#eae3d2]"
-              : "bg-lavender-100 border-lavender-300";
 
           return (
             <div
@@ -152,9 +160,11 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
             >
               <div>
                 <div className="flex items-start justify-between mb-4">
-                  <div className={`w-12 h-12 rounded-full border flex items-center justify-center text-ink font-display font-bold text-sm shadow-xs flex-shrink-0 ${avatarBg}`}>
-                    {member.relationship.substring(0, 2).toUpperCase()}
-                  </div>
+                  <FamilyCharacter
+                    config={memberChar}
+                    variant="avatar"
+                    size="md"
+                  />
                   <div className="flex items-center space-x-1.5">
                     <button
                       type="button"

@@ -17,6 +17,9 @@ import { UserProtectionProfile } from "@/types/questionnaire";
 import { PersonalizedScenario } from "@/types/stage2";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
+import { getCharacterForUser } from "@/lib/characterEngine";
+import { FamilyCharacter } from "../character/FamilyCharacter";
+import { FamilyGroupCluster } from "../character/FamilyGroupCluster";
 
 interface Chapter5BlueprintProps {
   scenario: PersonalizedScenario;
@@ -34,6 +37,7 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
   const { language, t } = useLanguage();
   const lang = language === "ta" ? "ta" : "en";
   const ch = t.stage3.chapter5;
+  const userChar = getCharacterForUser(profile.user);
 
   // 1. Digital Policy Document Clauses
   const [activeClauseKey, setActiveClauseKey] = useState<string>("sum_insured");
@@ -171,6 +175,9 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
           {ch.subheading}
         </p>
       </div>
+
+      {/* Persistent Protection Circle Network */}
+      <FamilyGroupCluster profile={profile} size="compact" />
 
       {/* 1. Interactive Digital Policy Document */}
       <div className="bg-white p-6 sm:p-8 rounded-[24px] border border-hairline shadow-subtle space-y-6">
@@ -383,6 +390,9 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
           </div>
         ) : (
           <div className="p-6 rounded-[20px] bg-bg-soft border border-hairline max-w-md mx-auto space-y-3 animate-fadeIn">
+            <div className="flex justify-center -mb-1">
+              <FamilyCharacter config={userChar} variant="bust" size="md" pose="reflective" />
+            </div>
             <CheckCircle2 className="w-8 h-8 text-ink mx-auto" />
             <h4 className="font-display text-lg font-semibold text-ink">
               {lang === "ta" ? "உங்கள் தனிப்பட்ட வழிகாட்டி தயாராகிறது" : "Your Educational Journey Complete"}

@@ -16,6 +16,9 @@ import {
 } from "@/data/constants";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
+import { useProtectionProfile } from "@/context/ProtectionProfileContext";
+import { getCharacterForUser } from "@/lib/characterEngine";
+import { CharacterGuideBubble } from "./character/CharacterGuideBubble";
 
 interface Question4FinancialProps {
   householdIncome: IncomeRange | null;
@@ -40,6 +43,8 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
   onContinue,
 }) => {
   const { t, language } = useLanguage();
+  const { profile } = useProtectionProfile();
+  const userChar = getCharacterForUser(profile.user);
 
   const isValid =
     !!householdIncome &&
@@ -50,7 +55,7 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
   return (
     <div className="w-full max-w-3xl mx-auto animate-fadeIn select-none z-10 relative">
       {/* Title */}
-      <div className="text-center mb-8">
+      <div className="text-center mb-6">
         <span className="editorial-kicker mb-2 block">
           {t.step4.tag}
         </span>
@@ -60,6 +65,18 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
         <p className="font-sans text-xs sm:text-sm text-ink-soft max-w-md mx-auto">
           {t.step4.subtitle}
         </p>
+      </div>
+
+      {/* Persistent Character Guide Bubble */}
+      <div className="mb-6 max-w-xl mx-auto">
+        <CharacterGuideBubble
+          character={userChar}
+          layout="compact"
+          pose="thinking"
+          badge={t.step4.tag}
+        >
+          {t.step4.subtitle}
+        </CharacterGuideBubble>
       </div>
 
       <div className="space-y-6">

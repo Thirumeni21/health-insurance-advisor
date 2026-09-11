@@ -244,3 +244,68 @@ input[type=range]::-webkit-slider-thumb:hover {
   transform: scale(1.15);
   background: #8b68cf;
 }
+
+/* Character Micro-Motion System */
+@keyframes character-breathe {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes character-blink {
+  0%, 94%, 98%, 100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes character-float-subtle {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(0.4deg);
+  }
+}
+
+@keyframes connector-pulse {
+  0% {
+    stroke-dashoffset: 24;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-char-breathe {
+  animation: character-breathe 4.5s ease-in-out infinite;
+}
+
+.animate-char-blink {
+  transform-origin: center;
+  animation: character-blink 6s ease-in-out infinite;
+}
+
+.animate-char-float {
+  animation: character-float-subtle 6s ease-in-out infinite;
+}
+
+.animate-connector-flow {
+  stroke-dasharray: 4, 4;
+  animation: connector-pulse 2s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-char-breathe,
+  .animate-char-blink,
+  .animate-char-float,
+  .animate-connector-flow {
+    animation: none !important;
+    transform: none !important;
+  }
+}

@@ -16,6 +16,7 @@ import {
 import { UserProtectionProfile } from "@/types/questionnaire";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
+import { FamilyGroupCluster } from "../character/FamilyGroupCluster";
 
 interface Chapter4HouseholdProps {
   profile: UserProtectionProfile;
@@ -56,6 +57,9 @@ export const Chapter4Household: React.FC<Chapter4HouseholdProps> = ({
           {ch.subheading}
         </p>
       </div>
+
+      {/* Persistent Protection Circle Network */}
+      <FamilyGroupCluster profile={profile} size="compact" />
 
       {/* 1. Family Floater vs Individual Policy */}
       <div className="bg-white p-6 sm:p-8 rounded-[24px] border border-hairline shadow-subtle space-y-6">

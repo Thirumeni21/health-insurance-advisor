@@ -4,6 +4,9 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
+import { useProtectionProfile } from "@/context/ProtectionProfileContext";
+import { getCharacterForUser } from "@/lib/characterEngine";
+import { FamilyCharacter } from "./character/FamilyCharacter";
 
 interface HeroSectionProps {
   onStart: () => void;
@@ -11,9 +14,22 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onStart }) => {
   const { t, language } = useLanguage();
+  const { profile } = useProtectionProfile();
+  const userChar = getCharacterForUser(profile.user);
 
   return (
     <div className="relative min-h-[80vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-10 sm:py-16 z-10 select-none animate-fadeIn">
+      {/* Persistent Character Anchor */}
+      <div className="flex justify-center mb-4">
+        <FamilyCharacter
+          config={userChar}
+          variant="bust"
+          size="md"
+          pose="idle"
+          showHalo
+        />
+      </div>
+
       {/* Category Label */}
       <div className="mb-5 sm:mb-6 inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-bg-soft border border-hairline">
         <span className="w-1.5 h-1.5 rounded-full bg-lavender-600" />

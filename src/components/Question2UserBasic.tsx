@@ -6,6 +6,8 @@ import { GenderType, HouseholdType } from "@/types/questionnaire";
 import { searchLocations, POPULAR_QUICK_LOCATIONS } from "@/data/locations";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
+import { getCharacterForUser } from "@/lib/characterEngine";
+import { FamilyCharacter } from "./character/FamilyCharacter";
 
 interface Question2UserBasicProps {
   householdType: HouseholdType | null;
@@ -43,10 +45,22 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
   const isSingle = householdType === "myself";
   const isValid = age >= 18 && age <= 100 && gender && city.trim().length > 0 && (!isSingle || singleDependents);
 
+  const liveChar = getCharacterForUser({ age, gender, city: null });
+
   return (
     <div className="w-full max-w-2xl mx-auto animate-fadeIn select-none z-10 relative">
       {/* Title */}
-      <div className="text-center mb-8">
+      <div className="text-center mb-6">
+        {/* Dynamic Character Preview */}
+        <div className="flex justify-center mb-3">
+          <FamilyCharacter
+            config={liveChar}
+            variant="bust"
+            size="md"
+            pose="idle"
+          />
+        </div>
+
         <div className="mb-2 inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-bg-soft border border-hairline">
           <span className="w-1.5 h-1.5 rounded-full bg-lavender-600" />
           <span className="text-xs font-semibold uppercase tracking-wider text-ink-soft">
