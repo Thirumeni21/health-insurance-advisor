@@ -24,7 +24,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onStart }) => {
 
       {/* Hero Headline */}
       <h1 className={`font-display font-bold text-3xl sm:text-5xl lg:text-7xl text-ink max-w-4xl mx-auto leading-[1.12] sm:leading-[1.08] tracking-tight mb-5 sm:mb-6 ${language === "ta" ? "text-2xl sm:text-4xl lg:text-6xl leading-[1.2]" : ""}`}>
-        {t.hero.title}
+        {language === "en" ? (
+          <>
+            Who are you{" "}
+            <span className="font-serif italic font-normal text-lavender-600">
+              protecting?
+            </span>
+          </>
+        ) : (
+          t.hero.title
+        )}
       </h1>
 
       {/* Subheading */}
