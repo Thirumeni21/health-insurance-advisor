@@ -32,23 +32,23 @@ export const CurrentCoverQuestion: React.FC<CurrentCoverQuestionProps> = ({
 
   return (
     <div className="w-full max-w-3xl mx-auto px-4 py-8 select-none z-10 relative animate-fadeIn">
-      {/* Header */ }
+      {/* Header */}
       <div className="text-center mb-8 space-y-2">
-        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-deep-aubergine/80 border border-glass-border">
-          <HelpCircle className="w-3.5 h-3.5 text-burnished-copper" />
-          <span className="text-[11px] font-mono tracking-widest uppercase text-burnished-copper">
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-lavender-100 border border-hairline">
+          <HelpCircle className="w-3.5 h-3.5 text-lavender-600" />
+          <span className="text-[11px] font-mono tracking-widest uppercase text-ink font-medium">
             {q.badge}
           </span>
         </div>
-        <h2 className="font-serif text-3xl sm:text-5xl text-warm-ivory tracking-tight">
+        <h2 className="font-display text-3xl sm:text-4xl font-semibold text-ink tracking-tight">
           {q.headline}
         </h2>
-        <p className="font-sans text-xs sm:text-sm text-dusty-mauve max-w-lg mx-auto font-light">
+        <p className="font-sans text-xs sm:text-sm text-ink-soft max-w-lg mx-auto">
           {q.subheading}
         </p>
       </div>
 
-      {/* Options Stack */ }
+      {/* Options Stack */}
       <div className="space-y-3 mb-6">
         {options.map((opt) => {
           const isSelected = selectedOption === opt.id;
@@ -60,30 +60,30 @@ export const CurrentCoverQuestion: React.FC<CurrentCoverQuestionProps> = ({
                 sound.playSoftPulse();
                 onSelectOption(opt.id);
               }}
-              className={`w-full p-4 rounded-2xl text-left border transition-all flex items-center justify-between min-h-[56px] ${
+              className={`w-full p-4 rounded-[16px] text-left border transition-all flex items-center justify-between min-h-[56px] ${
                 isSelected
-                  ? "bg-burnished-copper/20 border-burnished-copper text-warm-ivory shadow-copper-glow"
-                  : "bg-deep-aubergine/70 border-glass-border hover:border-burnished-copper/40 text-dusty-mauve hover:text-warm-ivory"
+                  ? "bg-lavender-100 border-lavender-600 text-ink shadow-sm"
+                  : "bg-white border-hairline hover:border-lavender-300 hover:bg-bg-soft text-ink-soft hover:text-ink"
               }`}
             >
-              <span className="font-serif text-base">{opt.label}</span>
-              {isSelected && <Check className="w-4 h-4 text-burnished-copper flex-shrink-0" />}
+              <span className="font-sans font-medium text-base">{opt.label}</span>
+              {isSelected && <Check className="w-4 h-4 text-lavender-600 flex-shrink-0" />}
             </button>
           );
         })}
       </div>
 
-      {/* Reassuring Feedback Banner */ }
+      {/* Reassuring Feedback Banner */}
       {activeResponse && (
-        <div className="luxury-card p-5 rounded-2xl border-burnished-copper/30 bg-oxblood-burgundy/20 mb-8 animate-fadeIn flex items-start space-x-3">
-          <ShieldCheck className="w-5 h-5 text-burnished-copper flex-shrink-0 mt-0.5" />
-          <p className="text-xs sm:text-sm text-warm-ivory/90 leading-relaxed font-light">
+        <div className="p-5 rounded-[16px] border border-hairline bg-sage-100/60 mb-8 animate-fadeIn flex items-start space-x-3">
+          <ShieldCheck className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" />
+          <p className="text-xs sm:text-sm text-ink leading-relaxed">
             {activeResponse}
           </p>
         </div>
       )}
 
-      {/* Proceed CTA */ }
+      {/* Proceed CTA */}
       <div className="flex justify-center">
         <button
           onClick={() => {
@@ -91,10 +91,10 @@ export const CurrentCoverQuestion: React.FC<CurrentCoverQuestionProps> = ({
             onProceedToFinalReflection();
           }}
           disabled={!selectedOption}
-          className={`group inline-flex items-center space-x-3 px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 min-h-[44px] ${
+          className={`group inline-flex items-center space-x-3 px-8 py-4 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 min-h-[44px] ${
             selectedOption
-              ? "bg-burnished-copper hover:bg-burnished-copper-light text-warm-ivory shadow-copper-glow hover:scale-105"
-              : "bg-deep-aubergine text-dusty-mauve/30 cursor-not-allowed border border-glass-border"
+              ? "btn-primary"
+              : "bg-bg-soft text-muted cursor-not-allowed border border-hairline"
           }`}
         >
           <span>{q.cta}</span>

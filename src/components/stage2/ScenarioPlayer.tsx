@@ -77,14 +77,14 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-6 select-none z-10 relative animate-fadeIn">
       {/* Act Stepper Bar */}
-      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-glass-border/40 pb-4">
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-4">
         <div className="flex items-center space-x-2">
-          <span className="w-2 h-2 rounded-full bg-burnished-copper animate-pulse" />
-          <span className="font-mono text-xs text-burnished-copper uppercase tracking-wider font-semibold">
+          <span className="w-2 h-2 rounded-full bg-lavender-600 animate-pulse" />
+          <span className="font-mono text-xs text-ink uppercase tracking-wider font-semibold">
             {scenario.title[lang]}
           </span>
-          <span className="text-dusty-mauve/40">·</span>
-          <span className="text-xs text-dusty-mauve font-mono">
+          <span className="text-muted">·</span>
+          <span className="text-xs text-ink-soft font-mono">
             {nav.actOf} 0{currentActIndex + 1} / 07: {nav.actNames[currentActIndex]}
           </span>
         </div>
@@ -94,11 +94,11 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           {[0, 1, 2, 3, 4, 5, 6].map((idx) => {
             let pillClass = "h-1.5 rounded-full transition-all duration-300 ";
             if (idx === currentActIndex) {
-              pillClass += "w-8 bg-burnished-copper shadow-copper-glow";
+              pillClass += "w-8 bg-ink";
             } else if (idx < currentActIndex) {
-              pillClass += "w-3 bg-burnished-copper/40 hover:bg-burnished-copper/60";
+              pillClass += "w-3 bg-lavender-300 hover:bg-lavender-600";
             } else {
-              pillClass += "w-2 bg-glass-border hover:bg-dusty-mauve/40";
+              pillClass += "w-2 bg-hairline hover:bg-muted";
             }
             return (
               <button
@@ -120,27 +120,27 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           ACT 01: NORMAL LIFE
          ======================================================== */}
       {currentActIndex === 0 && (
-        <div className="luxury-card p-6 sm:p-10 rounded-3xl text-center space-y-6 animate-fadeIn border-burnished-copper/30">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-deep-aubergine/80 border border-glass-border text-xs font-mono text-burnished-copper">
-            <Heart className="w-3.5 h-3.5" />
+        <div className="bg-white p-6 sm:p-10 rounded-[24px] text-center space-y-6 animate-fadeIn border border-hairline shadow-subtle">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-lavender-100 border border-hairline text-xs font-mono text-ink font-medium">
+            <Heart className="w-3.5 h-3.5 text-lavender-600" />
             <span>{acts.act1_tag}</span>
           </div>
 
           <div className="max-w-2xl mx-auto space-y-4">
-            <h2 className="font-serif text-3xl sm:text-5xl text-warm-ivory leading-tight tracking-tight">
+            <h2 className="font-display text-3xl sm:text-5xl font-semibold text-ink leading-tight tracking-tight">
               {scenario.act1_normal.headline[lang]}
             </h2>
-            <p className="font-sans text-sm sm:text-base text-dusty-mauve leading-relaxed font-light">
+            <p className="font-sans text-sm sm:text-base text-ink-soft leading-relaxed">
               {scenario.act1_normal.story[lang]}
             </p>
           </div>
 
           {/* Adaptation Notice if single user chose parent/family concern */}
           {scenario.adaptationNotice && (
-            <div className="p-4 rounded-2xl bg-burnished-copper/10 border border-burnished-copper/30 max-w-xl mx-auto text-xs text-soft-champagne/95 font-light leading-relaxed flex items-start space-x-2.5 text-left">
-              <Info className="w-4 h-4 text-burnished-copper flex-shrink-0 mt-0.5" />
+            <div className="p-4 rounded-[16px] bg-bg-soft border border-hairline max-w-xl mx-auto text-xs text-ink-soft leading-relaxed flex items-start space-x-2.5 text-left">
+              <Info className="w-4 h-4 text-lavender-600 flex-shrink-0 mt-0.5" />
               <div>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-burnished-copper block mb-0.5">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-ink font-semibold block mb-0.5">
                   {lang === "ta" ? "தனிப்பயனாக்கப்பட்ட பின்னணி" : "Personalized Context"}
                 </span>
                 {scenario.adaptationNotice[lang]}
@@ -149,10 +149,10 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           )}
 
           {/* Focus Badge */}
-          <div className="p-3.5 rounded-2xl bg-deep-aubergine/40 border border-glass-border/60 max-w-md mx-auto flex items-center justify-between text-xs font-mono text-dusty-mauve">
+          <div className="p-3.5 rounded-[16px] bg-bg-soft border border-hairline max-w-md mx-auto flex items-center justify-between text-xs font-mono text-ink-soft">
             <span>
               {lang === "ta" ? "மையப் புள்ளி:" : "Focus Node:"}{" "}
-              <strong className="text-warm-ivory">{scenario.targetPerson.name}</strong>
+              <strong className="text-ink font-semibold">{scenario.targetPerson.name}</strong>
             </span>
             <span>
               {scenario.targetPerson.isSelfOnly
@@ -164,7 +164,7 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           <div className="pt-4 flex justify-center">
             <button
               onClick={handleNextAct}
-              className="group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full bg-burnished-copper hover:bg-burnished-copper-light text-warm-ivory text-xs font-semibold uppercase tracking-wider shadow-copper-glow hover:scale-105 transition-all duration-300 min-h-[44px]"
+              className="btn-primary min-h-[44px] px-8 py-3.5 text-xs group inline-flex items-center space-x-3"
             >
               <span>{nav.nextAct}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -177,23 +177,23 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           ACT 02: THE INTERRUPTION
          ======================================================== */}
       {currentActIndex === 1 && (
-        <div className="luxury-card p-6 sm:p-10 rounded-3xl text-center space-y-6 animate-fadeIn border-burnished-copper/40 bg-oxblood-burgundy/30">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-deep-aubergine/80 border border-burnished-copper/40 text-xs font-mono text-burnished-copper">
-            <AlertCircle className="w-3.5 h-3.5" />
+        <div className="bg-white p-6 sm:p-10 rounded-[24px] text-center space-y-6 animate-fadeIn border border-hairline shadow-subtle">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-lavender-100 border border-hairline text-xs font-mono text-ink font-medium">
+            <AlertCircle className="w-3.5 h-3.5 text-lavender-600" />
             <span>{acts.act2_tag}</span>
           </div>
 
           <div className="max-w-2xl mx-auto space-y-4">
-            <h2 className="font-serif text-3xl sm:text-5xl text-warm-ivory leading-tight tracking-tight text-glow-copper">
+            <h2 className="font-display text-3xl sm:text-5xl font-semibold text-ink leading-tight tracking-tight">
               {scenario.act2_interruption.headline[lang]}
             </h2>
-            <p className="font-sans text-sm sm:text-base text-dusty-mauve leading-relaxed font-light">
+            <p className="font-sans text-sm sm:text-base text-ink-soft leading-relaxed">
               {scenario.act2_interruption.story[lang]}
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-obsidian-plum/80 border border-glass-border/60 max-w-lg mx-auto text-xs text-dusty-mauve/90 leading-relaxed font-light">
-            <span className="font-mono text-burnished-copper font-medium block mb-1">
+          <div className="p-4 rounded-[16px] bg-bg-soft border border-hairline max-w-lg mx-auto text-xs text-ink-soft leading-relaxed">
+            <span className="font-mono text-ink font-semibold block mb-1">
               {lang === "ta" ? "சிந்திக்க வேண்டிய மாதிரிச் சூழல்" : "Hypothetical Modeling"}
             </span>
             {lang === "ta"
@@ -204,13 +204,13 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           <div className="pt-4 flex items-center justify-center space-x-4">
             <button
               onClick={handlePrevAct}
-              className="px-5 py-3 rounded-full bg-obsidian-plum border border-glass-border text-xs font-mono text-dusty-mauve hover:text-warm-ivory transition-all"
+              className="px-5 py-3 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all"
             >
               <ArrowLeft className="w-4 h-4 inline mr-1.5" /> Back
             </button>
             <button
               onClick={handleNextAct}
-              className="group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full bg-burnished-copper hover:bg-burnished-copper-light text-warm-ivory text-xs font-semibold uppercase tracking-wider shadow-copper-glow hover:scale-105 transition-all duration-300 min-h-[44px]"
+              className="btn-primary min-h-[44px] px-8 py-3.5 text-xs group inline-flex items-center space-x-3"
             >
               <span>{nav.seeHospitalJourney}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -223,18 +223,18 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           ACT 03: THE CARE JOURNEY (Illuminated Vertical Timeline)
          ======================================================== */}
       {currentActIndex === 2 && (
-        <div className="luxury-card p-6 sm:p-8 rounded-3xl space-y-6 animate-fadeIn border-burnished-copper/30">
-          <div className="flex items-center justify-between border-b border-glass-border pb-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-deep-aubergine text-xs font-mono text-burnished-copper border border-glass-border">
-              <Activity className="w-3.5 h-3.5" />
+        <div className="bg-white p-6 sm:p-8 rounded-[24px] space-y-6 animate-fadeIn border border-hairline shadow-subtle">
+          <div className="flex items-center justify-between border-b border-hairline pb-3">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-lavender-100 text-xs font-mono text-ink border border-hairline font-medium">
+              <Activity className="w-3.5 h-3.5 text-lavender-600" />
               <span>{acts.act3_tag}</span>
             </div>
-            <span className="text-xs font-mono text-dusty-mauve">
+            <span className="text-xs font-mono text-ink-soft">
               {lang === "ta" ? "மருத்துவப் பராமரிப்பு படிநிலைகள்" : "Care Journey Progression"}
             </span>
           </div>
 
-          {/* Vertical Illuminated Step Timeline */}
+          {/* Vertical Step Timeline */}
           <div className="space-y-4 relative py-2">
             {scenario.act3_hospital.steps.map((step, idx) => {
               const isLast = idx === scenario.act3_hospital.steps.length - 1;
@@ -243,25 +243,25 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
                 <div key={idx} className="relative flex items-start space-x-4 group">
                   {/* Timeline connector & dot */}
                   <div className="flex flex-col items-center flex-shrink-0 mt-1">
-                    <div className="w-8 h-8 rounded-full bg-burnished-copper/20 border border-burnished-copper flex items-center justify-center font-mono text-xs font-bold text-burnished-copper group-hover:scale-110 group-hover:bg-burnished-copper group-hover:text-obsidian-plum transition-all shadow-copper-glow">
+                    <div className="w-8 h-8 rounded-full bg-lavender-100 border border-lavender-600 flex items-center justify-center font-mono text-xs font-bold text-ink transition-all shadow-sm">
                       {step.stepNumber}
                     </div>
                     {!isLast && (
-                      <div className="w-0.5 h-16 bg-gradient-to-b from-burnished-copper/60 to-glass-border/40 my-1" />
+                      <div className="w-0.5 h-16 bg-hairline my-1" />
                     )}
                   </div>
 
                   {/* Step Card */}
-                  <div className="flex-1 p-4 sm:p-5 rounded-2xl bg-deep-aubergine/80 border border-glass-border hover:border-burnished-copper/50 transition-all shadow-sm">
+                  <div className="flex-1 p-4 sm:p-5 rounded-[16px] bg-bg-soft border border-hairline hover:border-lavender-300 transition-all shadow-sm">
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-                      <h4 className="font-serif text-lg sm:text-xl text-warm-ivory group-hover:text-glow-copper transition-all">
+                      <h4 className="font-display text-lg sm:text-xl font-semibold text-ink">
                         {step.title[lang]}
                       </h4>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-obsidian-plum text-dusty-mauve border border-glass-border">
+                      <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white text-ink-soft border border-hairline">
                         {lang === "ta" ? `படிநிலை 0${idx + 1}` : `Phase 0${idx + 1}`}
                       </span>
                     </div>
-                    <p className="font-sans text-xs sm:text-sm text-dusty-mauve font-light leading-relaxed">
+                    <p className="font-sans text-xs sm:text-sm text-ink-soft leading-relaxed">
                       {step.desc[lang]}
                     </p>
                   </div>
@@ -270,16 +270,16 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
             })}
           </div>
 
-          <div className="pt-4 flex items-center justify-between border-t border-glass-border/40">
+          <div className="pt-4 flex items-center justify-between border-t border-hairline">
             <button
               onClick={handlePrevAct}
-              className="px-5 py-3 rounded-full bg-obsidian-plum border border-glass-border text-xs font-mono text-dusty-mauve hover:text-warm-ivory transition-all"
+              className="px-5 py-3 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all"
             >
               <ArrowLeft className="w-4 h-4 inline mr-1.5" /> Back
             </button>
             <button
               onClick={handleNextAct}
-              className="group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full bg-burnished-copper hover:bg-burnished-copper-light text-warm-ivory text-xs font-semibold uppercase tracking-wider shadow-copper-glow hover:scale-105 transition-all duration-300 min-h-[44px]"
+              className="btn-primary min-h-[44px] px-8 py-3.5 text-xs group inline-flex items-center space-x-3"
             >
               <span>{nav.seeBill}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -292,13 +292,13 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           ACT 04: THE MEDICAL BILL
          ======================================================== */}
       {currentActIndex === 3 && (
-        <div className="luxury-card p-6 sm:p-8 rounded-3xl space-y-6 animate-fadeIn">
-          <div className="flex items-center justify-between border-b border-glass-border pb-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-deep-aubergine text-xs font-mono text-burnished-copper border border-glass-border">
-              <DollarSign className="w-3.5 h-3.5" />
+        <div className="bg-white p-6 sm:p-8 rounded-[24px] space-y-6 animate-fadeIn border border-hairline shadow-subtle">
+          <div className="flex items-center justify-between border-b border-hairline pb-3">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-lavender-100 text-xs font-mono text-ink border border-hairline font-medium">
+              <DollarSign className="w-3.5 h-3.5 text-lavender-600" />
               <span>{acts.act4_tag}</span>
             </div>
-            <span className="text-[11px] font-mono text-dusty-mauve">
+            <span className="text-[11px] font-mono text-ink-soft">
               {lang === "ta" ? "நிதி முறிவு விவரம்" : "Financial Breakdown"}
             </span>
           </div>
@@ -306,16 +306,16 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             {/* Left: Cost Breakdown List */}
             <div className="space-y-2.5">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-dusty-mauve mb-2">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-ink-soft mb-2">
                 {bill.breakdownTitle}
               </h4>
               {scenario.act4_bill.breakdown.map((item) => (
                 <div
                   key={item.key}
-                  className="p-3 rounded-xl bg-deep-aubergine/60 border border-glass-border flex items-center justify-between text-xs"
+                  className="p-3 rounded-xl bg-bg-soft border border-hairline flex items-center justify-between text-xs"
                 >
-                  <span className="text-dusty-mauve font-light">{item.label[lang]}</span>
-                  <span className="font-mono font-medium text-warm-ivory">
+                  <span className="text-ink-soft">{item.label[lang]}</span>
+                  <span className="font-mono font-semibold text-ink">
                     ₹{item.amount.toLocaleString("en-IN")}
                   </span>
                 </div>
@@ -323,14 +323,14 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
             </div>
 
             {/* Right: Total Banner */}
-            <div className="p-6 rounded-3xl bg-oxblood-burgundy/40 border border-burnished-copper/50 text-center space-y-3">
-              <span className="text-[11px] font-mono uppercase tracking-widest text-burnished-copper block">
+            <div className="p-6 sm:p-8 rounded-[20px] bg-lavender-100/50 border border-lavender-300 text-center space-y-3">
+              <span className="editorial-kicker block">
                 {bill.totalLabel}
               </span>
-              <div className="font-serif text-4xl sm:text-5xl text-warm-ivory text-glow-copper">
+              <div className="font-display text-4xl sm:text-5xl font-bold text-ink">
                 ₹{scenario.act4_bill.totalAmount.toLocaleString("en-IN")}
               </div>
-              <div className="text-[11px] text-dusty-mauve/80 leading-relaxed font-light pt-2 border-t border-glass-border/40">
+              <div className="text-[11px] text-ink-soft leading-relaxed pt-2 border-t border-hairline">
                 {bill.costDisclaimer}
               </div>
             </div>
@@ -338,32 +338,32 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
 
           {/* Cumulative timeline if present */}
           {scenario.act4_bill.cumulativeTimeline && (
-            <div className="p-4 rounded-2xl bg-deep-aubergine/40 border border-glass-border space-y-2">
-              <span className="text-xs font-mono text-burnished-copper uppercase tracking-wider block">
+            <div className="p-4 rounded-[16px] bg-bg-soft border border-hairline space-y-2">
+              <span className="text-xs font-mono text-ink uppercase tracking-wider font-semibold block">
                 {bill.cumulativeLabel} Over 4 Months
               </span>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {scenario.act4_bill.cumulativeTimeline.map((item, idx) => (
-                  <div key={idx} className="p-2.5 rounded-xl bg-obsidian-plum text-center border border-glass-border">
-                    <span className="text-[10px] font-mono text-dusty-mauve block">{item.monthLabel[lang]}</span>
-                    <span className="text-xs font-mono font-bold text-warm-ivory">₹{item.monthAmount.toLocaleString("en-IN")}</span>
-                    <span className="text-[9px] font-mono text-burnished-copper block mt-0.5">Total: ₹{item.cumulativeTotal.toLocaleString("en-IN")}</span>
+                  <div key={idx} className="p-2.5 rounded-xl bg-white text-center border border-hairline">
+                    <span className="text-[10px] font-mono text-ink-soft block">{item.monthLabel[lang]}</span>
+                    <span className="text-xs font-mono font-bold text-ink">₹{item.monthAmount.toLocaleString("en-IN")}</span>
+                    <span className="text-[9px] font-mono text-lavender-600 block mt-0.5">Total: ₹{item.cumulativeTotal.toLocaleString("en-IN")}</span>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          <div className="pt-4 flex items-center justify-between border-t border-glass-border/40">
+          <div className="pt-4 flex items-center justify-between border-t border-hairline">
             <button
               onClick={handlePrevAct}
-              className="px-5 py-3 rounded-full bg-obsidian-plum border border-glass-border text-xs font-mono text-dusty-mauve hover:text-warm-ivory transition-all"
+              className="px-5 py-3 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all"
             >
               <ArrowLeft className="w-4 h-4 inline mr-1.5" /> Back
             </button>
             <button
               onClick={handleNextAct}
-              className="group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full bg-burnished-copper hover:bg-burnished-copper-light text-warm-ivory text-xs font-semibold uppercase tracking-wider shadow-copper-glow hover:scale-105 transition-all duration-300 min-h-[44px]"
+              className="btn-primary min-h-[44px] px-8 py-3.5 text-xs group inline-flex items-center space-x-3"
             >
               <span>{nav.seePersonalMoment}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -376,59 +376,59 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           ACT 05: YOUR FINANCIAL PICTURE
          ======================================================== */}
       {currentActIndex === 4 && (
-        <div className="luxury-card p-6 sm:p-8 rounded-3xl space-y-6 animate-fadeIn">
-          <div className="flex items-center justify-between border-b border-glass-border pb-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-deep-aubergine text-xs font-mono text-burnished-copper border border-glass-border">
-              <Wallet className="w-3.5 h-3.5" />
+        <div className="bg-white p-6 sm:p-8 rounded-[24px] space-y-6 animate-fadeIn border border-hairline shadow-subtle">
+          <div className="flex items-center justify-between border-b border-hairline pb-3">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-lavender-100 text-xs font-mono text-ink border border-hairline font-medium">
+              <Wallet className="w-3.5 h-3.5 text-lavender-600" />
               <span>{acts.act5_tag}</span>
             </div>
-            <span className="text-xs font-mono text-dusty-mauve">
+            <span className="text-xs font-mono text-ink-soft">
               {lang === "ta" ? "உங்கள் தனிப்பட்ட நிதிப் பின்னணி" : "Stage 1 Context Connection"}
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Savings Reflection */}
-            <div className="p-5 rounded-2xl bg-deep-aubergine/70 border border-glass-border space-y-2">
-              <span className="text-xs font-mono uppercase tracking-wider text-burnished-copper block">
+            <div className="p-5 rounded-[16px] bg-bg-soft border border-hairline space-y-2">
+              <span className="text-xs font-mono uppercase tracking-wider text-ink font-semibold block">
                 {personalContext.savingsHeader}
               </span>
-              <p className="text-xs text-warm-ivory/90 leading-relaxed font-light">
+              <p className="text-xs text-ink leading-relaxed">
                 {savingsNote}
               </p>
-              <p className="text-[11px] text-dusty-mauve/80 pt-1">
+              <p className="text-[11px] text-ink-soft pt-1">
                 {scenario.act5_personal_context.savingsNote[lang]}
               </p>
             </div>
 
             {/* Insurance Reflection */}
-            <div className="p-5 rounded-2xl bg-deep-aubergine/70 border border-glass-border space-y-2">
-              <span className="text-xs font-mono uppercase tracking-wider text-soft-champagne block">
+            <div className="p-5 rounded-[16px] bg-bg-soft border border-hairline space-y-2">
+              <span className="text-xs font-mono uppercase tracking-wider text-ink font-semibold block">
                 {personalContext.insuranceHeader}
               </span>
-              <p className="text-xs text-warm-ivory/90 leading-relaxed font-light">
+              <p className="text-xs text-ink leading-relaxed">
                 {insuranceNote}
               </p>
-              <p className="text-[11px] text-dusty-mauve/80 pt-1">
+              <p className="text-[11px] text-ink-soft pt-1">
                 {scenario.act5_personal_context.insuranceNote[lang]}
               </p>
             </div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-obsidian-plum/80 border border-glass-border/60 text-xs text-dusty-mauve/80 leading-relaxed font-light text-center">
+          <div className="p-4 rounded-[16px] bg-bg-soft border border-hairline text-xs text-ink-soft leading-relaxed text-center">
             {personalContext.evalDisclaimer}
           </div>
 
-          <div className="pt-4 flex items-center justify-between border-t border-glass-border/40">
+          <div className="pt-4 flex items-center justify-between border-t border-hairline">
             <button
               onClick={handlePrevAct}
-              className="px-5 py-3 rounded-full bg-obsidian-plum border border-glass-border text-xs font-mono text-dusty-mauve hover:text-warm-ivory transition-all"
+              className="px-5 py-3 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all"
             >
               <ArrowLeft className="w-4 h-4 inline mr-1.5" /> Back
             </button>
             <button
               onClick={handleNextAct}
-              className="group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full bg-burnished-copper hover:bg-burnished-copper-light text-warm-ivory text-xs font-semibold uppercase tracking-wider shadow-copper-glow hover:scale-105 transition-all duration-300 min-h-[44px]"
+              className="btn-primary min-h-[44px] px-8 py-3.5 text-xs group inline-flex items-center space-x-3"
             >
               <span>{nav.makeChoice}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -441,22 +441,22 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           ACT 06: THE DECISION
          ======================================================== */}
       {currentActIndex === 5 && (
-        <div className="luxury-card p-6 sm:p-8 rounded-3xl space-y-6 animate-fadeIn">
-          <div className="flex items-center justify-between border-b border-glass-border pb-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-deep-aubergine text-xs font-mono text-burnished-copper border border-glass-border">
-              <Layers className="w-3.5 h-3.5" />
+        <div className="bg-white p-6 sm:p-8 rounded-[24px] space-y-6 animate-fadeIn border border-hairline shadow-subtle">
+          <div className="flex items-center justify-between border-b border-hairline pb-3">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-lavender-100 text-xs font-mono text-ink border border-hairline font-medium">
+              <Layers className="w-3.5 h-3.5 text-lavender-600" />
               <span>{acts.act6_tag}</span>
             </div>
-            <span className="text-xs font-mono text-dusty-mauve">
+            <span className="text-xs font-mono text-ink-soft">
               {lang === "ta" ? "உங்கள் முடிவு" : "Interactive Choice"}
             </span>
           </div>
 
           <div className="text-center max-w-xl mx-auto space-y-2">
-            <h3 className="font-serif text-2xl sm:text-3xl text-warm-ivory">
+            <h3 className="font-display text-2xl sm:text-3xl font-semibold text-ink">
               {scenario.act6_decision.question[lang]}
             </h3>
-            <p className="text-xs text-dusty-mauve font-light">
+            <p className="text-xs text-ink-soft">
               {scenario.act6_decision.sub[lang]}
             </p>
           </div>
@@ -473,8 +473,8 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
             ].map((choice) => {
               const isSelected = selectedChoice === choice.id;
               const cardBg = isSelected
-                ? "bg-burnished-copper/20 border-burnished-copper text-warm-ivory shadow-copper-glow"
-                : "bg-deep-aubergine/70 border-glass-border hover:border-burnished-copper/40 text-dusty-mauve hover:text-warm-ivory";
+                ? "bg-lavender-100 border-lavender-600 text-ink shadow-sm"
+                : "bg-white border-hairline hover:border-lavender-300 hover:bg-bg-soft text-ink-soft hover:text-ink";
 
               return (
                 <button
@@ -484,27 +484,27 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
                     sound.playSoftPulse();
                     onSelectChoice(choice.id);
                   }}
-                  className={`p-4 rounded-2xl text-left border transition-all flex flex-col justify-between min-h-[120px] ${cardBg}`}
+                  className={`p-4 rounded-[16px] text-left border transition-all flex flex-col justify-between min-h-[120px] ${cardBg}`}
                 >
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
                       <div className="flex items-center space-x-2">
-                        <span className={isSelected ? "text-burnished-copper" : "text-dusty-mauve"}>
+                        <span className={isSelected ? "text-lavender-600" : "text-ink-soft"}>
                           {choice.icon}
                         </span>
-                        <span className="font-serif text-sm font-semibold text-warm-ivory">
+                        <span className="font-sans text-sm font-semibold text-ink">
                           {choice.title}
                         </span>
                       </div>
-                      {isSelected && <Check className="w-4 h-4 text-burnished-copper flex-shrink-0" />}
+                      {isSelected && <Check className="w-4 h-4 text-lavender-600 flex-shrink-0" />}
                     </div>
-                    <p className="text-[11px] text-dusty-mauve/80 font-light leading-relaxed">
+                    <p className="text-xs text-ink-soft leading-relaxed">
                       {choice.desc}
                     </p>
                   </div>
 
                   {isSelected && (
-                    <div className="mt-3 pt-2.5 border-t border-burnished-copper/30 text-[10px] text-burnished-copper font-mono">
+                    <div className="mt-3 pt-2.5 border-t border-hairline text-[10px] text-lavender-600 font-mono font-medium">
                       Impact: {choice.consequence}
                     </div>
                   )}
@@ -513,16 +513,16 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
             })}
           </div>
 
-          <div className="pt-4 flex items-center justify-between border-t border-glass-border/40">
+          <div className="pt-4 flex items-center justify-between border-t border-hairline">
             <button
               onClick={handlePrevAct}
-              className="px-5 py-3 rounded-full bg-obsidian-plum border border-glass-border text-xs font-mono text-dusty-mauve hover:text-warm-ivory transition-all"
+              className="px-5 py-3 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all"
             >
               <ArrowLeft className="w-4 h-4 inline mr-1.5" /> Back
             </button>
             <button
               onClick={handleNextAct}
-              className="group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full bg-burnished-copper hover:bg-burnished-copper-light text-warm-ivory text-xs font-semibold uppercase tracking-wider shadow-copper-glow hover:scale-105 transition-all duration-300 min-h-[44px]"
+              className="btn-primary min-h-[44px] px-8 py-3.5 text-xs group inline-flex items-center space-x-3"
             >
               <span>{nav.seeRealization}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -535,20 +535,20 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
           ACT 07: THE REALIZATION
          ======================================================== */}
       {currentActIndex === 6 && (
-        <div className="luxury-card p-6 sm:p-10 rounded-3xl text-center space-y-6 animate-fadeIn border-burnished-copper/40">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-deep-aubergine text-xs font-mono text-burnished-copper border border-glass-border">
-            <Shield className="w-3.5 h-3.5" />
+        <div className="bg-white p-6 sm:p-10 rounded-[24px] text-center space-y-6 animate-fadeIn border border-hairline shadow-subtle">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-lavender-100 text-xs font-mono text-ink border border-hairline font-medium">
+            <Shield className="w-3.5 h-3.5 text-lavender-600" />
             <span>{acts.act7_tag}</span>
           </div>
 
           <div className="max-w-2xl mx-auto space-y-4">
-            <h2 className="font-serif text-3xl sm:text-5xl text-warm-ivory leading-tight tracking-tight">
+            <h2 className="font-display text-3xl sm:text-5xl font-semibold text-ink leading-tight tracking-tight">
               {scenario.act7_realization.headline[lang]}
             </h2>
-            <blockquote className="font-serif text-xl sm:text-2xl text-soft-champagne italic max-w-xl mx-auto leading-relaxed">
+            <blockquote className="font-serif text-xl sm:text-2xl text-ink italic max-w-xl mx-auto leading-relaxed">
               {scenario.act7_realization.quote[lang]}
             </blockquote>
-            <p className="font-sans text-xs sm:text-sm text-dusty-mauve leading-relaxed font-light max-w-lg mx-auto">
+            <p className="font-sans text-xs sm:text-sm text-ink-soft leading-relaxed max-w-lg mx-auto">
               {scenario.act7_realization.sub[lang]}
             </p>
           </div>
@@ -563,23 +563,23 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
             ].map((pill) => (
               <div
                 key={pill}
-                className="p-3 rounded-xl bg-deep-aubergine/80 border border-glass-border text-center font-mono text-xs text-warm-ivory"
+                className="p-3 rounded-xl bg-bg-soft border border-hairline text-center font-mono text-xs text-ink font-medium"
               >
                 {pill}
               </div>
             ))}
           </div>
 
-          <div className="pt-6 flex items-center justify-between max-w-xl mx-auto border-t border-glass-border/40">
+          <div className="pt-6 flex items-center justify-between max-w-xl mx-auto border-t border-hairline">
             <button
               onClick={handlePrevAct}
-              className="px-5 py-3 rounded-full bg-obsidian-plum border border-glass-border text-xs font-mono text-dusty-mauve hover:text-warm-ivory transition-all"
+              className="px-5 py-3 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all"
             >
               <ArrowLeft className="w-4 h-4 inline mr-1.5" /> Back
             </button>
             <button
               onClick={onFinishScenario}
-              className="group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full bg-burnished-copper hover:bg-burnished-copper-light text-warm-ivory text-xs font-semibold uppercase tracking-wider shadow-copper-glow hover:scale-105 transition-all duration-300 min-h-[44px]"
+              className="btn-primary min-h-[44px] px-8 py-3.5 text-xs group inline-flex items-center space-x-3"
             >
               <span>{nav.proceedToConcepts}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

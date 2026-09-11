@@ -63,13 +63,16 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
     <div className="w-full max-w-3xl mx-auto animate-fadeIn select-none z-10 relative">
       {/* Title */}
       <div className="text-center mb-8">
-        <span className="text-[11px] uppercase font-mono tracking-widest text-burnished-copper mb-2 block">
-          {t.step3.tag}
-        </span>
-        <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-warm-ivory tracking-tight mb-3">
+        <div className="mb-2 inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-bg-soft border border-hairline">
+          <span className="w-1.5 h-1.5 rounded-full bg-lavender-600" />
+          <span className="text-xs font-semibold uppercase tracking-wider text-ink-soft">
+            {t.step3.tag}
+          </span>
+        </div>
+        <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-ink tracking-tight mb-3">
           {t.step3.title}
         </h1>
-        <p className="font-sans text-xs sm:text-sm text-dusty-mauve max-w-md mx-auto font-light">
+        <p className="font-sans text-sm text-ink-soft max-w-md mx-auto font-normal">
           {t.step3.subtitle}
         </p>
       </div>
@@ -87,9 +90,9 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
             key={item.rel}
             type="button"
             onClick={() => openAddModal(item.rel)}
-            className="group inline-flex items-center space-x-2 px-4 py-2.5 rounded-full bg-deep-aubergine/80 hover:bg-oxblood-burgundy border border-glass-border hover:border-burnished-copper text-xs font-mono text-warm-ivory transition-all shadow-sm hover:scale-105 min-h-[44px]"
+            className="group inline-flex items-center space-x-2 px-4 py-2.5 rounded-full bg-white hover:bg-bg-soft border border-hairline hover:border-lavender-300 text-xs font-semibold text-ink transition-all shadow-subtle hover:scale-105 min-h-[44px]"
           >
-            <Plus className="w-3.5 h-3.5 text-burnished-copper group-hover:rotate-90 transition-transform" />
+            <Plus className="w-3.5 h-3.5 text-lavender-600 group-hover:rotate-90 transition-transform" />
             <span>{item.label}</span>
           </button>
         ))}
@@ -98,51 +101,60 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
       {/* Member Cards List */}
       <div className="space-y-3 mb-8">
         {/* Central Anchor Card (YOU) */}
-        <div className="luxury-card p-4 rounded-2xl flex items-center justify-between border-burnished-copper/40 bg-oxblood-burgundy/40">
+        <div className="bg-lavender-100 border border-lavender-300 p-4.5 rounded-[20px] flex items-center justify-between shadow-subtle">
           <div className="flex items-center space-x-3.5">
-            <div className="w-9 h-9 rounded-full bg-burnished-copper/20 border border-burnished-copper flex items-center justify-center text-burnished-copper font-serif font-bold text-sm">
+            <div className="w-10 h-10 rounded-full bg-white border border-lavender-300 flex items-center justify-center text-ink font-display font-bold text-xs shadow-xs">
               YOU
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <span className="font-serif text-lg text-warm-ivory">
+                <span className="font-display font-bold text-lg text-ink">
                   {t.step3.youLabel}
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-burnished-copper/15 text-burnished-copper border border-burnished-copper/30">
+                <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-white text-ink border border-lavender-300">
                   {t.step3.youBadge}
                 </span>
               </div>
-              <span className="text-xs text-dusty-mauve font-mono">
+              <span className="text-xs text-ink-soft font-normal">
                 {userAge} {t.step2.ageUnit} · {t.step3.youDesc}
               </span>
             </div>
           </div>
-          <span className="text-xs text-burnished-copper font-mono"> Anchor</span>
+          <span className="text-xs text-lavender-600 font-semibold px-2.5 py-1 rounded-full bg-white/70 border border-lavender-200">
+            Anchor
+          </span>
         </div>
 
         {/* Dynamic Added Members */}
         {familyMembers.map((member) => {
           const relTranslated = t.modal.relationships[member.relationship] || member.relationship;
 
+          const avatarBg =
+            member.relationship === "Child"
+              ? "bg-sage-100 border-[#d3e0ba]"
+              : member.relationship === "Mother" || member.relationship === "Father"
+              ? "bg-cream-100 border-[#eae3d2]"
+              : "bg-lavender-100 border-lavender-300";
+
           return (
             <div
               key={member.id}
-              className="luxury-card p-4 rounded-2xl flex items-center justify-between border-glass-border hover:border-burnished-copper/40 transition-all"
+              className="bg-white border border-hairline hover:border-lavender-300 p-4.5 rounded-[20px] flex items-center justify-between shadow-subtle hover:shadow-elevated transition-all"
             >
               <div className="flex items-center space-x-3.5">
-                <div className="w-9 h-9 rounded-full bg-deep-aubergine border border-glass-border flex items-center justify-center text-warm-ivory font-serif text-sm">
+                <div className={`w-10 h-10 rounded-full border flex items-center justify-center text-ink font-display font-bold text-xs shadow-xs ${avatarBg}`}>
                   {member.relationship.substring(0, 2).toUpperCase()}
                 </div>
                 <div>
                   <div className="flex items-center space-x-2">
-                    <span className="font-serif text-lg text-warm-ivory">
+                    <span className="font-display font-bold text-lg text-ink">
                       {member.name || relTranslated}
                     </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-deep-aubergine text-dusty-mauve border border-glass-border">
+                    <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-bg-soft text-ink-soft border border-hairline">
                       {relTranslated}
                     </span>
                   </div>
-                  <div className="flex items-center space-x-2.5 text-xs text-dusty-mauve font-mono mt-0.5">
+                  <div className="flex items-center space-x-2 text-xs text-muted font-normal mt-0.5">
                     <span>{member.age} {t.step2.ageUnit}</span>
                     <span>·</span>
                     <span>
@@ -153,18 +165,18 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
                         : t.step3.familyTag}
                     </span>
                     <span>·</span>
-                    <span className={member.existingInsurance === "yes" ? "text-soft-champagne" : "text-dusty-mauve/60"}>
+                    <span className={member.existingInsurance === "yes" ? "text-ink font-medium" : "text-muted"}>
                       {member.existingInsurance === "yes" ? t.step3.insuredTag : t.step3.noInsuranceTag}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1.5">
                 <button
                   type="button"
                   onClick={() => openEditModal(member)}
-                  className="w-8 h-8 rounded-lg bg-obsidian-plum border border-glass-border flex items-center justify-center text-dusty-mauve hover:text-warm-ivory hover:border-burnished-copper transition-colors"
+                  className="w-8 h-8 rounded-full bg-white border border-hairline flex items-center justify-center text-muted hover:text-ink hover:border-ink transition-colors"
                   title="Edit member"
                 >
                   <Edit2 className="w-3.5 h-3.5" />
@@ -175,7 +187,7 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
                     sound.playChime(320, 0.1);
                     onRemoveMember(member.id);
                   }}
-                  className="w-8 h-8 rounded-lg bg-obsidian-plum border border-glass-border flex items-center justify-center text-dusty-mauve hover:text-red-400 hover:border-red-400/40 transition-colors"
+                  className="w-8 h-8 rounded-full bg-white border border-hairline flex items-center justify-center text-muted hover:text-red-500 hover:border-red-300 transition-colors"
                   title="Remove member"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -186,7 +198,7 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
         })}
 
         {familyMembers.length === 0 && !isSingle && (
-          <div className="p-4 rounded-2xl border border-dashed border-glass-border text-center text-xs font-mono text-dusty-mauve">
+          <div className="p-6 rounded-[20px] border border-dashed border-hairline text-center text-xs text-muted bg-bg-soft font-normal">
             {t.step3.emptyNotice}
           </div>
         )}
@@ -199,10 +211,10 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
             sound.playChime(580, 0.12);
             onContinue();
           }}
-          className="group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-burnished-copper hover:bg-burnished-copper-light text-warm-ivory shadow-copper-glow hover:scale-105 transition-all duration-300 min-h-[44px]"
+          className="group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-ink hover:bg-[#2e283b] text-white shadow-subtle hover:shadow-elevated hover:scale-105 transition-all duration-300 min-h-[44px]"
         >
           <span>{t.step3.continue}</span>
-          < ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </button>
       </div>
 

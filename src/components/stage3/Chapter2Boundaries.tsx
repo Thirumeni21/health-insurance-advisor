@@ -94,24 +94,24 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-8 space-y-10 select-none animate-fadeIn">
       {/* Chapter Badge Header */}
-      <div className="text-center sm:text-left space-y-2 border-b border-glass-border pb-4">
-        <span className="text-[11px] font-mono tracking-widest uppercase text-burnished-copper block">
+      <div className="text-center sm:text-left space-y-2 border-b border-hairline pb-4">
+        <span className="editorial-kicker block">
           {ch.badge}
         </span>
-        <h1 className="font-serif text-3xl sm:text-4xl text-warm-ivory">
+        <h1 className="font-display text-3xl sm:text-4xl font-semibold text-ink">
           {ch.headline}
         </h1>
-        <p className="font-sans text-xs sm:text-sm text-dusty-mauve font-light leading-relaxed max-w-2xl">
+        <p className="font-sans text-xs sm:text-sm text-ink-soft leading-relaxed max-w-2xl">
           {ch.subheading}
         </p>
       </div>
 
       {/* 1. Interactive Expense Sorter */}
-      <div className="luxury-card p-6 sm:p-8 rounded-3xl space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-glass-border pb-3">
+      <div className="bg-white p-6 sm:p-8 rounded-[24px] border border-hairline shadow-subtle space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-3">
           <div>
-            <h3 className="font-serif text-xl sm:text-2xl text-warm-ivory">{ch.sorterTitle}</h3>
-            <p className="text-xs text-dusty-mauve font-light mt-0.5">{ch.sorterSub}</p>
+            <h3 className="font-display text-xl sm:text-2xl font-semibold text-ink">{ch.sorterTitle}</h3>
+            <p className="text-xs text-ink-soft mt-0.5">{ch.sorterSub}</p>
           </div>
 
           {/* Filter Pills */}
@@ -123,8 +123,8 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
               }}
               className={`px-3 py-1 rounded-full text-xs font-mono transition-all ${
                 activeCategoryFilter === "all"
-                  ? "bg-burnished-copper text-warm-ivory shadow-copper-glow"
-                  : "bg-deep-aubergine text-dusty-mauve hover:text-warm-ivory border border-glass-border"
+                  ? "bg-ink text-white font-medium"
+                  : "bg-bg-soft text-ink-soft hover:text-ink border border-hairline"
               }`}
             >
               {lang === "ta" ? "அனைத்தும்" : "All Items"}
@@ -136,8 +136,8 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
               }}
               className={`px-3 py-1 rounded-full text-xs font-mono transition-all ${
                 activeCategoryFilter === "covered"
-                  ? "bg-emerald-800/80 text-warm-ivory border border-emerald-500/50"
-                  : "bg-deep-aubergine text-dusty-mauve hover:text-warm-ivory border border-glass-border"
+                  ? "bg-sage-100 text-ink border border-sage-300 font-semibold"
+                  : "bg-bg-soft text-ink-soft hover:text-ink border border-hairline"
               }`}
             >
               {lang === "ta" ? "ஏற்கப்படலாம்" : "May Be Covered"}
@@ -149,8 +149,8 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
               }}
               className={`px-3 py-1 rounded-full text-xs font-mono transition-all ${
                 activeCategoryFilter === "not_covered"
-                  ? "bg-rose-900/80 text-warm-ivory border border-rose-500/50"
-                  : "bg-deep-aubergine text-dusty-mauve hover:text-warm-ivory border border-glass-border"
+                  ? "bg-rose-100 text-rose-800 border border-rose-200 font-semibold"
+                  : "bg-bg-soft text-ink-soft hover:text-ink border border-hairline"
               }`}
             >
               {lang === "ta" ? "உங்கள் பங்கு" : "Customer Share"}
@@ -166,10 +166,10 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
             return (
               <div
                 key={item.id}
-                className={`p-4 rounded-2xl border transition-all flex flex-col justify-between ${
+                className={`p-4 rounded-[16px] border transition-all flex flex-col justify-between ${
                   isCovered
-                    ? "bg-deep-aubergine/80 border-emerald-500/30 hover:border-emerald-500/60"
-                    : "bg-deep-aubergine/80 border-rose-500/30 hover:border-rose-500/60"
+                    ? "bg-sage-100/40 border-sage-200"
+                    : "bg-rose-50/50 border-rose-200"
                 }`}
               >
                 <div>
@@ -177,18 +177,18 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
                     <span
                       className={`inline-flex items-center space-x-1 text-[10px] font-mono px-2 py-0.5 rounded-full ${
                         isCovered
-                          ? "bg-emerald-950/80 text-emerald-300 border border-emerald-500/40"
-                          : "bg-rose-950/80 text-rose-300 border border-rose-500/40"
+                          ? "bg-white text-ink border border-sage-300 font-medium"
+                          : "bg-white text-rose-700 border border-rose-200 font-medium"
                       }`}
                     >
-                      {isCovered ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
+                      {isCovered ? <CheckCircle2 className="w-3 h-3 text-emerald-600" /> : <XCircle className="w-3 h-3 text-rose-600" />}
                       <span>{isCovered ? (lang === "ta" ? "ஏற்கப்படலாம்" : "May Be Covered") : (lang === "ta" ? "உங்கள் பொறுப்பு" : "Customer Share")}</span>
                     </span>
                   </div>
-                  <h4 className="font-serif text-sm font-semibold text-warm-ivory mb-1">
+                  <h4 className="font-sans text-sm font-semibold text-ink mb-1">
                     {item.title}
                   </h4>
-                  <p className="text-[11px] text-dusty-mauve font-light leading-relaxed">
+                  <p className="text-xs text-ink-soft leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -199,27 +199,27 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
       </div>
 
       {/* 2. Three-Phase Care Timeline */}
-      <div className="luxury-card p-6 sm:p-8 rounded-3xl space-y-6">
+      <div className="bg-white p-6 sm:p-8 rounded-[24px] border border-hairline shadow-subtle space-y-6">
         <div>
-          <h3 className="font-serif text-xl sm:text-2xl text-warm-ivory">{ch.timelineTitle}</h3>
-          <p className="text-xs text-dusty-mauve font-light mt-1">{ch.timelineSub}</p>
+          <h3 className="font-display text-xl sm:text-2xl font-semibold text-ink">{ch.timelineTitle}</h3>
+          <p className="text-xs text-ink-soft mt-1">{ch.timelineSub}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {ch.phases.map((ph, idx) => (
             <div
               key={idx}
-              className="p-5 rounded-2xl bg-deep-aubergine/70 border border-glass-border flex flex-col justify-between space-y-3"
+              className="p-5 rounded-[16px] bg-bg-soft border border-hairline flex flex-col justify-between space-y-3"
             >
               <div>
-                <div className="flex items-center space-x-2 text-burnished-copper text-xs font-mono mb-2">
-                  <Clock className="w-3.5 h-3.5" />
-                  <span>{ph.timing}</span>
+                <div className="flex items-center space-x-2 text-ink text-xs font-mono mb-2">
+                  <Clock className="w-3.5 h-3.5 text-lavender-600" />
+                  <span className="font-semibold">{ph.timing}</span>
                 </div>
-                <h4 className="font-serif text-base text-warm-ivory font-semibold mb-1.5">
+                <h4 className="font-display text-base text-ink font-semibold mb-1.5">
                   {ph.phase}
                 </h4>
-                <p className="text-xs text-dusty-mauve font-light leading-relaxed">
+                <p className="text-xs text-ink-soft leading-relaxed">
                   {ph.desc}
                 </p>
               </div>
@@ -228,23 +228,23 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
         </div>
 
         {/* Daycare Banner */}
-        <div className="p-4 rounded-2xl bg-obsidian-plum/80 border border-burnished-copper/30 flex items-start space-x-3 text-xs leading-relaxed font-light text-dusty-mauve">
-          <Info className="w-4 h-4 text-burnished-copper flex-shrink-0 mt-0.5" />
+        <div className="p-4 rounded-[16px] bg-bg-soft border border-hairline flex items-start space-x-3 text-xs leading-relaxed text-ink-soft">
+          <Info className="w-4 h-4 text-lavender-600 flex-shrink-0 mt-0.5" />
           <div>
-            <strong className="text-warm-ivory font-serif text-sm block mb-0.5">{ch.daycareTitle}</strong>
+            <strong className="text-ink font-sans text-sm font-semibold block mb-0.5">{ch.daycareTitle}</strong>
             {ch.daycareSub}
           </div>
         </div>
       </div>
 
-      {/* 3. Room Rent Simulator (Room A vs Room B) */}
-      <div className="luxury-card p-6 sm:p-8 rounded-3xl space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-glass-border pb-3">
+      {/* 3. Room Rent Simulator */}
+      <div className="bg-white p-6 sm:p-8 rounded-[24px] border border-hairline shadow-subtle space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-hairline pb-3">
           <div>
-            <h3 className="font-serif text-xl sm:text-2xl text-warm-ivory">{ch.roomRentTitle}</h3>
-            <p className="text-xs text-dusty-mauve font-light mt-0.5">{ch.roomRentSub}</p>
+            <h3 className="font-display text-xl sm:text-2xl font-semibold text-ink">{ch.roomRentTitle}</h3>
+            <p className="text-xs text-ink-soft mt-0.5">{ch.roomRentSub}</p>
           </div>
-          <Home className="w-5 h-5 text-burnished-copper self-start sm:self-auto" />
+          <Home className="w-5 h-5 text-lavender-600 self-start sm:self-auto" />
         </div>
 
         {/* Room Selection Toggle */}
@@ -255,19 +255,19 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
               sound.playSoftPulse();
               setSelectedRoom("standard");
             }}
-            className={`p-5 rounded-2xl text-left border transition-all ${
+            className={`p-5 rounded-[16px] text-left border transition-all ${
               selectedRoom === "standard"
-                ? "bg-burnished-copper/20 border-burnished-copper shadow-copper-glow"
-                : "bg-deep-aubergine/70 border-glass-border hover:border-burnished-copper/40"
+                ? "bg-lavender-100 border-lavender-600 shadow-sm"
+                : "bg-bg-soft border-hairline hover:border-lavender-300"
             }`}
           >
             <div className="flex items-center justify-between mb-2">
-              <span className="font-serif text-base font-bold text-warm-ivory">
+              <span className="font-sans text-base font-semibold text-ink">
                 {ch.roomRentSimulator.standardTitle}
               </span>
-              {selectedRoom === "standard" && <CheckCircle2 className="w-4 h-4 text-burnished-copper" />}
+              {selectedRoom === "standard" && <CheckCircle2 className="w-4 h-4 text-lavender-600" />}
             </div>
-            <p className="text-xs text-warm-ivory/90 font-light leading-relaxed">
+            <p className="text-xs text-ink-soft leading-relaxed">
               {ch.roomRentSimulator.standardImpact}
             </p>
           </button>
@@ -278,19 +278,19 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
               sound.playSoftPulse();
               setSelectedRoom("deluxe");
             }}
-            className={`p-5 rounded-2xl text-left border transition-all ${
+            className={`p-5 rounded-[16px] text-left border transition-all ${
               selectedRoom === "deluxe"
-                ? "bg-rose-950/40 border-rose-500/80 shadow-lg"
-                : "bg-deep-aubergine/70 border-glass-border hover:border-rose-500/40"
+                ? "bg-rose-50 border-rose-300 shadow-sm"
+                : "bg-bg-soft border-hairline hover:border-rose-300"
             }`}
           >
             <div className="flex items-center justify-between mb-2">
-              <span className="font-serif text-base font-bold text-warm-ivory">
+              <span className="font-sans text-base font-semibold text-ink">
                 {ch.roomRentSimulator.deluxeTitle}
               </span>
-              {selectedRoom === "deluxe" && <AlertTriangle className="w-4 h-4 text-rose-400" />}
+              {selectedRoom === "deluxe" && <AlertTriangle className="w-4 h-4 text-rose-500" />}
             </div>
-            <p className="text-xs text-rose-200/90 font-light leading-relaxed">
+            <p className="text-xs text-rose-800 leading-relaxed">
               {ch.roomRentSimulator.deluxeImpact}
             </p>
           </button>
@@ -298,68 +298,68 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
       </div>
 
       {/* 4. Deductible & Co-Payment Calculator */}
-      <div className="luxury-card p-6 sm:p-8 rounded-3xl space-y-6">
-        <div className="flex items-center justify-between border-b border-glass-border pb-3">
+      <div className="bg-white p-6 sm:p-8 rounded-[24px] border border-hairline shadow-subtle space-y-6">
+        <div className="flex items-center justify-between border-b border-hairline pb-3">
           <div>
-            <h3 className="font-serif text-xl sm:text-2xl text-warm-ivory">{ch.costSharingTitle}</h3>
-            <p className="text-xs text-dusty-mauve font-light mt-0.5">
+            <h3 className="font-display text-xl sm:text-2xl font-semibold text-ink">{ch.costSharingTitle}</h3>
+            <p className="text-xs text-ink-soft mt-0.5">
               {lang === "ta" ? "உங்கள் பங்கும் இன்ஷூரன்ஸ் பங்கும் எவ்வாறு பிரிக்கப்படுகிறது என்று பாருங்கள்:" : "Interactive visualization of customer responsibility vs insurer settlement:"}
             </p>
           </div>
-          <Sliders className="w-5 h-5 text-burnished-copper" />
+          <Sliders className="w-5 h-5 text-lavender-600" />
         </div>
 
         {/* Live Calculation Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="p-4 rounded-2xl bg-deep-aubergine/80 border border-glass-border">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-dusty-mauve block mb-1">
+          <div className="p-4 rounded-[16px] bg-bg-soft border border-hairline">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-ink-soft block mb-1">
               {lang === "ta" ? "மாதிரி மருத்துவ பில்" : "Sample Eligible Bill"}
             </span>
-            <div className="font-serif text-2xl font-bold text-warm-ivory">₹{sampleBillAmount.toLocaleString("en-IN")}</div>
-            <span className="text-[10px] font-mono text-dusty-mauve/70 mt-1 block">
+            <div className="font-display text-2xl font-bold text-ink">₹{sampleBillAmount.toLocaleString("en-IN")}</div>
+            <span className="text-[10px] font-mono text-muted mt-1 block">
               Deductible: ₹{deductibleVal.toLocaleString("en-IN")}
             </span>
           </div>
 
-          <div className="p-4 rounded-2xl bg-rose-950/30 border border-rose-500/30">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-rose-300 block mb-1">
+          <div className="p-4 rounded-[16px] bg-rose-50 border border-rose-200">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-rose-800 block mb-1 font-semibold">
               {lang === "ta" ? "உங்கள் மொத்தப் பொறுப்பு" : "Your Total Share"}
             </span>
-            <div className="font-serif text-2xl font-bold text-rose-200">
+            <div className="font-display text-2xl font-bold text-rose-900">
               ₹{totalCustomerResponsibility.toLocaleString("en-IN")}
             </div>
-            <span className="text-[10px] font-mono text-rose-300/70 mt-1 block">
+            <span className="text-[10px] font-mono text-rose-700 mt-1 block">
               Deductible + {copayPercent}% Co-pay
             </span>
           </div>
 
-          <div className="p-4 rounded-2xl bg-emerald-950/30 border border-emerald-500/30">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-300 block mb-1">
+          <div className="p-4 rounded-[16px] bg-sage-100/60 border border-sage-300">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-ink block mb-1 font-semibold">
               {lang === "ta" ? "இன்ஷூரன்ஸ் செலுத்தும் பங்கு" : "Insurer Settlement"}
             </span>
-            <div className="font-serif text-2xl font-bold text-emerald-200">
+            <div className="font-display text-2xl font-bold text-ink">
               ₹{insurerResponsibility.toLocaleString("en-IN")}
             </div>
-            <span className="text-[10px] font-mono text-emerald-300/70 mt-1 block">
+            <span className="text-[10px] font-mono text-ink-soft mt-1 block">
               Eligible Insurer Share
             </span>
           </div>
         </div>
 
-        <div className="p-4 rounded-2xl bg-obsidian-plum/80 border border-glass-border text-xs text-dusty-mauve leading-relaxed font-light">
+        <div className="p-4 rounded-[16px] bg-bg-soft border border-hairline text-xs text-ink-soft leading-relaxed">
           {ch.nonPayableDesc}
         </div>
       </div>
 
       {/* Navigation Stepper */}
-      <div className="pt-4 flex items-center justify-between border-t border-glass-border/40">
+      <div className="pt-4 flex items-center justify-between border-t border-hairline">
         <button
           onClick={() => {
             sound.playChime(380, 0.1);
             window.scrollTo({ top: 0, behavior: "smooth" });
             onPrevChapter();
           }}
-          className="px-5 py-3 rounded-full bg-obsidian-plum border border-glass-border text-xs font-mono text-dusty-mauve hover:text-warm-ivory transition-all"
+          className="px-5 py-3 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all"
         >
           {t.stage3.nav.prevChapter}
         </button>
@@ -370,7 +370,7 @@ export const Chapter2Boundaries: React.FC<Chapter2BoundariesProps> = ({
             window.scrollTo({ top: 0, behavior: "smooth" });
             onNextChapter();
           }}
-          className="group inline-flex items-center space-x-3 px-8 py-4 rounded-full bg-burnished-copper hover:bg-burnished-copper-light text-warm-ivory text-xs font-semibold uppercase tracking-wider shadow-copper-glow hover:scale-105 transition-all duration-300 min-h-[44px]"
+          className="btn-primary min-h-[44px] px-8 py-4 text-xs group inline-flex items-center space-x-3"
         >
           <span>{t.stage3.nav.nextChapter}</span>
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

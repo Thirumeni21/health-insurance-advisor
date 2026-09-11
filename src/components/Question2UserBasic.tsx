@@ -46,30 +46,33 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
     <div className="w-full max-w-2xl mx-auto animate-fadeIn select-none z-10 relative">
       {/* Title */}
       <div className="text-center mb-8">
-        <span className="text-[11px] uppercase font-mono tracking-widest text-burnished-copper mb-2 block">
-          {t.step2.tag}
-        </span>
-        <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-warm-ivory tracking-tight mb-3">
+        <div className="mb-2 inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-bg-soft border border-hairline">
+          <span className="w-1.5 h-1.5 rounded-full bg-lavender-600" />
+          <span className="text-xs font-semibold uppercase tracking-wider text-ink-soft">
+            {t.step2.tag}
+          </span>
+        </div>
+        <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-ink tracking-tight mb-3">
           {t.step2.title}
         </h1>
-        <p className="font-sans text-xs sm:text-sm text-dusty-mauve max-w-md mx-auto font-light">
+        <p className="font-sans text-sm text-ink-soft max-w-md mx-auto font-normal">
           {t.step2.subtitle}
         </p>
       </div>
 
       <div className="space-y-6">
-        {/* 1. ge Selector */}
-        <div className="luxury-card p-6 rounded-2xl">
+        {/* 1. Age Selector */}
+        <div className="bg-white border border-hairline rounded-[20px] p-6 shadow-subtle">
           <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center space-x-2">
-              <User className="w-4 h-4 text-burnished-copper" />
-              <label className="text-sm font-medium text-warm-ivory">{t.step2.ageLabel}</label>
+            <div className="flex items-center space-x-2.5">
+              <User className="w-4 h-4 text-lavender-600" />
+              <label className="text-sm font-semibold text-ink">{t.step2.ageLabel}</label>
             </div>
             <div className="flex items-baseline space-x-1.5">
-              <span className="font-serif text-4xl text-burnished-copper text-glow-copper">
+              <span className="font-display font-bold text-4xl text-ink">
                 {age}
               </span>
-              <span className="text-xs text-dusty-mauve font-mono">{t.step2.ageUnit}</span>
+              <span className="text-xs text-muted font-medium">{t.step2.ageUnit}</span>
             </div>
           </div>
 
@@ -82,7 +85,7 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
             className="w-full"
           />
 
-          <div className="flex justify-between text-[11px] text-dusty-mauve/70 mt-2 font-mono">
+          <div className="flex justify-between text-xs text-muted mt-2 font-mono">
             <span>18</span>
             <span>35</span>
             <span>50</span>
@@ -92,8 +95,8 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
         </div>
 
         {/* 2. Gender Selection */}
-        <div className="luxury-card p-6 rounded-2xl">
-          <label className="text-xs font-mono uppercase tracking-wider text-dusty-mauve block mb-3">
+        <div className="bg-white border border-hairline rounded-[20px] p-6 shadow-subtle">
+          <label className="text-xs font-semibold uppercase tracking-wider text-muted block mb-3">
             {t.step2.genderLabel}
           </label>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -110,10 +113,10 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
                   sound.playChime(420, 0.08);
                   onUpdate({ gender: item.id });
                 }}
-                className={`min-h-[44px] py-3 px-2 rounded-xl text-xs font-medium transition-all text-center border ${
+                className={`min-h-[44px] py-3 px-2 rounded-[12px] text-xs font-medium transition-all text-center border ${
                   gender === item.id
-                    ? "bg-burnished-copper/20 border-burnished-copper text-warm-ivory shadow-copper-glow"
-                    : "bg-deep-aubergine/70 border-glass-border text-dusty-mauve hover:text-warm-ivory"
+                    ? "bg-lavender-100 border-lavender-300 text-ink font-semibold shadow-xs"
+                    : "bg-white border-hairline text-ink-soft hover:bg-bg-soft hover:text-ink"
                 }`}
               >
                 {item.label}
@@ -123,16 +126,16 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
         </div>
 
         {/* 3. Location / City Selector */}
-        <div className="luxury-card p-6 rounded-2xl">
+        <div className="bg-white border border-hairline rounded-[20px] p-6 shadow-subtle">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center space-x-2">
-              <MapPin className="w-4 h-4 text-burnished-copper" />
-              <label className="text-xs font-mono uppercase tracking-wider text-dusty-mauve">
+              <MapPin className="w-4 h-4 text-lavender-600" />
+              <label className="text-xs font-semibold uppercase tracking-wider text-muted">
                 {t.step2.cityLabel}
               </label>
             </div>
             {city && (
-              <span className="text-xs font-mono text-burnished-copper px-2 py-0.5 rounded bg-burnished-copper/10">
+              <span className="text-xs font-medium text-ink px-2.5 py-0.5 rounded-full bg-lavender-100 border border-lavender-300">
                 {city}
               </span>
             )}
@@ -149,11 +152,11 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
                 setIsCityOpen(true);
               }}
               onFocus={() => setIsCityOpen(true)}
-              className="w-full min-h-[44px] bg-deep-aubergine/90 border border-glass-border rounded-xl px-4 py-3 text-sm text-warm-ivory placeholder-dusty-mauve/40 focus:outline-none focus:border-burnished-copper transition-colors"
+              className="w-full min-h-[44px] bg-white border border-hairline rounded-[14px] px-4 py-3 text-sm text-ink placeholder-muted focus:outline-none focus:border-lavender-600 transition-colors"
             />
 
             {isCityOpen && filteredCities.length > 0 && (
-              <div className="absolute left-0 right-0 top-full mt-1 max-h-48 overflow-y-auto bg-deep-aubergine border border-glass-border rounded-xl shadow-luxury-glass z-30 py-1">
+              <div className="absolute left-0 right-0 top-full mt-1 max-h-48 overflow-y-auto bg-white border border-hairline rounded-[14px] shadow-elevated z-30 py-1">
                 {filteredCities.map((c) => (
                   <button
                     key={c}
@@ -163,7 +166,7 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
                       setCitySearch("");
                       setIsCityOpen(false);
                     }}
-                    className="w-full text-left px-4 py-2.5 text-xs text-dusty-mauve hover:text-warm-ivory hover:bg-burnished-copper/15 transition-colors"
+                    className="w-full text-left px-4 py-2.5 text-xs text-ink-soft hover:text-ink hover:bg-lavender-100 transition-colors"
                   >
                     {c}
                   </button>
@@ -183,10 +186,10 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
                   setCitySearch("");
                   setIsCityOpen(false);
                 }}
-                className={`text-[11px] px-2.5 py-1 rounded-lg border transition-all ${
+                className={`text-xs px-3 py-1 rounded-full border transition-all ${
                   city === c
-                    ? "bg-burnished-copper/20 border-burnished-copper text-burnished-copper"
-                    : "bg-obsidian-plum/80 border-glass-border text-dusty-mauve hover:text-warm-ivory"
+                    ? "bg-lavender-100 border-lavender-300 text-ink font-semibold"
+                    : "bg-bg-soft border-hairline text-ink-soft hover:text-ink hover:bg-lavender-100"
                 }`}
               >
                 {c}
@@ -194,19 +197,19 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
             ))}
           </div>
 
-          <div className="flex items-start space-x-2 text-[11px] text-dusty-mauve/70 bg-deep-aubergine/40 p-2.5 rounded-lg border border-glass-border/40 font-light">
-            <Info className="w-3.5 h-3.5 text-burnished-copper flex-shrink-0 mt-0.5" />
+          <div className="flex items-start space-x-2 text-xs text-ink-soft bg-bg-soft p-3 rounded-[12px] border border-hairline font-normal">
+            <Info className="w-3.5 h-3.5 text-lavender-600 flex-shrink-0 mt-0.5" />
             <span>{t.step2.cityNote}</span>
           </div>
         </div>
 
         {/* Dynamic single conditional question */}
         {isSingle && (
-          <div className="luxury-card p-6 rounded-2xl border-burnished-copper/30 animate-fadeIn">
-            <span className="text-[10px] font-mono text-burnished-copper uppercase tracking-wider block mb-1">
+          <div className="bg-white border border-hairline rounded-[20px] p-6 shadow-subtle animate-fadeIn">
+            <span className="text-xs font-semibold text-lavender-600 uppercase tracking-wider block mb-1">
               Adaptive Detail
             </span>
-            <h4 className="text-sm font-medium text-warm-ivory mb-3">
+            <h4 className="text-sm font-semibold text-ink mb-3">
               {t.step2.singleDependentsLabel}
             </h4>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -223,10 +226,10 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
                     sound.playSoftPulse();
                     onUpdate({ singleDependents: item.id });
                   }}
-                  className={`min-h-[44px] p-3 rounded-xl text-xs font-medium text-center border transition-all ${
+                  className={`min-h-[44px] p-3 rounded-[12px] text-xs font-medium text-center border transition-all ${
                     singleDependents === item.id
-                      ? "bg-burnished-copper text-obsidian-plum font-semibold border-burnished-copper shadow-copper-glow"
-                      : "bg-deep-aubergine/70 border-glass-border text-dusty-mauve hover:text-warm-ivory"
+                      ? "bg-lavender-100 border-lavender-300 text-ink font-semibold shadow-xs"
+                      : "bg-white border-hairline text-ink-soft hover:bg-bg-soft hover:text-ink"
                   }`}
                 >
                   {item.label}
@@ -245,14 +248,14 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
             onContinue();
           }}
           disabled={!isValid}
-          className={`group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
+          className={`group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 min-h-[44px] ${
             isValid
-              ? "bg-burnished-copper hover:bg-burnished-copper-light text-warm-ivory shadow-copper-glow hover:scale-105"
-              : "bg-deep-aubergine text-dusty-mauve/30 cursor-not-allowed border border-glass-border"
+              ? "bg-ink hover:bg-[#2e283b] text-white shadow-subtle hover:shadow-elevated hover:scale-105"
+              : "bg-bg-soft text-muted cursor-not-allowed border border-hairline"
           }`}
         >
           <span>{t.step2.continue}</span>
-          < ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </button>
       </div>
     </div>

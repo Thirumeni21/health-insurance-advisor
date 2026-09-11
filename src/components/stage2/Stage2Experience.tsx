@@ -9,7 +9,6 @@ import {
   CurrentCoverUnderstanding,
 } from "@/types/stage2";
 import { selectPersonalizedScenario } from "@/lib/scenarioEngine";
-import { Stage2Space3D } from "./Stage2Space3D";
 import { ScenarioPlayer } from "./ScenarioPlayer";
 import { InsuranceConceptsInteractive } from "./InsuranceConceptsInteractive";
 import { CurrentCoverQuestion } from "./CurrentCoverQuestion";
@@ -54,17 +53,7 @@ export const Stage2Experience: React.FC<Stage2ExperienceProps> = ({
   };
 
   return (
-    <div className="relative w-full min-h-[85vh] flex flex-col justify-center select-none">
-      {/* 3D Stage 2 Cinematic Space Canvas */}
-      <Stage2Space3D
-        currentStep={currentStep}
-        currentActIndex={currentActIndex}
-        scenario={scenario}
-        familyMembers={profile.household.familyMembers}
-        userAge={profile.user.age || 32}
-        activeConceptId={activeConceptId}
-        reducedMotion={reducedMotion}
-      />
+    <div className="relative w-full min-h-[85vh] flex flex-col justify-center select-none py-4">
 
       {/* Step 1: Single Personalized Scenario (7 Acts) */}
       {currentStep === "scenario" && (

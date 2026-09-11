@@ -67,15 +67,15 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
   const relTranslated = t.modal.relationships[relationship] || relationship;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-obsidian-plum/85 backdrop-blur-xl animate-fadeIn">
-      <div className="relative w-full max-w-lg rounded-t-3xl sm:rounded-2xl bg-deep-aubergine border-t sm:border border-burnished-copper/30 shadow-luxury-glass p-6 sm:p-8 overflow-y-auto max-h-[88vh] sm:max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-ink/40 backdrop-blur-sm animate-fadeIn">
+      <div className="relative w-full max-w-lg rounded-t-[28px] sm:rounded-[24px] bg-white border border-hairline shadow-elevated p-6 sm:p-8 overflow-y-auto max-h-[88vh] sm:max-h-[90vh]">
         {/* Mobile Drag Handle */}
-        <div className="sm:hidden w-12 h-1 bg-dusty-mauve/30 rounded-full mx-auto mb-4" />
+        <div className="sm:hidden w-12 h-1 bg-hairline rounded-full mx-auto mb-4" />
 
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-obsidian-plum border border-glass-border flex items-center justify-center text-dusty-mauve hover:text-warm-ivory transition-colors"
+          className="absolute top-5 right-5 w-8 h-8 rounded-full bg-bg-soft border border-hairline flex items-center justify-center text-ink-soft hover:text-ink transition-colors"
           aria-label="Close"
         >
           <X className="w-4 h-4" />
@@ -83,13 +83,13 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
 
         {/* Header */}
         <div className="mb-5">
-          <span className="text-[11px] uppercase font-mono tracking-widest text-burnished-copper block mb-1">
+          <span className="editorial-kicker block mb-1">
             {t.modal.tag}
           </span>
-          <h3 className="font-serif text-2xl sm:text-3xl text-warm-ivory">
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold text-ink tracking-tight">
             {t.modal.title} {relTranslated}
           </h3>
-          <p className="text-xs text-dusty-mauve mt-0.5 font-light">
+          <p className="text-xs text-ink-soft mt-1">
             {t.modal.subtitle}
           </p>
         </div>
@@ -97,7 +97,7 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
         <form onSubmit={handleSave} className="space-y-4 sm:space-y-5">
           {/* Relationship Selection */}
           <div>
-            <label className="text-xs font-mono uppercase tracking-wider text-dusty-mauve block mb-2">
+            <label className="text-xs font-mono uppercase tracking-wider text-ink-soft block mb-2">
               {t.modal.relLabel}
             </label>
             <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
@@ -115,8 +115,8 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
                     }}
                     className={`min-h-[44px] py-2 px-1 text-center text-xs rounded-xl border transition-all ${
                       relationship === rel
-                        ? "bg-burnished-copper/25 border-burnished-copper text-warm-ivory font-medium"
-                        : "bg-obsidian-plum/70 border-glass-border text-dusty-mauve hover:text-warm-ivory"
+                        ? "bg-lavender-100 border-lavender-600 text-ink font-semibold shadow-sm"
+                        : "bg-white border-hairline text-ink-soft hover:bg-bg-soft hover:text-ink"
                     }`}
                   >
                     {t.modal.relationships[rel] || rel}
@@ -126,10 +126,10 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
             </div>
           </div>
 
-          {/* ge and Optional Name */}
+          {/* Age and Optional Name */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
-              <label className="text-xs font-mono uppercase tracking-wider text-dusty-mauve block mb-1">
+              <label className="text-xs font-mono uppercase tracking-wider text-ink-soft block mb-1">
                 {t.modal.ageLabel}
               </label>
               <input
@@ -138,28 +138,28 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
                 max={100}
                 value={age}
                 onChange={(e) => setge(Math.max(0, Math.min(100, parseInt(e.target.value, 10) || 0)))}
-                className="w-full min-h-[44px] bg-obsidian-plum/80 border border-glass-border rounded-xl px-4 py-2.5 text-sm text-warm-ivory font-mono focus:outline-none focus:border-burnished-copper"
+                className="w-full min-h-[44px] bg-white border border-hairline rounded-xl px-4 py-2.5 text-sm text-ink font-mono focus:outline-none focus:border-lavender-600"
                 required
               />
             </div>
 
             <div>
-              <label className="text-xs font-mono uppercase tracking-wider text-dusty-mauve block mb-1">
-                {t.modal.nameLabel} <span className="text-dusty-mauve/40">{t.modal.optional}</span>
+              <label className="text-xs font-mono uppercase tracking-wider text-ink-soft block mb-1">
+                {t.modal.nameLabel} <span className="text-muted">{t.modal.optional}</span>
               </label>
               <input
                 type="text"
                 placeholder={relTranslated}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full min-h-[44px] bg-obsidian-plum/80 border border-glass-border rounded-xl px-4 py-2.5 text-sm text-warm-ivory placeholder-dusty-mauve/40 focus:outline-none focus:border-burnished-copper"
+                className="w-full min-h-[44px] bg-white border border-hairline rounded-xl px-4 py-2.5 text-sm text-ink placeholder-muted focus:outline-none focus:border-lavender-600"
               />
             </div>
           </div>
 
           {/* Financial Dependency */}
           <div>
-            <label className="text-xs font-mono uppercase tracking-wider text-dusty-mauve block mb-2">
+            <label className="text-xs font-mono uppercase tracking-wider text-ink-soft block mb-2">
               {t.modal.depLabel}
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -174,8 +174,8 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
                   onClick={() => setFinanciallyDependent(item.id)}
                   className={`min-h-[44px] py-2.5 rounded-xl text-xs font-medium border text-center transition-all ${
                     financiallyDependent === item.id
-                      ? "bg-burnished-copper/25 border-burnished-copper text-warm-ivory shadow-copper-glow"
-                      : "bg-obsidian-plum/70 border-glass-border text-dusty-mauve hover:text-warm-ivory"
+                      ? "bg-lavender-100 border-lavender-600 text-ink font-semibold shadow-sm"
+                      : "bg-white border-hairline text-ink-soft hover:bg-bg-soft hover:text-ink"
                   }`}
                 >
                   {item.label}
@@ -186,7 +186,7 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
 
           {/* Existing Insurance */}
           <div>
-            <label className="text-xs font-mono uppercase tracking-wider text-dusty-mauve block mb-2">
+            <label className="text-xs font-mono uppercase tracking-wider text-ink-soft block mb-2">
               {t.modal.insLabel}
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -201,8 +201,8 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
                   onClick={() => setExistingInsurance(item.id)}
                   className={`min-h-[44px] py-2.5 rounded-xl text-xs font-medium border text-center transition-all ${
                     existingInsurance === item.id
-                      ? "bg-burnished-copper/25 border-burnished-copper text-warm-ivory shadow-copper-glow"
-                      : "bg-obsidian-plum/70 border-glass-border text-dusty-mauve hover:text-warm-ivory"
+                      ? "bg-lavender-100 border-lavender-600 text-ink font-semibold shadow-sm"
+                      : "bg-white border-hairline text-ink-soft hover:bg-bg-soft hover:text-ink"
                   }`}
                 >
                   {item.label}
@@ -212,20 +212,20 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
           </div>
 
           {/* Expandable Why note */}
-          <div className="p-3 rounded-xl bg-obsidian-plum/40 border border-glass-border/60">
+          <div className="p-3.5 rounded-xl bg-bg-soft border border-hairline">
             <button
               type="button"
               onClick={() => setShowWhyModal(!showWhyModal)}
-              className="flex items-center space-x-1.5 text-xs text-burnished-copper hover:underline w-full justify-between font-mono"
+              className="flex items-center space-x-1.5 text-xs text-lavender-600 hover:underline w-full justify-between font-mono"
             >
               <div className="flex items-center space-x-1.5">
                 <HelpCircle className="w-3.5 h-3.5" />
                 <span>{t.modal.whyAsk}</span>
               </div>
-              <span className="text-[10px] text-dusty-mauve">{showWhyModal ? "Hide" : "Show"}</span>
+              <span className="text-[10px] text-ink-soft">{showWhyModal ? "Hide" : "Show"}</span>
             </button>
             {showWhyModal && (
-              <p className="text-[11px] text-dusty-mauve mt-2 leading-relaxed border-t border-glass-border/40 pt-2 font-light">
+              <p className="text-[11px] text-ink-soft mt-2 leading-relaxed border-t border-hairline pt-2 font-light">
                 {t.modal.whyAskText}
               </p>
             )}
@@ -236,13 +236,13 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="min-h-[44px] px-4 py-2.5 rounded-full text-xs font-mono text-dusty-mauve hover:text-warm-ivory"
+              className="min-h-[44px] px-5 py-2.5 rounded-full text-xs font-medium text-ink-soft hover:text-ink border border-hairline"
             >
               {t.modal.cancel}
             </button>
             <button
               type="submit"
-              className="min-h-[44px] px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-burnished-copper text-warm-ivory shadow-copper-glow hover:bg-burnished-copper-light transition-all flex items-center space-x-1.5"
+              className="btn-primary min-h-[44px] px-6 py-2.5 text-xs flex items-center space-x-1.5"
             >
               <Check className="w-3.5 h-3.5" />
               <span>{t.modal.save}</span>

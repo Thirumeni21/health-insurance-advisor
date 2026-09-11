@@ -3,7 +3,6 @@
 import React, { useState, useMemo } from "react";
 import { UserProtectionProfile } from "@/types/questionnaire";
 import { selectPersonalizedScenario } from "@/lib/scenarioEngine";
-import { Stage3Space3D } from "./Stage3Space3D";
 import { Chapter1Mechanism } from "./Chapter1Mechanism";
 import { Chapter2Boundaries } from "./Chapter2Boundaries";
 import { Chapter3Claims } from "./Chapter3Claims";
@@ -52,25 +51,18 @@ export const Stage3Experience: React.FC<Stage3ExperienceProps> = ({
   };
 
   return (
-    <div className="relative w-full min-h-[85vh] flex flex-col justify-center select-none">
-      {/* 3D Stage 3 Persistent Space Canvas */}
-      <Stage3Space3D
-        currentChapterIndex={currentChapterIndex}
-        scenario={scenario}
-        familyMembers={profile.household.familyMembers}
-        reducedMotion={reducedMotion}
-      />
+    <div className="relative w-full min-h-[85vh] flex flex-col justify-center select-none py-4">
 
       {/* Top Persistent Chapter Stepper Navigation */}
       <div className="w-full max-w-4xl mx-auto px-4 pt-4 pb-2 z-20">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-glass-border/40 pb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-hairline pb-3">
           <div className="flex items-center space-x-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-burnished-copper animate-pulse" />
-            <span className="font-mono text-xs text-burnished-copper uppercase tracking-wider font-semibold">
+            <span className="w-2.5 h-2.5 rounded-full bg-lavender-600 animate-pulse" />
+            <span className="font-mono text-xs text-ink uppercase tracking-wider font-semibold">
               {t.stage3.nav.stageTag}
             </span>
-            <span className="text-dusty-mauve/40">·</span>
-            <span className="text-xs text-dusty-mauve font-mono">
+            <span className="text-muted">·</span>
+            <span className="text-xs text-ink-soft font-mono">
               {t.stage3.nav.chapterOf} 0{currentChapterIndex + 1} / 05: {chapterNames[currentChapterIndex]}
             </span>
           </div>
@@ -92,10 +84,10 @@ export const Stage3Experience: React.FC<Stage3ExperienceProps> = ({
                   }}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     isCurrent
-                      ? "w-8 bg-burnished-copper shadow-copper-glow"
+                      ? "w-8 bg-ink"
                       : isPast
-                      ? "w-3.5 bg-burnished-copper/50 hover:bg-burnished-copper/70"
-                      : "w-2 bg-glass-border hover:bg-dusty-mauve/40"
+                      ? "w-3.5 bg-lavender-300 hover:bg-lavender-600"
+                      : "w-2 bg-hairline hover:bg-muted"
                   }`}
                   title={`${t.stage3.nav.chapterOf} ${idx + 1}: ${chapterNames[idx]}`}
                 />

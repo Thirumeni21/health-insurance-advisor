@@ -20,8 +20,6 @@ import { Question5Concerns } from "@/components/Question5Concerns";
 import { SummaryScreen } from "@/components/SummaryScreen";
 import { Stage2Experience } from "@/components/stage2/Stage2Experience";
 import { Stage3Experience } from "@/components/stage3/Stage3Experience";
-import { ProtectionSpace3D } from "@/components/ProtectionSpace3D";
-import { CustomCursor } from "@/components/CustomCursor";
 import { ResumeSessionModal } from "@/components/ResumeSessionModal";
 import { sound } from "@/lib/soundFx";
 
@@ -133,21 +131,7 @@ function ProtectionAppContent() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-obsidian-plum text-warm-ivory overflow-x-hidden">
-      {/* Custom Desktop Cursor */}
-      <CustomCursor />
-
-      {/* Stage 1 3D Constellation (rendered when in Stage 1) */}
-      {stage !== "stage2" && stage !== "stage3" && (
-        <ProtectionSpace3D
-          stage={stage}
-          familyMembers={profile.household.familyMembers}
-          userAge={profile.user.age || 32}
-          selectedConcernTrigger={selectedConcernTrigger}
-          reducedMotion={reducedMotion}
-        />
-      )}
-
+    <div className="relative min-h-screen flex flex-col bg-white text-ink overflow-x-hidden font-sans">
       {/* Resume Session Recovery Prompt */}
       <ResumeSessionModal
         isOpen={hasExistingSession}

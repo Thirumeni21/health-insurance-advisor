@@ -9,43 +9,53 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Master Palette
-        "obsidian-plum": "#100C12",
-        "deep-aubergine": "#1D1420",
-        "oxblood-burgundy": "#351D27",
-        "burnished-copper": "#C47B5A",
-        "burnished-copper-light": "#D88F6F",
-        "muted-rose": "#B98A91",
-        "warm-ivory": "#F1E9DC",
-        "dusty-mauve": "#B7A9AE",
-        "soft-champagne": "#D8B98A",
-        "glass-border": "rgba(241, 233, 220, 0.08)",
-        "glass-surface": "rgba(29, 20, 32, 0.72)",
+        // Style Reference Core Palette
+        ink: "#18151F",
+        "ink-soft": "#4A4556",
+        muted: "#928DA0",
+        hairline: "#E7E2EF",
+        "bg-soft": "#FAF9FC",
+        "lavender-100": "#EEE6FB",
+        "lavender-300": "#D9C8F3",
+        "lavender-600": "#8B68CF",
+        "sage-100": "#E9F0DA",
+        "sage-500": "#9CB974",
+        "cream-100": "#F6F1E6",
+
+        // Aliases to seamlessly restyle any legacy references
+        "obsidian-plum": "#FFFFFF",
+        "deep-aubergine": "#FAF9FC",
+        "oxblood-burgundy": "#EEE6FB",
+        "burnished-copper": "#18151F",
+        "burnished-copper-light": "#8B68CF",
+        "muted-rose": "#928DA0",
+        "warm-ivory": "#18151F",
+        "dusty-mauve": "#4A4556",
+        "soft-champagne": "#8B68CF",
+        "glass-border": "#E7E2EF",
+        "glass-surface": "#FFFFFF",
       },
       fontFamily: {
+        display: ["Bricolage Grotesque", "sans-serif"],
         serif: ["Instrument Serif", "Georgia", "serif"],
-        sans: ["Plus Jakarta Sans", "DM Sans", "sans-serif"],
+        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
       },
-      animation: {
-        "float-subtle": "floatSubtle 8s ease-in-out infinite",
-        "pulse-copper": "pulseCopper 4s ease-in-out infinite",
-      },
-      keyframes: {
-        floatSubtle: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-6px)" },
-        },
-        pulseCopper: {
-          "0%, 100%": { opacity: "0.6", filter: "blur(12px)" },
-          "50%": { opacity: "1", filter: "blur(20px)" },
-        },
+      borderRadius: {
+        sm: "10px",
+        md: "16px",
+        lg: "24px",
+        pill: "999px",
       },
       boxShadow: {
-        "copper-glow": "0 0 25px -4px rgba(196, 123, 90, 0.35)",
-        "copper-glow-lg": "0 0 45px -8px rgba(196, 123, 90, 0.45)",
-        "champagne-glow": "0 0 30px -5px rgba(216, 185, 138, 0.3)",
-        "luxury-glass": "0 20px 50px rgba(0, 0, 0, 0.6)",
+        subtle: "0 8px 20px rgba(24, 21, 31, 0.06)",
+        elevated: "0 20px 40px rgba(24, 21, 31, 0.08)",
+        "copper-glow": "0 8px 20px rgba(24, 21, 31, 0.06)",
+        "champagne-glow": "0 8px 20px rgba(139, 104, 207, 0.12)",
+        "luxury-glass": "0 8px 24px rgba(24, 21, 31, 0.06)",
+      },
+      maxWidth: {
+        editorial: "1240px",
       },
     },
   },

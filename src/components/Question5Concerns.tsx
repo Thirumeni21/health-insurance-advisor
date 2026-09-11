@@ -29,13 +29,13 @@ export const Question5Concerns: React.FC<Question5ConcernsProps> = ({
     <div className="w-full max-w-2xl mx-auto animate-fadeIn z-10 relative select-none">
       {/* Title */}
       <div className="text-left mb-6">
-        <span className="text-[11px] uppercase font-mono tracking-widest text-burnished-copper mb-1 block">
+        <span className="editorial-kicker mb-1 block">
           {t.step5.tag}
         </span>
-        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-warm-ivory tracking-tight mb-2">
+        <h2 className="font-display text-3xl sm:text-4xl font-semibold text-ink tracking-tight mb-2">
           {t.step5.title}
         </h2>
-        <p className="text-xs text-dusty-mauve max-w-md font-light">
+        <p className="text-xs sm:text-sm text-ink-soft max-w-md">
           {t.step5.subtitle}
         </p>
       </div>
@@ -50,32 +50,32 @@ export const Question5Concerns: React.FC<Question5ConcernsProps> = ({
             <div
               key={item.id}
               onClick={() => handleToggle(item.id)}
-              className={`group p-4 rounded-2xl cursor-pointer transition-all duration-300 flex items-start space-x-3 border min-h-[48px] ${
+              className={`group p-4 rounded-[16px] cursor-pointer transition-all duration-200 flex items-start space-x-3 border min-h-[48px] ${
                 isSelected
-                  ? "bg-burnished-copper/20 border-burnished-copper shadow-copper-glow transform scale-[1.01]"
-                  : "luxury-card luxury-card-hover"
-              } ${item.isEducationalHook ? "sm:col-span-2 bg-gradient-to-r from-deep-aubergine to-obsidian-plum" : ""}`}
+                  ? "bg-lavender-100 border-lavender-600 shadow-sm"
+                  : "bg-white border-hairline hover:border-lavender-300 hover:bg-bg-soft"
+              } ${item.isEducationalHook ? "sm:col-span-2 bg-gradient-to-r from-bg-soft to-lavender-100/40" : ""}`}
             >
-              <div className="w-9 h-9 rounded-xl bg-obsidian-plum border border-glass-border flex items-center justify-center text-lg flex-shrink-0 group-hover:scale-110 transition-transform">
+              <div className="w-9 h-9 rounded-xl bg-bg-soft border border-hairline flex items-center justify-center text-lg flex-shrink-0 group-hover:scale-105 transition-transform">
                 {item.icon}
               </div>
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-serif text-base text-warm-ivory group-hover:text-burnished-copper transition-colors leading-snug">
+                  <h3 className="font-sans font-medium text-base text-ink group-hover:text-lavender-600 transition-colors leading-snug">
                     {translated.title}
                   </h3>
                   <div
                     className={`w-4 h-4 rounded flex items-center justify-center transition-all flex-shrink-0 ml-1.5 ${
                       isSelected
-                        ? "bg-burnished-copper text-obsidian-plum shadow-copper-glow"
-                        : "border border-glass-border"
+                        ? "bg-lavender-600 text-white"
+                        : "border border-hairline bg-white"
                     }`}
                   >
                     {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
                   </div>
                 </div>
-                <p className="text-[11px] text-dusty-mauve leading-relaxed font-light">
+                <p className="text-xs text-ink-soft leading-relaxed font-light">
                   {translated.desc}
                 </p>
               </div>
@@ -92,14 +92,14 @@ export const Question5Concerns: React.FC<Question5ConcernsProps> = ({
             onContinue();
           }}
           disabled={!isValid}
-          className={`group flex items-center space-x-3 px-8 py-3.5 rounded-full font-mono text-xs uppercase tracking-wider font-semibold transition-all duration-300 min-h-[44px] ${
+          className={`group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 min-h-[44px] ${
             isValid
-              ? "bg-burnished-copper text-warm-ivory shadow-copper-glow hover:bg-burnished-copper-light hover:scale-105"
-              : "bg-deep-aubergine text-dusty-mauve/40 cursor-not-allowed border border-glass-border"
+              ? "btn-primary"
+              : "bg-bg-soft text-muted cursor-not-allowed border border-hairline"
           }`}
         >
           <span>{t.step5.continue}</span>
-          < ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </button>
       </div>
     </div>

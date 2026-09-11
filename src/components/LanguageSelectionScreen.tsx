@@ -16,18 +16,18 @@ export const LanguageSelectionScreen: React.FC = () => {
   return (
     <div className="relative min-h-[85vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 py-12 z-20 select-none animate-fadeIn">
       {/* Category Pill */}
-      <div className="mb-6 inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-deep-aubergine/80 border border-glass-border backdrop-blur-md">
-        <Globe className="w-3.5 h-3.5 text-burnished-copper" />
-        <span className="text-[11px] font-mono tracking-widest uppercase text-dusty-mauve">
+      <div className="mb-6 inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-bg-soft border border-hairline">
+        <span className="w-1.5 h-1.5 rounded-full bg-lavender-600" />
+        <span className="text-xs font-semibold uppercase tracking-wider text-ink-soft">
           Language / மொழி
         </span>
       </div>
 
       {/* Main Title */}
-      <h1 className="font-serif text-4xl sm:text-6xl text-warm-ivory tracking-tight mb-3">
-        Choose your language
+      <h1 className="font-display font-bold text-4xl sm:text-6xl text-ink tracking-tight mb-3">
+        Choose your <span className="font-serif italic font-normal text-lavender-600">language</span>
       </h1>
-      <p className="font-sans text-xs sm:text-sm text-dusty-mauve max-w-md mx-auto mb-10 font-light">
+      <p className="font-sans text-sm text-ink-soft max-w-md mx-auto mb-10 font-normal">
         Select your preferred language to enter your family protection experience.
       </p>
 
@@ -36,18 +36,18 @@ export const LanguageSelectionScreen: React.FC = () => {
         {/* English Card */}
         <div
           onClick={() => handleSelect("en")}
-          className="luxury-card luxury-card-hover p-6 rounded-2xl cursor-pointer text-left group border border-glass-border hover:border-burnished-copper/50 transition-all duration-300"
+          className="bg-white hover:bg-bg-soft border border-hairline hover:border-lavender-300 rounded-[20px] p-6 cursor-pointer text-left group shadow-subtle hover:shadow-elevated transition-all duration-300"
         >
           <div className="flex items-center justify-between mb-4">
-            <span className="text-2xl">🇬🇧</span>
-            <div className="w-7 h-7 rounded-full bg-deep-aubergine border border-glass-border flex items-center justify-center text-dusty-mauve group-hover:text-burnished-copper group-hover:border-burnished-copper transition-colors">
-              < ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+            <span className="text-3xl">🇬🇧</span>
+            <div className="w-8 h-8 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center text-ink group-hover:bg-ink group-hover:text-white transition-all">
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
             </div>
           </div>
-          <h3 className="font-serif text-2xl text-warm-ivory mb-1 group-hover:text-burnished-copper transition-colors">
+          <h3 className="font-display font-bold text-2xl text-ink mb-1 group-hover:text-lavender-600 transition-colors">
             English
           </h3>
-          <p className="text-xs text-dusty-mauve font-light">
+          <p className="text-xs text-muted font-normal">
             Continue in English
           </p>
         </div>
@@ -55,24 +55,24 @@ export const LanguageSelectionScreen: React.FC = () => {
         {/* Tamil Card */}
         <div
           onClick={() => handleSelect("ta")}
-          className="luxury-card luxury-card-hover p-6 rounded-2xl cursor-pointer text-left group border border-glass-border hover:border-burnished-copper/50 transition-all duration-300"
+          className="bg-white hover:bg-bg-soft border border-hairline hover:border-lavender-300 rounded-[20px] p-6 cursor-pointer text-left group shadow-subtle hover:shadow-elevated transition-all duration-300"
         >
           <div className="flex items-center justify-between mb-4">
-            <span className="text-2xl">🇮🇳</span>
-            <div className="w-7 h-7 rounded-full bg-deep-aubergine border border-glass-border flex items-center justify-center text-dusty-mauve group-hover:text-burnished-copper group-hover:border-burnished-copper transition-colors">
-              < ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+            <span className="text-3xl">🇮🇳</span>
+            <div className="w-8 h-8 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center text-ink group-hover:bg-ink group-hover:text-white transition-all">
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
             </div>
           </div>
-          <h3 className="font-serif text-2xl text-warm-ivory mb-1 group-hover:text-burnished-copper transition-colors">
+          <h3 className="font-display font-bold text-2xl text-ink mb-1 group-hover:text-lavender-600 transition-colors">
             தமிழ்
           </h3>
-          <p className="text-xs text-dusty-mauve font-light">
+          <p className="text-xs text-muted font-normal">
             தமிழில் தொடரவும்
           </p>
         </div>
       </div>
 
-      <div className="text-[11px] font-mono text-dusty-mauve/60">
+      <div className="text-xs text-muted">
         You can switch between English and தமிழ் anytime from the top bar.
       </div>
     </div>

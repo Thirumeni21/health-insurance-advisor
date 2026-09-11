@@ -51,24 +51,24 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
     <div className="w-full max-w-3xl mx-auto animate-fadeIn select-none z-10 relative">
       {/* Title */}
       <div className="text-center mb-8">
-        <span className="text-[11px] uppercase font-mono tracking-widest text-burnished-copper mb-2 block">
+        <span className="editorial-kicker mb-2 block">
           {t.step4.tag}
         </span>
-        <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-warm-ivory tracking-tight mb-3">
+        <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-ink tracking-tight mb-3">
           {t.step4.title}
         </h1>
-        <p className="font-sans text-xs sm:text-sm text-dusty-mauve max-w-md mx-auto font-light">
+        <p className="font-sans text-xs sm:text-sm text-ink-soft max-w-md mx-auto">
           {t.step4.subtitle}
         </p>
       </div>
 
       <div className="space-y-6">
         {/* 1. Household Income Range */}
-        <div className="luxury-card p-6 rounded-2xl">
-          <label className="text-xs font-mono uppercase tracking-wider text-dusty-mauve block mb-1">
+        <div className="bg-white p-6 sm:p-7 rounded-[20px] border border-hairline shadow-subtle">
+          <label className="text-xs font-mono uppercase tracking-wider text-ink-soft block mb-1">
             {t.step4.incomeLabel}
           </label>
-          <p className="text-xs text-dusty-mauve/70 mb-4 font-light">
+          <p className="text-xs text-muted mb-4">
             {t.step4.incomeDesc}
           </p>
 
@@ -83,16 +83,16 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
                 }}
                 className={`min-h-[50px] p-3.5 rounded-xl text-left border transition-all ${
                   householdIncome === item.id
-                    ? "bg-burnished-copper/20 border-burnished-copper text-warm-ivory shadow-copper-glow"
-                    : "bg-obsidian-plum/70 border-glass-border text-dusty-mauve hover:text-warm-ivory hover:border-burnished-copper/40"
+                    ? "bg-lavender-100 border-lavender-600 text-ink font-semibold shadow-sm"
+                    : "bg-white border-hairline text-ink-soft hover:bg-bg-soft hover:text-ink"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-serif text-sm">
+                  <span className="font-sans text-sm">
                     {t.step4.incomeOptions[item.id]}
                   </span>
                   {householdIncome === item.id && (
-                    <Check className="w-3.5 h-3.5 text-burnished-copper" />
+                    <Check className="w-3.5 h-3.5 text-lavender-600" />
                   )}
                 </div>
               </button>
@@ -101,11 +101,11 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
         </div>
 
         {/* 2. Current Health Insurance */}
-        <div className="luxury-card p-6 rounded-2xl">
-          <label className="text-xs font-mono uppercase tracking-wider text-dusty-mauve block mb-1">
+        <div className="bg-white p-6 sm:p-7 rounded-[20px] border border-hairline shadow-subtle">
+          <label className="text-xs font-mono uppercase tracking-wider text-ink-soft block mb-1">
             {t.step4.insuranceLabel}
           </label>
-          <p className="text-xs text-dusty-mauve/70 mb-4 font-light">
+          <p className="text-xs text-muted mb-4">
             {t.step4.insuranceDesc}
           </p>
 
@@ -127,24 +127,24 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
                 }}
                 className={`min-h-[52px] p-3.5 rounded-xl text-left border transition-all flex items-start space-x-3 ${
                   currentInsurance === opt.id
-                    ? "bg-burnished-copper/20 border-burnished-copper shadow-copper-glow"
-                    : "bg-obsidian-plum/70 border-glass-border hover:border-burnished-copper/40"
+                    ? "bg-lavender-100 border-lavender-600 shadow-sm"
+                    : "bg-white border-hairline hover:bg-bg-soft"
                 }`}
               >
                 <span className="text-lg mt-0.5">{opt.icon}</span>
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
                     <span
-                      className={`font-serif text-base ${
+                      className={`font-sans text-base ${
                         currentInsurance === opt.id
-                          ? "text-warm-ivory font-bold"
-                          : "text-dusty-mauve"
+                          ? "text-ink font-semibold"
+                          : "text-ink-soft"
                       }`}
                     >
                       {t.step4.insuranceOptions[opt.id]}
                     </span>
                     {currentInsurance === opt.id && (
-                      <Check className="w-3.5 h-3.5 text-burnished-copper" />
+                      <Check className="w-3.5 h-3.5 text-lavender-600" />
                     )}
                   </div>
                 </div>
@@ -155,30 +155,30 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
 
         {/* 3. Existing Coverage Amount */}
         {currentInsurance === "none" ? (
-          <div className="luxury-card p-5 rounded-2xl border border-glass-border/60 bg-obsidian-plum/50 flex items-center justify-between">
+          <div className="p-5 rounded-[16px] border border-hairline bg-bg-soft flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <span className="text-xl">🛡️</span>
               <div>
-                <p className="font-serif text-sm text-warm-ivory">
+                <p className="font-display font-medium text-sm text-ink">
                   {language === "ta" ? "தற்போது காப்பீடு இல்லை (₹0)" : "No Active Cover (₹0)"}
                 </p>
-                <p className="text-xs text-dusty-mauve/70 font-light mt-0.5">
+                <p className="text-xs text-ink-soft mt-0.5">
                   {language === "ta"
                     ? "நீங்கள் தற்போது ஹெல்த் இன்ஷூரன்ஸ் இல்லை என்று குறிப்பிட்டதால் இது ₹0 ஆக அமைக்கப்பட்டுள்ளது."
                     : "Automatically set to ₹0 since you currently have no active health insurance."}
                 </p>
               </div>
             </div>
-            <span className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-burnished-copper/20 text-burnished-copper border border-burnished-copper/40 whitespace-nowrap ml-3">
+            <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-lavender-100 text-ink border border-hairline whitespace-nowrap ml-3">
               {language === "ta" ? "பொருந்தாது" : "Not Applicable"}
             </span>
           </div>
         ) : (
-          <div className="luxury-card p-6 rounded-2xl">
-            <label className="text-xs font-mono uppercase tracking-wider text-dusty-mauve block mb-1">
+          <div className="bg-white p-6 sm:p-7 rounded-[20px] border border-hairline shadow-subtle">
+            <label className="text-xs font-mono uppercase tracking-wider text-ink-soft block mb-1">
               {t.step4.coverLabel}
             </label>
-            <p className="text-xs text-dusty-mauve/70 mb-4 font-light">
+            <p className="text-xs text-muted mb-4">
               {t.step4.coverDesc}
             </p>
 
@@ -193,8 +193,8 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
                   }}
                   className={`min-h-[44px] py-3 px-2 rounded-xl text-xs font-mono text-center border transition-all ${
                     currentCover === cov.id
-                      ? "bg-burnished-copper/20 border-burnished-copper text-warm-ivory font-medium shadow-copper-glow"
-                      : "bg-obsidian-plum/70 border-glass-border text-dusty-mauve hover:text-warm-ivory"
+                      ? "bg-lavender-100 border-lavender-600 text-ink font-semibold shadow-sm"
+                      : "bg-white border-hairline text-ink-soft hover:bg-bg-soft hover:text-ink"
                   }`}
                 >
                   {cov.label}
@@ -205,11 +205,11 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
         )}
 
         {/* 4. Emergency Savings Buffer */}
-        <div className="luxury-card p-6 rounded-2xl">
-          <label className="text-xs font-mono uppercase tracking-wider text-dusty-mauve block mb-1">
+        <div className="bg-white p-6 sm:p-7 rounded-[20px] border border-hairline shadow-subtle">
+          <label className="text-xs font-mono uppercase tracking-wider text-ink-soft block mb-1">
             {t.step4.savingsLabel}
           </label>
-          <p className="text-xs text-dusty-mauve/70 mb-4 font-light">
+          <p className="text-xs text-muted mb-4">
             {t.step4.savingsDesc}
           </p>
 
@@ -224,12 +224,12 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
                 }}
                 className={`min-h-[48px] p-3.5 rounded-xl text-left border transition-all ${
                   emergencySavings === sav.id
-                    ? "bg-soft-champagne/15 border-soft-champagne text-warm-ivory shadow-champagne-glow"
-                    : "bg-obsidian-plum/70 border-glass-border text-dusty-mauve hover:text-warm-ivory"
+                    ? "bg-lavender-100 border-lavender-600 text-ink font-semibold shadow-sm"
+                    : "bg-white border-hairline text-ink-soft hover:bg-bg-soft hover:text-ink"
                 }`}
               >
                 <div className="flex items-center space-x-1.5 mb-1">
-                  <span className="font-serif text-sm">{t.step4.savingsOptions[sav.id]}</span>
+                  <span className="font-sans text-sm">{t.step4.savingsOptions[sav.id]}</span>
                 </div>
               </button>
             ))}
@@ -237,9 +237,9 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
         </div>
 
         {/* Zero Private Data Guarantee */}
-        <div className="flex items-center space-x-3 p-3.5 rounded-xl bg-deep-aubergine/80 border border-glass-border">
-          <Lock className="w-4 h-4 text-burnished-copper flex-shrink-0" />
-          <div className="text-[11px] text-dusty-mauve leading-relaxed font-light">
+        <div className="flex items-center space-x-3 p-3.5 rounded-xl bg-bg-soft border border-hairline">
+          <Lock className="w-4 h-4 text-lavender-600 flex-shrink-0" />
+          <div className="text-[11px] text-ink-soft leading-relaxed font-light">
             {t.step4.privacyGuarantee}
           </div>
         </div>
@@ -253,10 +253,10 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
             onContinue();
           }}
           disabled={!isValid}
-          className={`group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 min-h-[44px] ${
+          className={`group inline-flex items-center space-x-3 px-8 py-3.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 min-h-[44px] ${
             isValid
-              ? "bg-burnished-copper hover:bg-burnished-copper-light text-warm-ivory shadow-copper-glow hover:scale-105"
-              : "bg-deep-aubergine text-dusty-mauve/30 cursor-not-allowed border border-glass-border"
+              ? "btn-primary"
+              : "bg-bg-soft text-muted cursor-not-allowed border border-hairline"
           }`}
         >
           <span>{t.step4.continue}</span>

@@ -13,7 +13,6 @@ import {
   RotateCcw,
   Compass,
 } from "lucide-react";
-import confetti from "canvas-confetti";
 import { UserProtectionProfile } from "@/types/questionnaire";
 import { PersonalizedScenario } from "@/types/stage2";
 import { sound } from "@/lib/soundFx";
@@ -155,35 +154,29 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
 
   const handleCtaClick = () => {
     sound.playChime(760, 0.25);
-    confetti({
-      particleCount: 120,
-      spread: 75,
-      origin: { y: 0.6 },
-      colors: ["#C47B5A", "#D8B98A", "#F1E9DC", "#B98A91"],
-    });
     setIsCompletedModalOpen(true);
   };
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-8 space-y-10 select-none animate-fadeIn">
       {/* Badge & Title */}
-      <div className="text-center sm:text-left space-y-2 border-b border-glass-border pb-4">
-        <span className="text-[11px] font-mono tracking-widest uppercase text-burnished-copper block">
+      <div className="text-center sm:text-left space-y-2 border-b border-hairline pb-4">
+        <span className="editorial-kicker block">
           {ch.badge}
         </span>
-        <h1 className="font-serif text-3xl sm:text-4xl text-warm-ivory">
+        <h1 className="font-display text-3xl sm:text-4xl font-semibold text-ink">
           {ch.headline}
         </h1>
-        <p className="font-sans text-xs sm:text-sm text-dusty-mauve font-light leading-relaxed max-w-2xl">
+        <p className="font-sans text-xs sm:text-sm text-ink-soft leading-relaxed max-w-2xl">
           {ch.subheading}
         </p>
       </div>
 
       {/* 1. Interactive Digital Policy Document */}
-      <div className="luxury-card p-6 sm:p-8 rounded-3xl space-y-6">
+      <div className="bg-white p-6 sm:p-8 rounded-[24px] border border-hairline shadow-subtle space-y-6">
         <div>
-          <h3 className="font-serif text-xl sm:text-2xl text-warm-ivory">{ch.digitalDocTitle}</h3>
-          <p className="text-xs text-dusty-mauve font-light mt-1">{ch.digitalDocSub}</p>
+          <h3 className="font-display text-xl sm:text-2xl font-semibold text-ink">{ch.digitalDocTitle}</h3>
+          <p className="text-xs text-ink-soft mt-1">{ch.digitalDocSub}</p>
         </div>
 
         {/* Clickable Clause Badges */}
@@ -198,10 +191,10 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
                   sound.playSoftPulse();
                   setActiveClauseKey(cl.id);
                 }}
-                className={`px-3.5 py-2 rounded-xl text-xs font-mono transition-all flex items-center space-x-2 ${
+                className={`px-4 py-2 rounded-full text-xs font-mono transition-all flex items-center space-x-2 ${
                   isActive
-                    ? "bg-burnished-copper text-warm-ivory shadow-copper-glow"
-                    : "bg-deep-aubergine text-dusty-mauve hover:text-warm-ivory border border-glass-border"
+                    ? "bg-ink text-white font-medium"
+                    : "bg-bg-soft text-ink-soft hover:text-ink border border-hairline"
                 }`}
               >
                 <FileCheck className="w-3.5 h-3.5" />
@@ -212,34 +205,34 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
         </div>
 
         {/* Active Clause Detail Card */}
-        <div className="p-5 rounded-2xl bg-oxblood-burgundy/30 border border-burnished-copper/40 space-y-2">
+        <div className="p-5 rounded-[16px] bg-lavender-100/50 border border-lavender-300 space-y-2">
           <div className="flex items-center justify-between">
-            <span className="font-mono text-[10px] text-burnished-copper uppercase tracking-wider">
+            <span className="font-mono text-[10px] text-ink font-semibold uppercase tracking-wider">
               {activeClause.tag}
             </span>
-            <span className="text-xs font-mono text-soft-champagne">Contractual Plain English</span>
+            <span className="text-xs font-mono text-ink-soft">Contractual Plain English</span>
           </div>
-          <h4 className="font-serif text-lg text-warm-ivory font-semibold">{activeClause.name}</h4>
-          <p className="text-xs text-warm-ivory/90 font-light leading-relaxed">
+          <h4 className="font-display text-lg text-ink font-semibold">{activeClause.name}</h4>
+          <p className="text-xs text-ink-soft leading-relaxed">
             {activeClause.explanation}
           </p>
         </div>
       </div>
 
       {/* 2. What Health Insurance CANNOT Promise */}
-      <div className="luxury-card p-6 sm:p-8 rounded-3xl border-rose-500/30 bg-oxblood-burgundy/20 space-y-4">
-        <div className="flex items-center space-x-2 text-rose-300">
+      <div className="bg-white p-6 sm:p-8 rounded-[24px] border border-hairline shadow-subtle space-y-4">
+        <div className="flex items-center space-x-2 text-rose-700">
           <AlertOctagon className="w-5 h-5" />
-          <h3 className="font-serif text-xl sm:text-2xl text-warm-ivory">{ch.cannotPromiseTitle}</h3>
+          <h3 className="font-display text-xl sm:text-2xl font-semibold text-ink">{ch.cannotPromiseTitle}</h3>
         </div>
 
         <div className="space-y-2.5">
           {ch.cannotPromiseList.map((item, idx) => (
             <div
               key={idx}
-              className="p-3.5 rounded-xl bg-deep-aubergine/70 border border-rose-500/20 flex items-start space-x-3 text-xs text-warm-ivory/90 font-light"
+              className="p-3.5 rounded-xl bg-rose-50/50 border border-rose-200 flex items-start space-x-3 text-xs text-ink leading-relaxed"
             >
-              <XCircle className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" />
+              <XCircle className="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" />
               <span>{item}</span>
             </div>
           ))}
@@ -247,10 +240,10 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
       </div>
 
       {/* 3. Five Things to Remember Always */}
-      <div className="luxury-card p-6 sm:p-8 rounded-3xl space-y-6">
+      <div className="bg-white p-6 sm:p-8 rounded-[24px] border border-hairline shadow-subtle space-y-6">
         <div>
-          <h3 className="font-serif text-xl sm:text-2xl text-warm-ivory">{ch.fiveThingsTitle}</h3>
-          <p className="text-xs text-dusty-mauve font-light mt-1">
+          <h3 className="font-display text-xl sm:text-2xl font-semibold text-ink">{ch.fiveThingsTitle}</h3>
+          <p className="text-xs text-ink-soft mt-1">
             {lang === "ta" ? "மருத்துவ நிதிப் பாதுகாப்பிற்கான எளிய மனப் பார்வை:" : "The clear 5-point mental model for life:"}
           </p>
         </div>
@@ -259,16 +252,16 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
           {ch.fiveThings.map((th) => (
             <div
               key={th.num}
-              className="p-4 rounded-2xl bg-deep-aubergine/80 border border-glass-border flex flex-col justify-between space-y-2"
+              className="p-4 rounded-[16px] bg-bg-soft border border-hairline flex flex-col justify-between space-y-2"
             >
               <div>
-                <span className="w-7 h-7 rounded-full bg-burnished-copper/20 border border-burnished-copper text-xs font-mono font-bold text-burnished-copper flex items-center justify-center mb-2">
+                <span className="w-7 h-7 rounded-full bg-lavender-100 border border-lavender-300 text-xs font-mono font-bold text-ink flex items-center justify-center mb-2">
                   {th.num}
                 </span>
-                <h4 className="font-serif text-sm font-semibold text-warm-ivory mb-1">
+                <h4 className="font-sans text-sm font-semibold text-ink mb-1">
                   {th.title}
                 </h4>
-                <p className="text-[11px] text-dusty-mauve font-light leading-relaxed">
+                <p className="text-xs text-ink-soft leading-relaxed">
                   {th.desc}
                 </p>
               </div>
@@ -278,12 +271,12 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
       </div>
 
       {/* 4. Interactive 5-Question Knowledge Check */}
-      <div className="luxury-card p-6 sm:p-8 rounded-3xl space-y-6">
-        <div className="flex items-center space-x-2 text-burnished-copper">
-          <HelpCircle className="w-5 h-5" />
-          <h3 className="font-serif text-xl sm:text-2xl text-warm-ivory">{ch.knowledgeCheckTitle}</h3>
+      <div className="bg-white p-6 sm:p-8 rounded-[24px] border border-hairline shadow-subtle space-y-6">
+        <div className="flex items-center space-x-2 text-ink">
+          <HelpCircle className="w-5 h-5 text-lavender-600" />
+          <h3 className="font-display text-xl sm:text-2xl font-semibold text-ink">{ch.knowledgeCheckTitle}</h3>
         </div>
-        <p className="text-xs text-dusty-mauve font-light leading-relaxed">
+        <p className="text-xs text-ink-soft leading-relaxed">
           {ch.knowledgeCheckSub}
         </p>
 
@@ -296,13 +289,13 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
             return (
               <div
                 key={q.id}
-                className="p-4 sm:p-5 rounded-2xl bg-deep-aubergine/70 border border-glass-border space-y-3"
+                className="p-4 sm:p-5 rounded-[16px] bg-bg-soft border border-hairline space-y-3"
               >
                 <div className="flex items-start space-x-3">
-                  <span className="w-6 h-6 rounded-full bg-obsidian-plum text-xs font-mono text-dusty-mauve flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="w-6 h-6 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft flex items-center justify-center flex-shrink-0 mt-0.5">
                     {idx + 1}
                   </span>
-                  <h4 className="font-serif text-sm sm:text-base text-warm-ivory">
+                  <h4 className="font-sans font-medium text-sm sm:text-base text-ink">
                     {q.statement}
                   </h4>
                 </div>
@@ -319,10 +312,10 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
                           sound.playSoftPulse();
                           setQuizAnswers({ ...quizAnswers, [q.id]: opt.val });
                         }}
-                        className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all ${
+                        className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-all ${
                           isSelected
-                            ? "bg-burnished-copper text-warm-ivory shadow-copper-glow"
-                            : "bg-obsidian-plum text-dusty-mauve hover:text-warm-ivory border border-glass-border"
+                            ? "bg-ink text-white font-medium"
+                            : "bg-white text-ink-soft hover:text-ink border border-hairline"
                         }`}
                       >
                         {opt.label}
@@ -334,16 +327,16 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
                 {/* Feedback */}
                 {isAnswered && (
                   <div
-                    className={`p-3 rounded-xl text-xs font-light leading-relaxed ml-9 border flex items-start space-x-2 ${
+                    className={`p-3 rounded-xl text-xs leading-relaxed ml-9 border flex items-start space-x-2 ${
                       isCorrect
-                        ? "bg-emerald-950/40 border-emerald-500/30 text-emerald-200"
-                        : "bg-rose-950/40 border-rose-500/30 text-rose-200"
+                        ? "bg-sage-100/60 border-sage-300 text-ink"
+                        : "bg-rose-50 border-rose-200 text-rose-800"
                     }`}
                   >
                     {isCorrect ? (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
                     ) : (
-                      <XCircle className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" />
+                      <XCircle className="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" />
                     )}
                     <span>{q.explanation}</span>
                   </div>
@@ -355,16 +348,16 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
       </div>
 
       {/* 5. Final Reflection & Non-Sales CTAs */}
-      <div className="luxury-card p-6 sm:p-10 rounded-3xl text-center space-y-6 border-burnished-copper/40 bg-oxblood-burgundy/25">
-        <div className="w-12 h-12 rounded-full bg-burnished-copper/20 border border-burnished-copper flex items-center justify-center mx-auto text-burnished-copper">
-          <Sparkles className="w-6 h-6" />
+      <div className="bg-white p-6 sm:p-10 rounded-[24px] text-center space-y-6 border border-hairline shadow-elevated">
+        <div className="w-12 h-12 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center mx-auto text-ink">
+          <Sparkles className="w-6 h-6 text-lavender-600" />
         </div>
 
         <div className="max-w-2xl mx-auto space-y-3">
-          <h2 className="font-serif text-3xl sm:text-4xl text-warm-ivory">
+          <h2 className="font-display text-3xl sm:text-4xl font-semibold text-ink">
             {ch.finalReflectionTitle}
           </h2>
-          <p className="font-sans text-xs sm:text-sm text-dusty-mauve font-light leading-relaxed">
+          <p className="font-sans text-xs sm:text-sm text-ink-soft leading-relaxed">
             {ch.finalReflectionSub}
           </p>
         </div>
@@ -374,7 +367,7 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
             <button
               onClick={handleCtaClick}
-              className="group inline-flex items-center space-x-3 px-8 py-4 rounded-full bg-burnished-copper hover:bg-burnished-copper-light text-warm-ivory text-xs font-semibold uppercase tracking-wider shadow-copper-glow hover:scale-105 transition-all duration-300 min-h-[44px]"
+              className="btn-primary min-h-[44px] px-8 py-4 text-xs group inline-flex items-center space-x-3"
             >
               <span>{ch.ctas.primary}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -382,26 +375,26 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
 
             <button
               onClick={handleCtaClick}
-              className="inline-flex items-center space-x-2 px-6 py-4 rounded-full bg-obsidian-plum border border-glass-border text-xs font-mono text-dusty-mauve hover:text-warm-ivory hover:border-burnished-copper/40 transition-all min-h-[44px]"
+              className="inline-flex items-center space-x-2 px-6 py-4 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink hover:bg-bg-soft transition-all min-h-[44px]"
             >
-              <Compass className="w-4 h-4 text-burnished-copper" />
+              <Compass className="w-4 h-4 text-lavender-600" />
               <span>{ch.ctas.secondary}</span>
             </button>
           </div>
         ) : (
-          <div className="p-6 rounded-2xl bg-deep-aubergine/90 border border-burnished-copper/40 max-w-md mx-auto space-y-3 animate-fadeIn">
-            <CheckCircle2 className="w-8 h-8 text-burnished-copper mx-auto" />
-            <h4 className="font-serif text-lg text-warm-ivory">
+          <div className="p-6 rounded-[20px] bg-bg-soft border border-hairline max-w-md mx-auto space-y-3 animate-fadeIn">
+            <CheckCircle2 className="w-8 h-8 text-ink mx-auto" />
+            <h4 className="font-display text-lg font-semibold text-ink">
               {lang === "ta" ? "உங்கள் தனிப்பட்ட வழிகாட்டி தயாராகிறது" : "Your Educational Journey Complete"}
             </h4>
-            <p className="text-xs text-dusty-mauve font-light">
+            <p className="text-xs text-ink-soft">
               {lang === "ta"
                 ? "நீங்கள் இப்போது ஹெல்த் இன்ஷூரன்ஸின் அனைத்து விதிகளையும் வெளிப்படையாக அறிந்துகொண்டீர்கள். உங்கள் விருப்பங்கள் பாதுகாப்பாக பதிவு செய்யப்பட்டுள்ளன."
                 : "You now understand what health insurance actually does and where its boundaries lie. Zero sales push, total clarity."}
             </p>
             <button
               onClick={onRestartExperience}
-              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-full bg-obsidian-plum border border-glass-border text-xs font-mono text-dusty-mauve hover:text-warm-ivory hover:border-burnished-copper transition-all"
+              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink transition-all"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>{lang === "ta" ? "அனுபவத்தை மீண்டும் தொடங்க" : "Restart Experience"}</span>
@@ -409,14 +402,14 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
           </div>
         )}
 
-        <div className="pt-4 border-t border-glass-border/40 flex justify-center">
+        <div className="pt-4 border-t border-hairline flex justify-center">
           <button
             onClick={() => {
               sound.playChime(380, 0.1);
               window.scrollTo({ top: 0, behavior: "smooth" });
               onPrevChapter();
             }}
-            className="px-5 py-2.5 rounded-full bg-obsidian-plum border border-glass-border text-xs font-mono text-dusty-mauve hover:text-warm-ivory transition-all"
+            className="px-5 py-2.5 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink transition-all"
           >
             {t.stage3.nav.prevChapter}
           </button>
@@ -425,3 +418,4 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
     </div>
   );
 };
+
