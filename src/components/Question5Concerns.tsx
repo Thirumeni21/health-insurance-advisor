@@ -50,32 +50,32 @@ export const Question5Concerns: React.FC<Question5ConcernsProps> = ({
             <div
               key={item.id}
               onClick={() => handleToggle(item.id)}
-              className={`group p-4 rounded-[16px] cursor-pointer transition-all duration-200 flex items-start space-x-3 border min-h-[48px] ${
+              className={`group p-5 rounded-[20px] cursor-pointer transition-all duration-200 flex flex-col justify-between border shadow-subtle hover:shadow-elevated ${
                 isSelected
-                  ? "bg-lavender-100 border-lavender-600 shadow-sm"
+                  ? "bg-lavender-100/70 border-lavender-600 shadow-sm"
                   : "bg-white border-hairline hover:border-lavender-300 hover:bg-bg-soft"
-              } ${item.isEducationalHook ? "sm:col-span-2 bg-gradient-to-r from-bg-soft to-lavender-100/40" : ""}`}
+              } ${item.isEducationalHook ? "sm:col-span-2 bg-gradient-to-r from-bg-soft to-lavender-100/30" : ""}`}
             >
-              <div className="w-9 h-9 rounded-xl bg-bg-soft border border-hairline flex items-center justify-center text-lg flex-shrink-0 group-hover:scale-105 transition-transform">
-                {item.icon}
-              </div>
-
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-sans font-medium text-base text-ink group-hover:text-lavender-600 transition-colors leading-normal">
-                    {translated.title}
-                  </h3>
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-10 h-10 rounded-full bg-bg-soft border border-hairline flex items-center justify-center text-lg group-hover:scale-105 transition-transform shadow-xs">
+                    {item.icon}
+                  </div>
                   <div
-                    className={`w-4 h-4 rounded flex items-center justify-center transition-all flex-shrink-0 ml-1.5 ${
+                    className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${
                       isSelected
-                        ? "bg-lavender-600 text-white"
+                        ? "bg-ink text-white"
                         : "border border-hairline bg-white"
                     }`}
                   >
                     {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
                   </div>
                 </div>
-                <p className="text-xs text-ink-soft leading-relaxed font-light">
+
+                <h3 className="font-display font-bold text-base text-ink group-hover:text-lavender-600 transition-colors leading-normal mb-1.5">
+                  {translated.title}
+                </h3>
+                <p className="text-xs text-ink-soft leading-relaxed font-normal">
                   {translated.desc}
                 </p>
               </div>

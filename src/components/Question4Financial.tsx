@@ -155,23 +155,30 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
 
         {/* 3. Existing Coverage Amount */}
         {currentInsurance === "none" ? (
-          <div className="p-4 sm:p-5 rounded-[16px] border border-hairline bg-bg-soft flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-start sm:items-center space-x-3">
-              <span className="text-xl flex-shrink-0 mt-0.5 sm:mt-0">🛡️</span>
-              <div>
-                <p className="font-display font-medium text-sm text-ink">
-                  {language === "ta" ? "தற்போது காப்பீடு இல்லை (₹0)" : "No Active Cover (₹0)"}
-                </p>
-                <p className="text-xs text-ink-soft mt-0.5 leading-relaxed">
-                  {language === "ta"
-                    ? "நீங்கள் தற்போது ஹெல்த் இன்ஷூரன்ஸ் இல்லை என்று குறிப்பிட்டதால் இது ₹0 ஆக அமைக்கப்பட்டுள்ளது."
-                    : "Automatically set to ₹0 since you currently have no active health insurance."}
-                </p>
+          <div className="p-6 rounded-[20px] border border-hairline bg-white shadow-subtle flex flex-col justify-between space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="inline-flex items-center space-x-2">
+                <div className="w-8 h-8 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center text-sm shadow-xs">
+                  🛡️
+                </div>
+                <span className="text-xs font-mono uppercase tracking-wider text-ink-soft">
+                  {t.step4.coverLabel}
+                </span>
               </div>
+              <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-lavender-100 text-ink border border-lavender-300 font-semibold">
+                {language === "ta" ? "பொருந்தாது" : "Not Applicable"}
+              </span>
             </div>
-            <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-lavender-100 text-ink border border-hairline whitespace-nowrap self-start sm:self-auto flex-shrink-0">
-              {language === "ta" ? "பொருந்தாது" : "Not Applicable"}
-            </span>
+            <div>
+              <h4 className="font-display text-lg font-bold text-ink mb-1">
+                {language === "ta" ? "தற்போது காப்பீடு இல்லை (₹0)" : "No Active Cover (₹0)"}
+              </h4>
+              <p className="text-xs text-ink-soft leading-relaxed">
+                {language === "ta"
+                  ? "நீங்கள் தற்போது ஹெல்த் இன்ஷூரன்ஸ் இல்லை என்று குறிப்பிட்டதால் இது ₹0 ஆக அமைக்கப்பட்டுள்ளது."
+                  : "Automatically set to ₹0 since you currently have no active health insurance."}
+              </p>
+            </div>
           </div>
         ) : (
           <div className="bg-white p-6 sm:p-7 rounded-[20px] border border-hairline shadow-subtle">
@@ -237,9 +244,11 @@ export const Question4Financial: React.FC<Question4FinancialProps> = ({
         </div>
 
         {/* Zero Private Data Guarantee */}
-        <div className="flex items-center space-x-3 p-3.5 rounded-xl bg-bg-soft border border-hairline">
-          <Lock className="w-4 h-4 text-lavender-600 flex-shrink-0" />
-          <div className="text-[11px] text-ink-soft leading-relaxed font-light">
+        <div className="p-4 rounded-[16px] bg-bg-soft border border-hairline flex items-start space-x-3">
+          <div className="w-6 h-6 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <Lock className="w-3 h-3 text-lavender-600" />
+          </div>
+          <div className="text-xs text-ink-soft leading-relaxed">
             {t.step4.privacyGuarantee}
           </div>
         </div>

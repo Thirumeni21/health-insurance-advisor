@@ -148,17 +148,24 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
             </div>
           )}
 
-          {/* Focus Badge */}
-          <div className="p-3.5 rounded-[16px] bg-bg-soft border border-hairline max-w-md mx-auto flex items-center justify-between text-xs font-mono text-ink-soft">
-            <span>
-              {lang === "ta" ? "மையப் புள்ளி:" : "Focus Node:"}{" "}
-              <strong className="text-ink font-semibold">{scenario.targetPerson.name}</strong>
-            </span>
-            <span>
-              {scenario.targetPerson.isSelfOnly
-                ? lang === "ta" ? "சுயாதீனப் பாதுகாப்பு" : "Self · Independent"
-                : `${scenario.targetPerson.relationship} · ${scenario.targetPerson.age} yrs`}
-            </span>
+          {/* Focus Persona Card */}
+          <div className="p-5 rounded-[20px] bg-bg-soft border border-hairline max-w-md mx-auto text-left shadow-subtle flex items-center space-x-4">
+            <div className="w-12 h-12 rounded-full bg-lavender-100 border-2 border-lavender-300 flex items-center justify-center text-ink font-display font-bold text-sm shadow-xs flex-shrink-0">
+              {scenario.targetPerson.name.substring(0, 2).toUpperCase()}
+            </div>
+            <div className="flex-1 min-w-0">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-lavender-600 font-semibold block mb-0.5">
+                {lang === "ta" ? "மையப் புள்ளி (Focus Persona)" : "Scenario Protagonist"}
+              </span>
+              <div className="font-display font-bold text-lg text-ink truncate">
+                {scenario.targetPerson.name}
+              </div>
+              <div className="text-xs text-ink-soft font-mono">
+                {scenario.targetPerson.isSelfOnly
+                  ? lang === "ta" ? "சுயாதீனப் பாதுகாப்பு · Self" : "Self · Independent Profile"
+                  : `${scenario.targetPerson.relationship} · ${scenario.targetPerson.age} yrs`}
+              </div>
+            </div>
           </div>
 
           <div className="pt-4 flex justify-center">
@@ -305,21 +312,24 @@ export const ScenarioPlayer: React.FC<ScenarioPlayerProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             {/* Left: Cost Breakdown List */}
-            <div className="space-y-2.5">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-ink-soft mb-2">
+            {/* Left: Cost Breakdown Card Ledger */}
+            <div className="bg-bg-soft rounded-[20px] p-5 border border-hairline shadow-subtle space-y-3">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-ink-soft pb-1 border-b border-hairline">
                 {bill.breakdownTitle}
               </h4>
-              {scenario.act4_bill.breakdown.map((item) => (
-                <div
-                  key={item.key}
-                  className="p-3 rounded-xl bg-bg-soft border border-hairline flex items-center justify-between text-xs"
-                >
-                  <span className="text-ink-soft">{item.label[lang]}</span>
-                  <span className="font-mono font-semibold text-ink">
-                    ₹{item.amount.toLocaleString("en-IN")}
-                  </span>
-                </div>
-              ))}
+              <div className="divide-y divide-hairline">
+                {scenario.act4_bill.breakdown.map((item) => (
+                  <div
+                    key={item.key}
+                    className="py-2.5 flex items-center justify-between text-xs"
+                  >
+                    <span className="text-ink font-medium">{item.label[lang]}</span>
+                    <span className="font-mono font-semibold text-ink">
+                      ₹{item.amount.toLocaleString("en-IN")}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Right: Total Banner */}

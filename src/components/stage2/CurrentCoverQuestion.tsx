@@ -48,9 +48,9 @@ export const CurrentCoverQuestion: React.FC<CurrentCoverQuestionProps> = ({
         </p>
       </div>
 
-      {/* Options Stack */}
-      <div className="space-y-3 mb-6">
-        {options.map((opt) => {
+      {/* Options Editorial Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 mb-6">
+        {options.map((opt, idx) => {
           const isSelected = selectedOption === opt.id;
           return (
             <button
@@ -60,14 +60,29 @@ export const CurrentCoverQuestion: React.FC<CurrentCoverQuestionProps> = ({
                 sound.playSoftPulse();
                 onSelectOption(opt.id);
               }}
-              className={`w-full p-4 rounded-[16px] text-left border transition-all flex items-center justify-between min-h-[56px] ${
+              className={`p-5 rounded-[20px] text-left border transition-all flex flex-col justify-between min-h-[110px] shadow-subtle hover:shadow-elevated ${
                 isSelected
-                  ? "bg-lavender-100 border-lavender-600 text-ink shadow-sm"
+                  ? "bg-lavender-100/70 border-lavender-600 text-ink shadow-sm"
                   : "bg-white border-hairline hover:border-lavender-300 hover:bg-bg-soft text-ink-soft hover:text-ink"
               }`}
             >
-              <span className="font-sans font-medium text-base">{opt.label}</span>
-              {isSelected && <Check className="w-4 h-4 text-lavender-600 flex-shrink-0" />}
+              <div className="flex items-center justify-between mb-3 w-full">
+                <span className="text-[10px] font-mono text-muted uppercase tracking-wider">
+                  Option 0{idx + 1}
+                </span>
+                <div
+                  className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${
+                    isSelected
+                      ? "bg-ink text-white"
+                      : "border border-hairline bg-white"
+                  }`}
+                >
+                  {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
+                </div>
+              </div>
+              <span className="font-sans font-semibold text-sm sm:text-base text-ink leading-snug">
+                {opt.label}
+              </span>
             </button>
           );
         })}
@@ -75,9 +90,11 @@ export const CurrentCoverQuestion: React.FC<CurrentCoverQuestionProps> = ({
 
       {/* Reassuring Feedback Banner */}
       {activeResponse && (
-        <div className="p-5 rounded-[16px] border border-hairline bg-sage-100/60 mb-8 animate-fadeIn flex items-start space-x-3">
-          <ShieldCheck className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" />
-          <p className="text-xs sm:text-sm text-ink leading-relaxed">
+        <div className="p-6 rounded-[20px] border border-hairline bg-sage-100/50 mb-8 animate-fadeIn flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-3.5 shadow-subtle">
+          <div className="w-9 h-9 rounded-full bg-white border border-[#d3e0ba] flex items-center justify-center flex-shrink-0">
+            <ShieldCheck className="w-5 h-5 text-ink" />
+          </div>
+          <p className="text-xs sm:text-sm text-ink leading-relaxed font-normal">
             {activeResponse}
           </p>
         </div>

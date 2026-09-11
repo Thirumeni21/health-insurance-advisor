@@ -94,31 +94,39 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
         </button>
       </div>
 
-      {/* Member Cards List */}
-      <div className="space-y-3 mb-8">
-        {/* Central Anchor Card (YOU) */}
-        <div className="bg-lavender-100 border border-lavender-300 p-4.5 rounded-[20px] flex items-center justify-between shadow-subtle">
-          <div className="flex items-center space-x-3.5">
-            <div className="w-10 h-10 rounded-full bg-white border border-lavender-300 flex items-center justify-center text-ink font-display font-bold text-xs shadow-xs">
+      {/* Editorial Person Card Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+        {/* Primary Anchor Card (YOU) */}
+        <div className="bg-white border-2 border-lavender-300 rounded-[22px] p-6 shadow-subtle flex flex-col justify-between min-h-[260px] relative transition-all hover:shadow-elevated">
+          {/* Top Status Bar */}
+          <div className="flex items-center justify-between mb-4">
+            <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-lavender-100 border border-lavender-300 text-[11px] font-semibold text-ink uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-lavender-600 animate-pulse" />
+              <span>{t.step3.youBadge}</span>
+            </span>
+            <span className="text-[10px] font-mono uppercase tracking-wider text-lavender-600 font-semibold px-2 py-0.5 rounded-md bg-lavender-50 border border-lavender-200">
+              Anchor
+            </span>
+          </div>
+
+          {/* Center Person Profile */}
+          <div className="flex flex-col items-center text-center my-auto py-2">
+            <div className="w-16 h-16 rounded-full bg-lavender-100 border-2 border-lavender-300 flex items-center justify-center text-ink font-display font-bold text-base shadow-xs mb-3.5">
               YOU
             </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="font-display font-bold text-lg text-ink">
-                  {t.step3.youLabel}
-                </span>
-                <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-white text-ink border border-lavender-300">
-                  {t.step3.youBadge}
-                </span>
-              </div>
-              <span className="text-xs text-ink-soft font-normal">
-                {userAge} {t.step2.ageUnit} · {t.step3.youDesc}
-              </span>
-            </div>
+            <h3 className="font-display font-bold text-xl text-ink leading-tight mb-1">
+              {t.step3.youLabel}
+            </h3>
+            <p className="text-xs text-ink-soft font-normal mb-2 leading-relaxed">
+              {userAge} {t.step2.ageUnit} · {t.step3.youDesc}
+            </p>
           </div>
-          <span className="text-xs text-lavender-600 font-semibold px-2.5 py-1 rounded-full bg-white/70 border border-lavender-200">
-            Anchor
-          </span>
+
+          {/* Card Bottom status indicator */}
+          <div className="pt-3 border-t border-hairline flex items-center justify-between text-xs text-ink-soft font-mono">
+            <span>Primary Life</span>
+            <span className="font-semibold text-ink">Active Anchor</span>
+          </div>
         </div>
 
         {/* Dynamic Added Members */}
@@ -135,68 +143,95 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
           return (
             <div
               key={member.id}
-              className="bg-white border border-hairline hover:border-lavender-300 p-4.5 rounded-[20px] flex items-center justify-between shadow-subtle hover:shadow-elevated transition-all"
+              className="bg-white border border-hairline hover:border-lavender-300 rounded-[22px] p-6 shadow-subtle hover:shadow-elevated flex flex-col justify-between min-h-[260px] relative transition-all group"
             >
-              <div className="flex items-center space-x-3.5">
-                <div className={`w-10 h-10 rounded-full border flex items-center justify-center text-ink font-display font-bold text-xs shadow-xs ${avatarBg}`}>
-                  {member.relationship.substring(0, 2).toUpperCase()}
-                </div>
-                <div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-display font-bold text-lg text-ink">
-                      {member.name || relTranslated}
-                    </span>
-                    <span className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-bg-soft text-ink-soft border border-hairline">
-                      {relTranslated}
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-1.5 text-xs text-muted font-normal mt-0.5">
-                    <span>{member.age} {t.step2.ageUnit}</span>
-                    <span>·</span>
-                    <span>
-                      {member.financiallyDependent === "yes"
-                        ? t.step3.dependentTag
-                        : member.financiallyDependent === "partially"
-                        ? "Partially Dep."
-                        : t.step3.familyTag}
-                    </span>
-                    <span>·</span>
-                    <span className={member.existingInsurance === "yes" ? "text-ink font-medium" : "text-muted"}>
-                      {member.existingInsurance === "yes" ? t.step3.insuredTag : t.step3.noInsuranceTag}
-                    </span>
-                  </div>
+              {/* Top Header: Relationship Badge + Action Controls */}
+              <div className="flex items-center justify-between mb-4">
+                <span className="inline-flex items-center px-3 py-1 rounded-full bg-bg-soft text-ink border border-hairline text-xs font-semibold">
+                  {relTranslated}
+                </span>
+                <div className="flex items-center space-x-1.5">
+                  <button
+                    type="button"
+                    onClick={() => openEditModal(member)}
+                    className="w-8 h-8 rounded-full bg-white border border-hairline hover:border-ink flex items-center justify-center text-ink-soft hover:text-ink transition-colors shadow-xs"
+                    title="Edit member"
+                  >
+                    <Edit2 className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.playChime(320, 0.1);
+                      onRemoveMember(member.id);
+                    }}
+                    className="w-8 h-8 rounded-full bg-white border border-hairline hover:border-red-300 hover:bg-red-50 flex items-center justify-center text-muted hover:text-red-600 transition-colors shadow-xs"
+                    title="Remove member"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
 
-              <div className="flex items-center space-x-1.5">
-                <button
-                  type="button"
-                  onClick={() => openEditModal(member)}
-                  className="w-8 h-8 rounded-full bg-white border border-hairline flex items-center justify-center text-muted hover:text-ink hover:border-ink transition-colors"
-                  title="Edit member"
-                >
-                  <Edit2 className="w-3.5 h-3.5" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    sound.playChime(320, 0.1);
-                    onRemoveMember(member.id);
-                  }}
-                  className="w-8 h-8 rounded-full bg-white border border-hairline flex items-center justify-center text-muted hover:text-red-500 hover:border-red-300 transition-colors"
-                  title="Remove member"
-                >
-                  <Trash2 className="w-3.5 h-3.5" />
-                </button>
+              {/* Center Person Profile */}
+              <div className="flex flex-col items-center text-center my-auto py-2">
+                <div className={`w-16 h-16 rounded-full border-2 flex items-center justify-center text-ink font-display font-bold text-base shadow-xs mb-3.5 ${avatarBg}`}>
+                  {member.relationship.substring(0, 2).toUpperCase()}
+                </div>
+                <h3 className="font-display font-bold text-xl text-ink leading-tight mb-1">
+                  {member.name || relTranslated}
+                </h3>
+                <p className="text-xs text-ink-soft font-normal mb-2 leading-relaxed">
+                  {member.age} {t.step2.ageUnit}
+                </p>
+
+                {/* Metadata Badges */}
+                <div className="flex flex-wrap items-center justify-center gap-1.5 mt-1">
+                  <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-bg-soft border border-hairline text-ink-soft">
+                    {member.financiallyDependent === "yes"
+                      ? t.step3.dependentTag
+                      : member.financiallyDependent === "partially"
+                      ? "Partially Dep."
+                      : t.step3.familyTag}
+                  </span>
+                  <span
+                    className={`text-[11px] font-mono px-2.5 py-0.5 rounded-full border ${
+                      member.existingInsurance === "yes"
+                        ? "bg-lavender-100 border-lavender-300 text-ink font-semibold"
+                        : "bg-white border-hairline text-muted"
+                    }`}
+                  >
+                    {member.existingInsurance === "yes" ? t.step3.insuredTag : t.step3.noInsuranceTag}
+                  </span>
+                </div>
+              </div>
+
+              {/* Card Bottom status indicator */}
+              <div className="pt-3 border-t border-hairline flex items-center justify-between text-xs text-ink-soft font-mono">
+                <span>Protected Node</span>
+                <span className="text-ink font-medium">{relTranslated}</span>
               </div>
             </div>
           );
         })}
 
+        {/* Empty state invitation card if no members yet */}
         {familyMembers.length === 0 && !isSingle && (
-          <div className="p-6 rounded-[20px] border border-dashed border-hairline text-center text-xs text-muted bg-bg-soft font-normal">
-            {t.step3.emptyNotice}
-          </div>
+          <button
+            type="button"
+            onClick={() => openAddModal("Spouse")}
+            className="rounded-[22px] border-2 border-dashed border-hairline hover:border-lavender-300 bg-bg-soft/60 hover:bg-lavender-50/40 p-6 flex flex-col items-center justify-center text-center min-h-[260px] transition-all group cursor-pointer"
+          >
+            <div className="w-14 h-14 rounded-full bg-white border border-hairline flex items-center justify-center text-muted group-hover:text-lavender-600 group-hover:scale-110 transition-all mb-3 shadow-xs">
+              <Plus className="w-6 h-6" />
+            </div>
+            <span className="font-display font-semibold text-base text-ink mb-1">
+              {t.step3.addFamilyMember || "Add Family Member"}
+            </span>
+            <span className="text-xs text-muted max-w-[200px] leading-relaxed">
+              {t.step3.emptyNotice}
+            </span>
+          </button>
         )}
       </div>
 

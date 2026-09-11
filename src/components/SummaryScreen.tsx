@@ -94,54 +94,69 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
             </button>
           </div>
 
-          <div className="space-y-2.5">
-            {/* Primary User node */}
-            <div className="p-3.5 rounded-xl bg-lavender-100/50 border border-lavender-300 flex items-center justify-between">
-              <div>
-                <div className="flex items-center space-x-2">
-                  <span className="font-mono text-xs font-bold text-ink">
-                    {t.summary.youAnchor}
-                  </span>
-                  <span className="text-xs text-ink font-medium">
-                    {profile.user.age} {t.step2.ageUnit}
-                  </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {/* Primary User node card */}
+            <div className="p-4 rounded-[18px] bg-white border border-lavender-300 shadow-xs flex flex-col justify-between space-y-2.5">
+              <div className="flex items-center justify-between">
+                <div className="w-8 h-8 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center text-ink font-display font-bold text-[11px]">
+                  YOU
                 </div>
-                <span className="text-[11px] text-ink-soft font-mono">
-                  {profile.user.city || "—"} · {profile.user.gender}
+                <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-lavender-50 text-lavender-600 border border-lavender-200 font-semibold">
+                  Anchor
                 </span>
               </div>
-              <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white text-ink border border-hairline font-medium">
-                Anchor Node
-              </span>
+              <div>
+                <span className="font-sans font-semibold text-ink text-sm block">
+                  {t.summary.youAnchor}
+                </span>
+                <span className="text-[11px] text-ink-soft font-mono">
+                  {profile.user.age} {t.step2.ageUnit} · {profile.user.city || "—"}
+                </span>
+              </div>
             </div>
 
-            {/* Family Members list */}
-            {profile.household.familyMembers.map((member) => (
-              <div
-                key={member.id}
-                className="p-3 rounded-xl bg-bg-soft border border-hairline flex items-center justify-between text-xs"
-              >
-                <div>
-                  <span className="font-sans font-medium text-ink text-sm block">
-                    {member.name ? member.name + " (" + (t.modal.relationships[member.relationship as keyof typeof t.modal.relationships] || member.relationship) + ")" : t.modal.relationships[member.relationship as keyof typeof t.modal.relationships] || member.relationship}
-                  </span>
-                  <span className="text-[11px] text-ink-soft font-mono">
-                    {member.age} {t.step2.ageUnit} · {member.gender}
-                  </span>
+            {/* Family Members cards */}
+            {profile.household.familyMembers.map((member) => {
+              const relTranslated =
+                t.modal.relationships[member.relationship as keyof typeof t.modal.relationships] ||
+                member.relationship;
+              const avatarBg =
+                member.relationship === "Child"
+                  ? "bg-sage-100 border-[#d3e0ba]"
+                  : member.relationship === "Mother" || member.relationship === "Father"
+                  ? "bg-cream-100 border-[#eae3d2]"
+                  : "bg-lavender-100 border-lavender-300";
+
+              return (
+                <div
+                  key={member.id}
+                  className="p-4 rounded-[18px] bg-bg-soft border border-hairline hover:border-lavender-300 flex flex-col justify-between space-y-2.5 transition-all"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className={`w-8 h-8 rounded-full border flex items-center justify-center text-ink font-display font-bold text-[10px] ${avatarBg}`}>
+                      {member.relationship.substring(0, 2).toUpperCase()}
+                    </div>
+                    <span
+                      className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${
+                        member.financiallyDependent === "yes"
+                          ? "text-ink bg-lavender-100 border border-lavender-300 font-medium"
+                          : "text-ink-soft bg-white border border-hairline"
+                      }`}
+                    >
+                      {member.financiallyDependent === "yes" ? "Dependent" : "Self-Reliant"}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="font-sans font-semibold text-ink text-sm block truncate">
+                      {member.name || relTranslated}
+                    </span>
+                    <span className="text-[11px] text-ink-soft font-mono">
+                      {member.age} {t.step2.ageUnit} · {relTranslated}
+                    </span>
+                  </div>
                 </div>
-                <div className="text-right font-mono text-[10px]">
-                  <span
-                    className={
-                      member.financiallyDependent === "yes"
-                        ? "px-2 py-0.5 rounded-full text-ink bg-lavender-100 font-medium"
-                        : "px-2 py-0.5 rounded-full text-ink-soft bg-white border border-hairline"
-                    }
-                  >
-                    {member.financiallyDependent === "yes" ? "Dependent" : "Self-Reliant"}
-                  </span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
