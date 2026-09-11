@@ -107,7 +107,7 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
                   </span>
                 </div>
                 <span className="text-[11px] text-ink-soft font-mono">
-                  {profile.user.city} · {profile.user.gender}
+                  {profile.user.city || "—"} · {profile.user.gender}
                 </span>
               </div>
               <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white text-ink border border-hairline font-medium">
@@ -256,7 +256,7 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
           {t.summary.stage2Notice}
         </span>
 
-        <p className="font-display text-2xl sm:text-3xl font-semibold text-ink max-w-xl mx-auto leading-snug">
+        <p className="font-display text-2xl sm:text-3xl font-semibold text-ink max-w-xl mx-auto leading-normal">
           {t.summary.transitionQuote}
         </p>
 

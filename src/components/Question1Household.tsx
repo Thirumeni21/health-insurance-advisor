@@ -51,7 +51,7 @@ export const Question1Household: React.FC<Question1HouseholdProps> = ({
                 sound.playChime(480, 0.1);
                 onSelect(option.id);
               }}
-              className={`group relative p-6 rounded-[20px] cursor-pointer transition-all duration-300 ${
+              className={`group relative p-6 rounded-[20px] cursor-pointer transition-all duration-300 flex flex-col justify-between min-h-full ${
                 isSelected
                   ? "bg-lavender-100 border border-lavender-300 shadow-subtle"
                   : "bg-white hover:bg-bg-soft border border-hairline hover:border-lavender-300 shadow-subtle hover:shadow-elevated"

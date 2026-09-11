@@ -44,7 +44,7 @@ function ProtectionAppContent() {
     resumeSession,
   } = useProtectionProfile();
 
-  const { isLanguageSelected, t } = useLanguage();
+  const { isLanguageSelected, language, t } = useLanguage();
 
   const [reducedMotion, setReducedMotion] = useState(false);
   const [selectedConcernTrigger, setSelectedConcernTrigger] = useState<string | null>(null);
@@ -131,7 +131,12 @@ function ProtectionAppContent() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-white text-ink overflow-x-hidden font-sans">
+    <div
+      data-lang={language}
+      className={`relative min-h-screen flex flex-col bg-white text-ink overflow-x-hidden font-sans ${
+        language === "ta" ? "lang-ta" : "lang-en"
+      }`}
+    >
       {/* Resume Session Recovery Prompt */}
       <ResumeSessionModal
         isOpen={hasExistingSession}
@@ -195,7 +200,7 @@ function ProtectionAppContent() {
             householdType={profile.household.protectionType}
             age={profile.user.age || 32}
             gender={profile.user.gender}
-            city={profile.user.city || "Mumbai"}
+            city={profile.user.city || ""}
             singleDependents={profile.user.singleDependents}
             onUpdate={(data) => setUserDetails(data)}
             onContinue={() => {

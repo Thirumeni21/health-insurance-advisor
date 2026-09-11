@@ -142,15 +142,15 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
                   {member.relationship.substring(0, 2).toUpperCase()}
                 </div>
                 <div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="font-display font-bold text-lg text-ink">
                       {member.name || relTranslated}
                     </span>
-                    <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-bg-soft text-ink-soft border border-hairline">
+                    <span className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-bg-soft text-ink-soft border border-hairline">
                       {relTranslated}
                     </span>
                   </div>
-                  <div className="flex items-center space-x-2 text-xs text-muted font-normal mt-0.5">
+                  <div className="flex flex-wrap items-center gap-1.5 text-xs text-muted font-normal mt-0.5">
                     <span>{member.age} {t.step2.ageUnit}</span>
                     <span>·</span>
                     <span>

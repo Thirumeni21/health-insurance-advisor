@@ -62,7 +62,7 @@ export const Question5Concerns: React.FC<Question5ConcernsProps> = ({
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-1">
-                  <h3 className="font-sans font-medium text-base text-ink group-hover:text-lavender-600 transition-colors leading-snug">
+                  <h3 className="font-sans font-medium text-base text-ink group-hover:text-lavender-600 transition-colors leading-normal">
                     {translated.title}
                   </h3>
                   <div

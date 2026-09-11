@@ -67,21 +67,61 @@ h1, h2, h3, .font-display {
 
 /* Tamil Headings & Typography */
 html[lang="ta"] h1, 
+.lang-ta h1,
 html[lang="ta"] h2, 
+.lang-ta h2,
 html[lang="ta"] h3,
-html[lang="ta"] .font-display {
+.lang-ta h3,
+html[lang="ta"] h4,
+.lang-ta h4,
+html[lang="ta"] .font-display,
+.lang-ta .font-display {
   font-family: 'Noto Serif Tamil', 'Bricolage Grotesque', serif;
   font-weight: 700;
-  letter-spacing: 0em;
-  line-height: 1.25;
+  letter-spacing: 0.01em;
+  line-height: 1.42;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 html[lang="ta"] body,
+.lang-ta body,
 html[lang="ta"] button,
+.lang-ta button,
 html[lang="ta"] input,
+.lang-ta input,
 html[lang="ta"] p,
-html[lang="ta"] span {
-  font-family: 'Noto Sans Tamil', 'Inter', sans-serif;
+.lang-ta p,
+html[lang="ta"] span,
+.lang-ta span,
+html[lang="ta"] label,
+.lang-ta label,
+html[lang="ta"] div,
+.lang-ta div {
+  font-family: 'Noto Sans Tamil', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: 0.005em;
+  overflow-wrap: break-word;
+}
+
+html[lang="ta"] p,
+.lang-ta p {
+  line-height: 1.72;
+}
+
+html[lang="ta"] button,
+.lang-ta button {
+  line-height: 1.45;
+  white-space: normal;
+}
+
+html[lang="ta"] .font-serif,
+.lang-ta .font-serif,
+html[lang="ta"] em,
+.lang-ta em,
+html[lang="ta"] blockquote,
+.lang-ta blockquote {
+  font-family: 'Noto Serif Tamil', Georgia, serif;
+  font-style: normal;
   line-height: 1.6;
 }
 

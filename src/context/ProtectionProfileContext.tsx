@@ -19,7 +19,7 @@ const DEFAULT_PROFILE: UserProtectionProfile = {
   user: {
     age: 32,
     gender: null,
-    city: "Mumbai",
+    city: "",
     singleDependents: null,
   },
   household: {

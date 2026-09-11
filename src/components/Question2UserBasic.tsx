@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, MapPin, User, Info } from "lucide-react";
+import { ArrowRight, MapPin, User, Info, X } from "lucide-react";
 import { GenderType, HouseholdType } from "@/types/questionnaire";
-import { POPULAR_CITIES } from "@/data/constants";
+import { searchLocations, POPULAR_QUICK_LOCATIONS } from "@/data/locations";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -34,11 +34,11 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
   const { t } = useLanguage();
   const [isCityOpen, setIsCityOpen] = useState(false);
 
-  const isCityMatch = POPULAR_CITIES.some((c) => c.toLowerCase() === city.trim().toLowerCase());
-  const query = city.trim().toLowerCase();
-  const filteredCities = query
-    ? POPULAR_CITIES.filter((c) => c.toLowerCase().includes(query)).slice(0, 15)
-    : POPULAR_CITIES.slice(0, 15);
+  const query = city.trim();
+  const suggestedCities = query ? searchLocations(query) : POPULAR_QUICK_LOCATIONS;
+  const isExactMatch = suggestedCities.some(
+    (c) => c.toLowerCase() === query.toLowerCase() || c.toLowerCase().startsWith(query.toLowerCase() + ",")
+  );
 
   const isSingle = householdType === "myself";
   const isValid = age >= 18 && age <= 100 && gender && city.trim().length > 0 && (!isSingle || singleDependents);
@@ -159,12 +159,25 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
                   (e.target as HTMLInputElement).blur();
                 }
               }}
-              className="w-full min-h-[48px] bg-white border border-hairline rounded-[14px] px-4 py-3 text-sm text-ink placeholder-muted focus:outline-none focus:border-lavender-600 transition-colors"
+              className="w-full min-h-[48px] bg-white border border-hairline rounded-[14px] pl-4 pr-10 py-3 text-sm text-ink placeholder-muted focus:outline-none focus:border-lavender-600 transition-colors"
             />
+            {city.length > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  onUpdate({ city: "" });
+                  setIsCityOpen(false);
+                }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center text-muted hover:text-ink hover:bg-lavender-100 transition-colors"
+                title="Clear city"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
 
             {isCityOpen && (
               <div className="absolute left-0 right-0 top-full mt-1.5 max-h-56 overflow-y-auto bg-white border border-hairline rounded-[14px] shadow-elevated z-30 py-1.5 divide-y divide-hairline">
-                {city.trim().length > 0 && !isCityMatch && (
+                {city.trim().length > 0 && !isExactMatch && (
                   <button
                     type="button"
                     onMouseDown={(e) => {
@@ -178,7 +191,7 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
                     <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-lavender-200 text-ink">Custom</span>
                   </button>
                 )}
-                {filteredCities.map((c) => (
+                {suggestedCities.map((c) => (
                   <button
                     key={c}
                     type="button"
@@ -205,23 +218,39 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
 
           {/* Quick city pills */}
           <div className="flex flex-wrap gap-1.5 mb-3">
-            {["Chennai", "Coimbatore", "Bengaluru", "Mumbai", "Madurai", "Trichy", "Hyderabad", "Delhi NCR", "Salem", "Kochi"].map((c) => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => {
-                  onUpdate({ city: c });
-                  setIsCityOpen(false);
-                }}
-                className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
-                  city === c
-                    ? "bg-lavender-100 border-lavender-300 text-ink font-semibold shadow-xs"
-                    : "bg-bg-soft border-hairline text-ink-soft hover:text-ink hover:bg-lavender-100"
-                }`}
-              >
-                {c}
-              </button>
-            ))}
+            {[
+              { label: "Chennai", full: "Chennai, Tamil Nadu" },
+              { label: "Coimbatore", full: "Coimbatore, Tamil Nadu" },
+              { label: "Madurai", full: "Madurai, Tamil Nadu" },
+              { label: "Trichy", full: "Tiruchirappalli (Trichy), Tamil Nadu" },
+              { label: "Salem", full: "Salem, Tamil Nadu" },
+              { label: "Tiruppur", full: "Tiruppur, Tamil Nadu" },
+              { label: "Erode", full: "Erode, Tamil Nadu" },
+              { label: "Bengaluru", full: "Bengaluru (Bangalore), Karnataka" },
+              { label: "Kochi", full: "Ernakulam (Kochi / Cochin), Kerala" },
+              { label: "Hyderabad", full: "Hyderabad, Telangana" },
+              { label: "Mumbai", full: "Mumbai, Maharashtra" },
+              { label: "Delhi NCR", full: "New Delhi, Delhi NCR" },
+            ].map((item) => {
+              const isSelected = city === item.full || city === item.label;
+              return (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => {
+                    onUpdate({ city: item.full });
+                    setIsCityOpen(false);
+                  }}
+                  className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
+                    isSelected
+                      ? "bg-lavender-100 border-lavender-300 text-ink font-semibold shadow-xs"
+                      : "bg-bg-soft border-hairline text-ink-soft hover:text-ink hover:bg-lavender-100"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
           </div>
 
           <div className="flex items-start space-x-2 text-xs text-ink-soft bg-bg-soft p-3 rounded-[12px] border border-hairline font-normal">
