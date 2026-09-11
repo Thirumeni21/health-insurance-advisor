@@ -13,18 +13,16 @@ export interface AdvisorConfig {
   phone: string;
   email: string;
   designation: string;
-  additionalDetails: string;
-  // Direct action links (optional - can be updated once phone/email is added)
-  phoneRaw?: string;       // e.g. "+919876543210" for tel: links
-  whatsappRaw?: string;    // e.g. "919876543210" for https://wa.me/ links
+  phoneRaw: string;
+  whatsappRaw: string;
 }
 
 export const ADVISOR_CONFIG: AdvisorConfig = {
-  name: "[YOUR NAME HERE]",
-  phone: "[YOUR PHONE NUMBER HERE]",
-  email: "[YOUR EMAIL HERE — OPTIONAL]",
+  name: "Thirumeni O V",
+  phone: "+91 88380 01685",
+  email: "thirumeniov@gmail.com",
   designation: "Health Insurance Advisor",
-  additionalDetails: "[YOUR DETAILS HERE — OPTIONAL]",
-  phoneRaw: "",
-  whatsappRaw: "",
+  phoneRaw: "+918838001685",
+  whatsappRaw: "918838001685",
 };
+

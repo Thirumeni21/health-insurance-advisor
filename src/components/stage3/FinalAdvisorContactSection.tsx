@@ -133,98 +133,128 @@ export const FinalAdvisorContactSection: React.FC<FinalAdvisorContactSectionProp
         {/* Advisor Details */}
         <div className="space-y-2.5 text-xs">
           {/* Name */}
-          <div className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-hairline">
+          <div className="flex items-center justify-between p-3 rounded-xl bg-white border border-hairline">
             <div className="min-w-0 pr-2">
-              <span className="font-mono text-[10px] uppercase text-muted block">
-                {lang === "ta" ? "பெயர்" : "Advisor Name"}
+              <span className="font-mono text-[10px] uppercase text-muted block leading-tight">
+                {lang === "ta" ? "ஆலோசகர் பெயர்" : "Insurance Advisor"}
               </span>
-              <span className="font-display font-bold text-sm text-ink block truncate">
-                {ADVISOR_CONFIG.name}
-              </span>
+              <div className="flex items-center space-x-2 mt-0.5">
+                <span className="font-display font-bold text-base text-ink block truncate">
+                  {ADVISOR_CONFIG.name}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => handleCopy(ADVISOR_CONFIG.name, "name")}
+                  className="p-1 rounded-md bg-bg-soft hover:bg-lavender-100 text-ink-soft hover:text-ink transition-all border border-hairline inline-flex items-center justify-center flex-shrink-0"
+                  title="Copy Name"
+                  aria-label="Copy name"
+                >
+                  {copiedField === "name" ? (
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  ) : (
+                    <Copy className="w-3.5 h-3.5" />
+                  )}
+                </button>
+                {copiedField === "name" && (
+                  <span className="text-[10px] font-mono text-emerald-600 animate-fadeIn">
+                    {lang === "ta" ? "நகலெடுக்கப்பட்டது!" : "Copied!"}
+                  </span>
+                )}
+              </div>
             </div>
-            {ADVISOR_CONFIG.name !== "[YOUR NAME HERE]" && (
-              <button
-                type="button"
-                onClick={() => handleCopy(ADVISOR_CONFIG.name, "name")}
-                className="p-1.5 rounded-lg bg-bg-soft hover:bg-lavender-100 text-ink-soft transition-colors"
-                title="Copy Name"
-              >
-                <Copy className="w-3.5 h-3.5" />
-              </button>
-            )}
           </div>
 
-          {/* Phone */}
-          <div className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-hairline">
+          {/* Phone with copy icon right near the number */}
+          <div className="flex items-center justify-between p-3 rounded-xl bg-white border border-hairline hover:border-lavender-200 transition-colors">
             <div className="flex items-center space-x-3 min-w-0 pr-2">
-              <div className="w-7 h-7 rounded-lg bg-lavender-100 text-lavender-600 flex items-center justify-center flex-shrink-0">
-                <Phone className="w-3.5 h-3.5" />
+              <div className="w-8 h-8 rounded-lg bg-lavender-100 text-lavender-600 flex items-center justify-center flex-shrink-0">
+                <Phone className="w-4 h-4" />
               </div>
               <div className="min-w-0">
-                <span className="font-mono text-[10px] uppercase text-muted block">
+                <span className="font-mono text-[10px] uppercase text-muted block leading-tight">
                   {lang === "ta" ? "தொலைபேசி" : "Phone / WhatsApp"}
                 </span>
-                <span className="font-mono font-medium text-xs sm:text-sm text-ink block truncate">
-                  {ADVISOR_CONFIG.phone}
-                </span>
+                <div className="flex items-center space-x-2 mt-0.5 flex-wrap gap-y-1">
+                  <a
+                    href={`tel:${ADVISOR_CONFIG.phoneRaw}`}
+                    className="font-mono font-semibold text-xs sm:text-sm text-ink hover:text-lavender-700 transition-colors"
+                  >
+                    {ADVISOR_CONFIG.phone}
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => handleCopy(ADVISOR_CONFIG.phone, "phone")}
+                    className="p-1 rounded-md bg-bg-soft hover:bg-lavender-100 text-ink-soft hover:text-ink transition-all border border-hairline inline-flex items-center justify-center flex-shrink-0"
+                    title={lang === "ta" ? "தொலைபேசி எண்ணை நகலெடு" : "Copy phone number"}
+                    aria-label="Copy phone number"
+                  >
+                    {copiedField === "phone" ? (
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    ) : (
+                      <Copy className="w-3.5 h-3.5" />
+                    )}
+                  </button>
+                  {copiedField === "phone" && (
+                    <span className="text-[10px] font-mono text-emerald-600 animate-fadeIn">
+                      {lang === "ta" ? "நகலெடுக்கப்பட்டது!" : "Copied!"}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
-            {ADVISOR_CONFIG.phone !== "[YOUR PHONE NUMBER HERE]" && (
-              <button
-                type="button"
-                onClick={() => handleCopy(ADVISOR_CONFIG.phone, "phone")}
-                className="p-1.5 rounded-lg bg-bg-soft hover:bg-lavender-100 text-ink-soft transition-colors"
-                title="Copy Phone"
-              >
-                {copiedField === "phone" ? (
-                  <CheckCircle2 className="w-3.5 h-3.5 text-sage-600" />
-                ) : (
-                  <Copy className="w-3.5 h-3.5" />
-                )}
-              </button>
-            )}
+            <a
+              href={`tel:${ADVISOR_CONFIG.phoneRaw}`}
+              className="px-3 py-1.5 rounded-lg bg-lavender-50 hover:bg-lavender-100 text-lavender-700 text-xs font-semibold border border-lavender-200 transition-colors flex-shrink-0 hidden sm:inline-flex items-center space-x-1"
+            >
+              <span>{lang === "ta" ? "அழைக்கவும்" : "Call"}</span>
+            </a>
           </div>
 
-          {/* Email */}
-          <div className="flex items-center justify-between p-2.5 rounded-xl bg-white border border-hairline">
+          {/* Email with copy icon right near the email */}
+          <div className="flex items-center justify-between p-3 rounded-xl bg-white border border-hairline hover:border-sage-200 transition-colors">
             <div className="flex items-center space-x-3 min-w-0 pr-2">
-              <div className="w-7 h-7 rounded-lg bg-sage-100 text-sage-600 flex items-center justify-center flex-shrink-0">
-                <Mail className="w-3.5 h-3.5" />
+              <div className="w-8 h-8 rounded-lg bg-sage-100 text-sage-600 flex items-center justify-center flex-shrink-0">
+                <Mail className="w-4 h-4" />
               </div>
               <div className="min-w-0">
-                <span className="font-mono text-[10px] uppercase text-muted block">
+                <span className="font-mono text-[10px] uppercase text-muted block leading-tight">
                   {lang === "ta" ? "மின்னஞ்சல்" : "Email"}
                 </span>
-                <span className="font-mono font-medium text-xs text-ink block truncate">
-                  {ADVISOR_CONFIG.email}
-                </span>
+                <div className="flex items-center space-x-2 mt-0.5 flex-wrap gap-y-1">
+                  <a
+                    href={`mailto:${ADVISOR_CONFIG.email}`}
+                    className="font-mono font-semibold text-xs sm:text-sm text-ink hover:text-sage-700 transition-colors truncate block"
+                  >
+                    {ADVISOR_CONFIG.email}
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => handleCopy(ADVISOR_CONFIG.email, "email")}
+                    className="p-1 rounded-md bg-bg-soft hover:bg-sage-100 text-ink-soft hover:text-ink transition-all border border-hairline inline-flex items-center justify-center flex-shrink-0"
+                    title={lang === "ta" ? "மின்னஞ்சலை நகலெடு" : "Copy email address"}
+                    aria-label="Copy email address"
+                  >
+                    {copiedField === "email" ? (
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    ) : (
+                      <Copy className="w-3.5 h-3.5" />
+                    )}
+                  </button>
+                  {copiedField === "email" && (
+                    <span className="text-[10px] font-mono text-emerald-600 animate-fadeIn">
+                      {lang === "ta" ? "நகலெடுக்கப்பட்டது!" : "Copied!"}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
-            {ADVISOR_CONFIG.email !== "[YOUR EMAIL HERE — OPTIONAL]" && (
-              <button
-                type="button"
-                onClick={() => handleCopy(ADVISOR_CONFIG.email, "email")}
-                className="p-1.5 rounded-lg bg-bg-soft hover:bg-lavender-100 text-ink-soft transition-colors"
-                title="Copy Email"
-              >
-                {copiedField === "email" ? (
-                  <CheckCircle2 className="w-3.5 h-3.5 text-sage-600" />
-                ) : (
-                  <Copy className="w-3.5 h-3.5" />
-                )}
-              </button>
-            )}
+            <a
+              href={`mailto:${ADVISOR_CONFIG.email}`}
+              className="px-3 py-1.5 rounded-lg bg-sage-50 hover:bg-sage-100 text-sage-700 text-xs font-semibold border border-sage-200 transition-colors flex-shrink-0 hidden sm:inline-flex items-center space-x-1"
+            >
+              <span>{lang === "ta" ? "மின்னஞ்சல்" : "Email"}</span>
+            </a>
           </div>
-
-          {/* Additional details */}
-          {ADVISOR_CONFIG.additionalDetails && (
-            <div className="p-2.5 rounded-xl bg-white border border-hairline text-xs text-ink-soft">
-              <span className="font-mono text-[10px] uppercase text-muted block mb-0.5">
-                {lang === "ta" ? "கூடுதல் விவரங்கள்" : "Additional Information"}
-              </span>
-              <span>{ADVISOR_CONFIG.additionalDetails}</span>
-            </div>
-          )}
         </div>
 
         <p className="text-[11px] text-muted text-center pt-1">
