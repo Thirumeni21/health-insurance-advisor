@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { X, HelpCircle, Check } from "lucide-react";
 import {
   FamilyMember,
@@ -28,6 +29,7 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
   defaultRelationship = "Spouse",
 }) => {
   const { t } = useLanguage();
+  const [mounted, setMounted] = useState(false);
   const [relationship, setRelationship] = useState<FamilyRelationship>(
     initialData?.relationship || defaultRelationship
   );
@@ -47,7 +49,20 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
   );
   const [showWhyModal, setShowWhyModal] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
     if (isOpen) {
       const rel = initialData?.relationship || defaultRelationship;
       setRelationship(rel);
@@ -66,7 +81,7 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
     }
   }, [isOpen, initialData, defaultRelationship]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,9 +100,12 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
 
   const relTranslated = t.modal.relationships[relationship] || relationship;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-ink/40 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-lg rounded-t-[28px] sm:rounded-[24px] bg-white border border-hairline shadow-elevated p-6 sm:p-8 overflow-y-auto max-h-[88vh] sm:max-h-[90vh]">
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-ink/60 backdrop-blur-md animate-fadeIn">
+      {/* Backdrop tap to close */}
+      <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
+
+      <div className="relative z-10 w-full max-w-lg rounded-t-[28px] sm:rounded-[24px] bg-white border border-hairline shadow-elevated p-6 sm:p-8 overflow-y-auto max-h-[88vh] sm:max-h-[90vh]">
         {/* Mobile Drag Handle */}
         <div className="sm:hidden w-12 h-1 bg-hairline rounded-full mx-auto mb-4" />
 
@@ -269,6 +287,7 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };

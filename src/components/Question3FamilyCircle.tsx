@@ -58,9 +58,10 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
   };
 
   const isSingle = householdType === "myself";
+  const hasMembers = familyMembers.length > 0;
 
   return (
-    <div className="w-full max-w-3xl mx-auto animate-fadeIn select-none z-10 relative">
+    <div className="w-full max-w-4xl mx-auto animate-fadeIn select-none">
       {/* Title */}
       <div className="text-center mb-8">
         <div className="mb-2 inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-bg-soft border border-hairline">
@@ -77,55 +78,59 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
         </p>
       </div>
 
-      {/* Single Add Family Member Action Button */}
-      <div className="flex items-center justify-center mb-8">
-        <button
-          type="button"
-          onClick={() => {
-            const hasSpouse = familyMembers.some((m) => m.relationship === "Spouse");
-            openAddModal(hasSpouse ? "Child" : "Spouse");
-          }}
-          className="group inline-flex items-center justify-center space-x-2.5 px-6 py-3.5 rounded-full bg-white hover:bg-bg-soft border border-hairline hover:border-lavender-300 text-xs sm:text-sm font-semibold text-ink transition-all shadow-subtle hover:shadow-elevated hover:scale-105 min-h-[48px] w-full sm:w-auto"
-        >
-          <div className="w-7 h-7 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center text-ink group-hover:scale-110 transition-transform">
-            <Plus className="w-4 h-4 text-lavender-600 group-hover:rotate-90 transition-transform" />
-          </div>
-          <span className="font-sans font-semibold">{t.step3.addFamilyMember || "+ Add Family Member"}</span>
-        </button>
-      </div>
+      {/* Add Family Member Button (only displayed above when circle already has members) */}
+      {hasMembers && (
+        <div className="flex items-center justify-center mb-7">
+          <button
+            type="button"
+            onClick={() => {
+              const hasSpouse = familyMembers.some((m) => m.relationship === "Spouse");
+              openAddModal(hasSpouse ? "Child" : "Spouse");
+            }}
+            className="group inline-flex items-center justify-center space-x-2.5 px-6 py-3 rounded-full bg-ink hover:bg-[#2e283b] text-white text-xs sm:text-sm font-semibold transition-all shadow-subtle hover:shadow-elevated hover:scale-105 min-h-[46px]"
+          >
+            <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+              <Plus className="w-3.5 h-3.5 text-white group-hover:rotate-90 transition-transform" />
+            </div>
+            <span>{t.step3.addFamilyMember || "+ Add Family Member"}</span>
+          </button>
+        </div>
+      )}
 
       {/* Editorial Person Card Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+      <div
+        className={
+          !hasMembers && !isSingle
+            ? "grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8 max-w-2xl mx-auto"
+            : familyMembers.length <= 1
+            ? "grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8 max-w-3xl mx-auto"
+            : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8"
+        }
+      >
         {/* Primary Anchor Card (YOU) */}
-        <div className="bg-white border-2 border-lavender-300 rounded-[22px] p-6 shadow-subtle flex flex-col justify-between min-h-[260px] relative transition-all hover:shadow-elevated">
-          {/* Top Status Bar */}
-          <div className="flex items-center justify-between mb-4">
-            <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-lavender-100 border border-lavender-300 text-[11px] font-semibold text-ink uppercase tracking-wider">
-              <span className="w-1.5 h-1.5 rounded-full bg-lavender-600 animate-pulse" />
-              <span>{t.step3.youBadge}</span>
-            </span>
-            <span className="text-[10px] font-mono uppercase tracking-wider text-lavender-600 font-semibold px-2 py-0.5 rounded-md bg-lavender-50 border border-lavender-200">
-              Anchor
-            </span>
-          </div>
-
-          {/* Center Person Profile */}
-          <div className="flex flex-col items-center text-center my-auto py-2">
-            <div className="w-16 h-16 rounded-full bg-lavender-100 border-2 border-lavender-300 flex items-center justify-center text-ink font-display font-bold text-base shadow-xs mb-3.5">
-              YOU
+        <div className="bg-white border-2 border-lavender-300 rounded-[20px] p-6 shadow-subtle hover:shadow-elevated transition-all flex flex-col justify-between">
+          <div>
+            <div className="flex items-start justify-between mb-4">
+              <div className="w-12 h-12 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center text-ink font-display font-bold text-sm shadow-xs flex-shrink-0">
+                YOU
+              </div>
+              <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-lavender-100 text-[11px] font-semibold text-ink font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-lavender-600 animate-pulse" />
+                <span>{t.step3.youBadge || "Anchor"}</span>
+              </span>
             </div>
+
             <h3 className="font-display font-bold text-xl text-ink leading-tight mb-1">
               {t.step3.youLabel}
             </h3>
-            <p className="text-xs text-ink-soft font-normal mb-2 leading-relaxed">
+            <p className="text-xs text-ink-soft leading-relaxed font-normal mb-4">
               {userAge} {t.step2.ageUnit} · {t.step3.youDesc}
             </p>
           </div>
 
-          {/* Card Bottom status indicator */}
-          <div className="pt-3 border-t border-hairline flex items-center justify-between text-xs text-ink-soft font-mono">
-            <span>Primary Life</span>
-            <span className="font-semibold text-ink">Active Anchor</span>
+          <div className="pt-3 border-t border-hairline mt-4 flex items-center justify-between text-xs font-mono text-ink-soft">
+            <span>Primary Anchor</span>
+            <span className="font-semibold text-ink">Active Cover</span>
           </div>
         </div>
 
@@ -143,50 +148,49 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
           return (
             <div
               key={member.id}
-              className="bg-white border border-hairline hover:border-lavender-300 rounded-[22px] p-6 shadow-subtle hover:shadow-elevated flex flex-col justify-between min-h-[260px] relative transition-all group"
+              className="bg-white border border-hairline hover:border-lavender-300 rounded-[20px] p-6 shadow-subtle hover:shadow-elevated transition-all flex flex-col justify-between group"
             >
-              {/* Top Header: Relationship Badge + Action Controls */}
-              <div className="flex items-center justify-between mb-4">
-                <span className="inline-flex items-center px-3 py-1 rounded-full bg-bg-soft text-ink border border-hairline text-xs font-semibold">
-                  {relTranslated}
-                </span>
-                <div className="flex items-center space-x-1.5">
-                  <button
-                    type="button"
-                    onClick={() => openEditModal(member)}
-                    className="w-8 h-8 rounded-full bg-white border border-hairline hover:border-ink flex items-center justify-center text-ink-soft hover:text-ink transition-colors shadow-xs"
-                    title="Edit member"
-                  >
-                    <Edit2 className="w-3.5 h-3.5" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      sound.playChime(320, 0.1);
-                      onRemoveMember(member.id);
-                    }}
-                    className="w-8 h-8 rounded-full bg-white border border-hairline hover:border-red-300 hover:bg-red-50 flex items-center justify-center text-muted hover:text-red-600 transition-colors shadow-xs"
-                    title="Remove member"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
+              <div>
+                <div className="flex items-start justify-between mb-4">
+                  <div className={`w-12 h-12 rounded-full border flex items-center justify-center text-ink font-display font-bold text-sm shadow-xs flex-shrink-0 ${avatarBg}`}>
+                    {member.relationship.substring(0, 2).toUpperCase()}
+                  </div>
+                  <div className="flex items-center space-x-1.5">
+                    <button
+                      type="button"
+                      onClick={() => openEditModal(member)}
+                      className="w-8 h-8 rounded-full bg-bg-soft hover:bg-white border border-hairline hover:border-ink flex items-center justify-center text-ink-soft hover:text-ink transition-colors shadow-xs"
+                      title="Edit member"
+                    >
+                      <Edit2 className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        sound.playChime(320, 0.1);
+                        onRemoveMember(member.id);
+                      }}
+                      className="w-8 h-8 rounded-full bg-bg-soft hover:bg-red-50 border border-hairline hover:border-red-300 flex items-center justify-center text-muted hover:text-red-600 transition-colors shadow-xs"
+                      title="Remove member"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              {/* Center Person Profile */}
-              <div className="flex flex-col items-center text-center my-auto py-2">
-                <div className={`w-16 h-16 rounded-full border-2 flex items-center justify-center text-ink font-display font-bold text-base shadow-xs mb-3.5 ${avatarBg}`}>
-                  {member.relationship.substring(0, 2).toUpperCase()}
+                <div className="flex flex-wrap items-baseline gap-2 mb-1">
+                  <h3 className="font-display font-bold text-xl text-ink leading-tight">
+                    {member.name || relTranslated}
+                  </h3>
+                  {member.name && (
+                    <span className="text-xs text-muted font-normal">({relTranslated})</span>
+                  )}
                 </div>
-                <h3 className="font-display font-bold text-xl text-ink leading-tight mb-1">
-                  {member.name || relTranslated}
-                </h3>
-                <p className="text-xs text-ink-soft font-normal mb-2 leading-relaxed">
-                  {member.age} {t.step2.ageUnit}
+                <p className="text-xs text-ink-soft leading-relaxed font-normal mb-3">
+                  {member.age} {t.step2.ageUnit} · {member.gender === "female" ? "Female" : member.gender === "male" ? "Male" : "Other"}
                 </p>
 
-                {/* Metadata Badges */}
-                <div className="flex flex-wrap items-center justify-center gap-1.5 mt-1">
+                <div className="flex flex-wrap gap-1.5">
                   <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-bg-soft border border-hairline text-ink-soft">
                     {member.financiallyDependent === "yes"
                       ? t.step3.dependentTag
@@ -206,29 +210,31 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
                 </div>
               </div>
 
-              {/* Card Bottom status indicator */}
-              <div className="pt-3 border-t border-hairline flex items-center justify-between text-xs text-ink-soft font-mono">
-                <span>Protected Node</span>
-                <span className="text-ink font-medium">{relTranslated}</span>
+              <div className="pt-3 border-t border-hairline mt-4 flex items-center justify-between text-xs font-mono text-ink-soft">
+                <span>Protected Member</span>
+                <span className="font-semibold text-ink">{relTranslated}</span>
               </div>
             </div>
           );
         })}
 
         {/* Empty state invitation card if no members yet */}
-        {familyMembers.length === 0 && !isSingle && (
+        {!hasMembers && !isSingle && (
           <button
             type="button"
-            onClick={() => openAddModal("Spouse")}
-            className="rounded-[22px] border-2 border-dashed border-hairline hover:border-lavender-300 bg-bg-soft/60 hover:bg-lavender-50/40 p-6 flex flex-col items-center justify-center text-center min-h-[260px] transition-all group cursor-pointer"
+            onClick={() => {
+              sound.playChime(500, 0.1);
+              openAddModal("Spouse");
+            }}
+            className="rounded-[20px] border-2 border-dashed border-hairline hover:border-lavender-400 bg-bg-soft/40 hover:bg-lavender-50/30 p-6 flex flex-col items-center justify-center text-center min-h-[220px] transition-all group cursor-pointer shadow-xs hover:shadow-subtle"
           >
-            <div className="w-14 h-14 rounded-full bg-white border border-hairline flex items-center justify-center text-muted group-hover:text-lavender-600 group-hover:scale-110 transition-all mb-3 shadow-xs">
-              <Plus className="w-6 h-6" />
+            <div className="w-12 h-12 rounded-full bg-white border border-hairline group-hover:border-lavender-300 flex items-center justify-center text-ink-soft group-hover:text-lavender-600 group-hover:scale-110 transition-all mb-3 shadow-xs">
+              <Plus className="w-5 h-5" />
             </div>
-            <span className="font-display font-semibold text-base text-ink mb-1">
-              {t.step3.addFamilyMember || "Add Family Member"}
+            <span className="font-display font-bold text-base text-ink mb-1 group-hover:text-lavender-600 transition-colors">
+              {t.step3.addFamilyMember || "+ Add Family Member"}
             </span>
-            <span className="text-xs text-muted max-w-[200px] leading-relaxed">
+            <span className="text-xs text-muted max-w-[220px] leading-relaxed font-normal">
               {t.step3.emptyNotice}
             </span>
           </button>

@@ -301,7 +301,7 @@ export const SummaryScreen: React.FC<SummaryScreenProps> = ({
 
       {/* JSON Modal */}
       {showJsonModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/40 backdrop-blur-sm animate-fadeIn">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-ink/60 backdrop-blur-md animate-fadeIn">
           <div className="relative w-full max-w-2xl rounded-[20px] bg-white border border-hairline shadow-elevated p-6 max-h-[85vh] flex flex-col">
             <div className="flex items-center justify-between pb-3 border-b border-hairline mb-4">
               <h3 className="font-display text-xl font-semibold text-ink">

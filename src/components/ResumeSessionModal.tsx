@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { ArrowRight, RotateCcw } from "lucide-react";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
@@ -19,10 +20,16 @@ export const ResumeSessionModal: React.FC<ResumeSessionModalProps> = ({
   onDismiss,
 }) => {
   const { t } = useLanguage();
-  if (!isOpen) return null;
+  const [mounted, setMounted] = useState(false);
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-ink/30 backdrop-blur-sm animate-fadeIn">
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center p-4 bg-ink/60 backdrop-blur-md animate-fadeIn">
       <div className="w-full max-w-md rounded-[24px] bg-white border border-hairline shadow-elevated p-6 sm:p-7 text-center space-y-4">
         {/* Subtle pill */}
         <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-lavender-100 border border-lavender-300 text-ink text-xs font-semibold">
@@ -66,6 +73,7 @@ export const ResumeSessionModal: React.FC<ResumeSessionModalProps> = ({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
