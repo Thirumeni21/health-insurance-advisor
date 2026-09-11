@@ -20,6 +20,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { getCharacterForUser } from "@/lib/characterEngine";
 import { FamilyCharacter } from "../character/FamilyCharacter";
 import { FamilyGroupCluster } from "../character/FamilyGroupCluster";
+import { FinalAdvisorContactSection } from "./FinalAdvisorContactSection";
 
 interface Chapter5BlueprintProps {
   scenario: PersonalizedScenario;
@@ -389,27 +390,10 @@ export const Chapter5Blueprint: React.FC<Chapter5BlueprintProps> = ({
             </button>
           </div>
         ) : (
-          <div className="p-6 rounded-[20px] bg-bg-soft border border-hairline max-w-md mx-auto space-y-3 animate-fadeIn">
-            <div className="flex justify-center -mb-1">
-              <FamilyCharacter config={userChar} variant="bust" size="md" pose="reflective" />
-            </div>
-            <CheckCircle2 className="w-8 h-8 text-ink mx-auto" />
-            <h4 className="font-display text-lg font-semibold text-ink">
-              {lang === "ta" ? "உங்கள் தனிப்பட்ட வழிகாட்டி தயாராகிறது" : "Your Educational Journey Complete"}
-            </h4>
-            <p className="text-xs text-ink-soft">
-              {lang === "ta"
-                ? "நீங்கள் இப்போது ஹெல்த் இன்ஷூரன்ஸின் அனைத்து விதிகளையும் வெளிப்படையாக அறிந்துகொண்டீர்கள். உங்கள் விருப்பங்கள் பாதுகாப்பாக பதிவு செய்யப்பட்டுள்ளன."
-                : "You now understand what health insurance actually does and where its boundaries lie. Zero sales push, total clarity."}
-            </p>
-            <button
-              onClick={onRestartExperience}
-              className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-full bg-white border border-hairline text-xs font-mono text-ink-soft hover:text-ink transition-all"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>{lang === "ta" ? "அனுபவத்தை மீண்டும் தொடங்க" : "Restart Experience"}</span>
-            </button>
-          </div>
+          <FinalAdvisorContactSection
+            profile={profile}
+            onRestartExperience={onRestartExperience}
+          />
         )}
 
         <div className="pt-4 border-t border-hairline flex justify-center">

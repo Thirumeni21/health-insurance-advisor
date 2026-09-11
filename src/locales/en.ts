@@ -15,8 +15,8 @@ export const en = {
     taDesc: "தமிழில் தொடரவும்",
   },
   nav: {
-    brand: "Aegis",
-    tagline: "Constellation",
+    brand: "Health Insurance Advisor",
+    tagline: "Guidance & Advisory",
     stageBadge: "Stage 01 · Personal & Family Protection",
     stage2Badge: "Stage 02 · “What If?” Scenario Simulator",
     soundOn: "Sound: On",

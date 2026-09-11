@@ -1,13 +1,24 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Check } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Activity,
+  ShieldAlert,
+  Heart,
+  Users,
+  Wallet,
+  FileCheck,
+  Compass,
+} from "lucide-react";
 import { CONCERN_OPTIONS } from "@/data/constants";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
 import { useProtectionProfile } from "@/context/ProtectionProfileContext";
-import { getCharacterForUser } from "@/lib/characterEngine";
+import { getCharacterForUser, getCharacterForMember } from "@/lib/characterEngine";
 import { CharacterGuideBubble } from "./character/CharacterGuideBubble";
+import { FamilyCharacter } from "./character/FamilyCharacter";
 
 interface Question5ConcernsProps {
   selectedConcerns: string[];
@@ -25,9 +36,113 @@ export const Question5Concerns: React.FC<Question5ConcernsProps> = ({
   const userChar = getCharacterForUser(profile.user);
   const isValid = selectedConcerns.length > 0;
 
+  const members = profile.household.familyMembers || [];
+  const spouse = members.find((m) => m.relationship === "Spouse");
+  const child = members.find((m) => m.relationship === "Child");
+  const parent = members.find(
+    (m) => m.relationship === "Mother" || m.relationship === "Father" || m.relationship === "Grandparent"
+  );
+
   const handleToggle = (id: string) => {
     sound.playSoftPulse();
     onToggleConcern(id);
+  };
+
+  const renderConcernVisual = (itemId: string) => {
+    switch (itemId) {
+      case "hospital_bill":
+        return (
+          <div className="flex items-center space-x-2">
+            <FamilyCharacter config={userChar} variant="avatar" size="xs" pose="thinking" />
+            <div className="w-8 h-8 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center text-lavender-600 shadow-xs">
+              <Activity className="w-3.5 h-3.5 animate-pulse" />
+            </div>
+          </div>
+        );
+
+      case "accident":
+        return (
+          <div className="flex items-center space-x-2">
+            <FamilyCharacter config={userChar} variant="avatar" size="xs" pose="protective" />
+            <div className="w-8 h-8 rounded-full bg-red-50 border border-red-200 flex items-center justify-center text-red-500 shadow-xs">
+              <ShieldAlert className="w-3.5 h-3.5" />
+            </div>
+          </div>
+        );
+
+      case "family_treatment": {
+        const targetFamily = child || spouse;
+        return (
+          <div className="flex items-center space-x-2">
+            <div className="flex items-center -space-x-2">
+              <FamilyCharacter config={userChar} variant="avatar" size="xs" />
+              {targetFamily && (
+                <FamilyCharacter
+                  config={getCharacterForMember(targetFamily)}
+                  variant="avatar"
+                  size="xs"
+                />
+              )}
+            </div>
+            <div className="w-8 h-8 rounded-full bg-sage-100 border border-[#cce0b2] flex items-center justify-center text-sage-600 shadow-xs">
+              <Heart className="w-3.5 h-3.5" />
+            </div>
+          </div>
+        );
+      }
+
+      case "parents_healthcare": {
+        return (
+          <div className="flex items-center space-x-2">
+            <div className="flex items-center -space-x-2">
+              {parent ? (
+                <FamilyCharacter
+                  config={getCharacterForMember(parent)}
+                  variant="avatar"
+                  size="xs"
+                />
+              ) : (
+                <FamilyCharacter config={userChar} variant="avatar" size="xs" pose="thinking" />
+              )}
+            </div>
+            <div className="w-8 h-8 rounded-full bg-cream-100 border border-[#ebd7bc] flex items-center justify-center text-[#b2793e] shadow-xs">
+              <Users className="w-3.5 h-3.5" />
+            </div>
+          </div>
+        );
+      }
+
+      case "savings_depletion":
+        return (
+          <div className="flex items-center space-x-2">
+            <FamilyCharacter config={userChar} variant="avatar" size="xs" pose="thinking" />
+            <div className="w-8 h-8 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center text-ink shadow-xs">
+              <Wallet className="w-3.5 h-3.5" />
+            </div>
+          </div>
+        );
+
+      case "understanding_coverage":
+        return (
+          <div className="flex items-center space-x-2">
+            <FamilyCharacter config={userChar} variant="avatar" size="xs" pose="explaining" />
+            <div className="w-8 h-8 rounded-full bg-bg-soft border border-hairline flex items-center justify-center text-lavender-600 shadow-xs">
+              <FileCheck className="w-3.5 h-3.5" />
+            </div>
+          </div>
+        );
+
+      case "dont_know":
+      default:
+        return (
+          <div className="flex items-center space-x-2">
+            <FamilyCharacter config={userChar} variant="avatar" size="xs" pose="thinking" />
+            <div className="w-8 h-8 rounded-full bg-bg-soft border border-hairline flex items-center justify-center text-ink-soft shadow-xs">
+              <Compass className="w-3.5 h-3.5" />
+            </div>
+          </div>
+        );
+    }
   };
 
   return (
@@ -75,8 +190,8 @@ export const Question5Concerns: React.FC<Question5ConcernsProps> = ({
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 rounded-full bg-bg-soft border border-hairline flex items-center justify-center text-lg group-hover:scale-105 transition-transform shadow-xs">
-                    {item.icon}
+                  <div className="flex items-center">
+                    {renderConcernVisual(item.id)}
                   </div>
                   <div
                     className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${

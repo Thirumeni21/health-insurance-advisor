@@ -7,8 +7,9 @@ import { HOUSEHOLD_OPTIONS } from "@/data/constants";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
 import { useProtectionProfile } from "@/context/ProtectionProfileContext";
-import { getCharacterForUser } from "@/lib/characterEngine";
+import { getCharacterForUser, getCharacterForMember } from "@/lib/characterEngine";
 import { CharacterGuideBubble } from "./character/CharacterGuideBubble";
+import { FamilyCharacter } from "./character/FamilyCharacter";
 
 interface Question1HouseholdProps {
   selectedType: HouseholdType | null;
@@ -24,6 +25,88 @@ export const Question1Household: React.FC<Question1HouseholdProps> = ({
   const { t } = useLanguage();
   const { profile } = useProtectionProfile();
   const userChar = getCharacterForUser(profile.user);
+
+  const spouseChar = getCharacterForMember({
+    id: "preview_spouse",
+    relationship: "Spouse",
+    age: 30,
+    gender: profile.user.gender === "female" ? "male" : "female",
+  });
+  const childChar = getCharacterForMember({
+    id: "preview_child",
+    relationship: "Child",
+    age: 7,
+    gender: "female",
+  });
+  const fatherChar = getCharacterForMember({
+    id: "preview_father",
+    relationship: "Father",
+    age: 62,
+    gender: "male",
+  });
+  const motherChar = getCharacterForMember({
+    id: "preview_mother",
+    relationship: "Mother",
+    age: 58,
+    gender: "female",
+  });
+  const otherChar = getCharacterForMember({
+    id: "preview_other",
+    relationship: "Other Dependent",
+    age: 22,
+    gender: "female",
+  });
+
+  const renderHouseholdCharacters = (optionId: HouseholdType) => {
+    switch (optionId) {
+      case "myself":
+        return (
+          <div className="flex items-center group-hover:scale-105 transition-transform">
+            <FamilyCharacter config={userChar} variant="avatar" size="sm" />
+          </div>
+        );
+      case "spouse":
+        return (
+          <div className="flex items-center -space-x-2 group-hover:scale-105 transition-transform">
+            <FamilyCharacter config={userChar} variant="avatar" size="sm" />
+            <FamilyCharacter config={spouseChar} variant="avatar" size="sm" />
+          </div>
+        );
+      case "family":
+        return (
+          <div className="flex items-center -space-x-2 group-hover:scale-105 transition-transform">
+            <FamilyCharacter config={userChar} variant="avatar" size="sm" />
+            <FamilyCharacter config={spouseChar} variant="avatar" size="sm" />
+            <FamilyCharacter config={childChar} variant="avatar" size="sm" />
+          </div>
+        );
+      case "parents":
+        return (
+          <div className="flex items-center -space-x-2 group-hover:scale-105 transition-transform">
+            <FamilyCharacter config={fatherChar} variant="avatar" size="sm" />
+            <FamilyCharacter config={motherChar} variant="avatar" size="sm" />
+          </div>
+        );
+      case "whole_family":
+        return (
+          <div className="flex items-center -space-x-2 group-hover:scale-105 transition-transform">
+            <FamilyCharacter config={userChar} variant="avatar" size="sm" />
+            <FamilyCharacter config={spouseChar} variant="avatar" size="sm" />
+            <FamilyCharacter config={childChar} variant="avatar" size="sm" />
+            <FamilyCharacter config={fatherChar} variant="avatar" size="sm" />
+            <FamilyCharacter config={motherChar} variant="avatar" size="sm" />
+          </div>
+        );
+      case "other":
+      default:
+        return (
+          <div className="flex items-center -space-x-2 group-hover:scale-105 transition-transform">
+            <FamilyCharacter config={userChar} variant="avatar" size="sm" />
+            <FamilyCharacter config={otherChar} variant="avatar" size="sm" />
+          </div>
+        );
+    }
+  };
 
   return (
     <div className="w-full max-w-3xl mx-auto animate-fadeIn select-none z-10 relative">
@@ -74,8 +157,8 @@ export const Question1Household: React.FC<Question1HouseholdProps> = ({
               }`}
             >
               <div className="flex items-start justify-between mb-3">
-                <div className="w-11 h-11 rounded-full bg-white border border-hairline flex items-center justify-center text-xl group-hover:scale-105 transition-transform shadow-xs">
-                  {option.icon}
+                <div className="flex items-center">
+                  {renderHouseholdCharacters(option.id)}
                 </div>
 
                 <div className="flex items-center space-x-2">

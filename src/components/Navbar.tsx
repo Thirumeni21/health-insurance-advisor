@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { Shield, RotateCcw, Volume2, VolumeX, Eye, Globe } from "lucide-react";
+import React from "react";
+import { Shield, Globe } from "lucide-react";
 import { sound } from "@/lib/soundFx";
 import { useLanguage } from "@/context/LanguageContext";
 import { AppStage } from "@/types/questionnaire";
@@ -10,24 +10,15 @@ interface NavbarProps {
   stage?: AppStage;
   onReset?: () => void;
   currentStep?: number;
-  reducedMotion: boolean;
-  onToggleReducedMotion: () => void;
+  reducedMotion?: boolean;
+  onToggleReducedMotion?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   stage = "hero",
   onReset,
-  currentStep,
-  reducedMotion,
-  onToggleReducedMotion,
 }) => {
   const { language, setLanguage, t } = useLanguage();
-  const [isMuted, setIsMuted] = useState(true);
-
-  const handleToggleSound = () => {
-    const muted = sound.toggleMute();
-    setIsMuted(muted);
-  };
 
   const handleToggleLanguage = () => {
     sound.playChime(500, 0.08);
@@ -63,9 +54,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span className="font-medium">{stage === "stage3" ? t.stage3?.nav?.stageTag || "Stage 3" : stage === "stage2" ? t.nav.stage2Badge : t.nav.stageBadge}</span>
         </div>
 
-        {/* Right Controls */}
+        {/* Right Controls: Focused Language Switcher Pill (EN | தமிழ்) */}
         <div className="flex items-center space-x-2 sm:space-x-3">
-          {/* Language Switcher Pill (EN | தமிழ்) */}
           <button
             onClick={handleToggleLanguage}
             className="flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-bg-soft hover:bg-lavender-100 border border-hairline hover:border-lavender-300 text-xs transition-all text-ink min-h-[38px]"
@@ -80,44 +70,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               தமிழ்
             </span>
           </button>
-
-          {/* Sound */}
-          <button
-            onClick={handleToggleSound}
-            className={`w-9 h-9 rounded-full border transition-all text-xs flex items-center justify-center ${
-              !isMuted
-                ? "bg-lavender-100 border-lavender-300 text-ink"
-                : "bg-white border-hairline text-muted hover:text-ink hover:border-muted"
-            }`}
-            title={isMuted ? t.nav.soundOn : t.nav.soundOff}
-          >
-            {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-          </button>
-
-          {/* Reduced Motion */}
-          <button
-            onClick={onToggleReducedMotion}
-            className={`hidden sm:flex w-9 h-9 rounded-full border transition-all text-xs items-center justify-center ${
-              reducedMotion
-                ? "bg-lavender-100 border-lavender-300 text-ink"
-                : "bg-white border-hairline text-muted hover:text-ink hover:border-muted"
-            }`}
-            title={reducedMotion ? t.nav.motionOn : t.nav.motionOff}
-          >
-            <Eye className="w-4 h-4" />
-          </button>
-
-          {/* Reset */}
-          {((currentStep !== undefined && currentStep > 0) || stage === "stage2" || stage === "stage3") && (
-            <button
-              onClick={onReset}
-              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs text-ink-soft hover:text-ink hover:bg-bg-soft transition-all border border-hairline min-h-[38px]"
-              title={t.nav.reset}
-            >
-              <RotateCcw className="w-3.5 h-3.5 text-muted" />
-              <span className="hidden sm:inline font-medium">{t.nav.reset}</span>
-            </button>
-          )}
         </div>
       </div>
     </header>
