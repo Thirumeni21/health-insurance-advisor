@@ -32,12 +32,13 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
   onContinue,
 }) => {
   const { t } = useLanguage();
-  const [citySearch, setCitySearch] = useState("");
   const [isCityOpen, setIsCityOpen] = useState(false);
 
-  const filteredCities = POPULAR_CITIES.filter((c) =>
-    c.toLowerCase().includes(citySearch.toLowerCase())
-  );
+  const isCityMatch = POPULAR_CITIES.some((c) => c.toLowerCase() === city.trim().toLowerCase());
+  const query = city.trim().toLowerCase();
+  const filteredCities = query
+    ? POPULAR_CITIES.filter((c) => c.toLowerCase().includes(query)).slice(0, 15)
+    : POPULAR_CITIES.slice(0, 15);
 
   const isSingle = householdType === "myself";
   const isValid = age >= 18 && age <= 100 && gender && city.trim().length > 0 && (!isSingle || singleDependents);
@@ -134,9 +135,9 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
                 {t.step2.cityLabel}
               </label>
             </div>
-            {city && (
+            {city.trim() && (
               <span className="text-xs font-medium text-ink px-2.5 py-0.5 rounded-full bg-lavender-100 border border-lavender-300">
-                {city}
+                {city.trim()}
               </span>
             )}
           </div>
@@ -145,30 +146,57 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
             <input
               type="text"
               placeholder={t.step2.cityPlaceholder}
-              value={citySearch || city}
+              value={city}
               onChange={(e) => {
-                setCitySearch(e.target.value);
                 onUpdate({ city: e.target.value });
                 setIsCityOpen(true);
               }}
               onFocus={() => setIsCityOpen(true)}
-              className="w-full min-h-[44px] bg-white border border-hairline rounded-[14px] px-4 py-3 text-sm text-ink placeholder-muted focus:outline-none focus:border-lavender-600 transition-colors"
+              onBlur={() => setTimeout(() => setIsCityOpen(false), 250)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setIsCityOpen(false);
+                  (e.target as HTMLInputElement).blur();
+                }
+              }}
+              className="w-full min-h-[48px] bg-white border border-hairline rounded-[14px] px-4 py-3 text-sm text-ink placeholder-muted focus:outline-none focus:border-lavender-600 transition-colors"
             />
 
-            {isCityOpen && filteredCities.length > 0 && (
-              <div className="absolute left-0 right-0 top-full mt-1 max-h-48 overflow-y-auto bg-white border border-hairline rounded-[14px] shadow-elevated z-30 py-1">
+            {isCityOpen && (
+              <div className="absolute left-0 right-0 top-full mt-1.5 max-h-56 overflow-y-auto bg-white border border-hairline rounded-[14px] shadow-elevated z-30 py-1.5 divide-y divide-hairline">
+                {city.trim().length > 0 && !isCityMatch && (
+                  <button
+                    type="button"
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      onUpdate({ city: city.trim() });
+                      setIsCityOpen(false);
+                    }}
+                    className="w-full text-left px-4 py-2.5 text-xs text-lavender-600 hover:bg-lavender-100 font-semibold flex items-center justify-between transition-colors"
+                  >
+                    <span>Use &quot;{city.trim()}&quot; as my city</span>
+                    <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-lavender-200 text-ink">Custom</span>
+                  </button>
+                )}
                 {filteredCities.map((c) => (
                   <button
                     key={c}
                     type="button"
-                    onClick={() => {
+                    onMouseDown={(e) => {
+                      e.preventDefault();
                       onUpdate({ city: c });
-                      setCitySearch("");
                       setIsCityOpen(false);
                     }}
-                    className="w-full text-left px-4 py-2.5 text-xs text-ink-soft hover:text-ink hover:bg-lavender-100 transition-colors"
+                    className={`w-full text-left px-4 py-2.5 text-xs transition-colors flex items-center justify-between ${
+                      city.toLowerCase() === c.toLowerCase()
+                        ? "bg-lavender-100 text-ink font-semibold"
+                        : "text-ink-soft hover:text-ink hover:bg-lavender-50"
+                    }`}
                   >
-                    {c}
+                    <span>{c}</span>
+                    {city.toLowerCase() === c.toLowerCase() && (
+                      <span className="text-[10px] font-mono text-lavender-600 font-semibold">Selected</span>
+                    )}
                   </button>
                 ))}
               </div>
@@ -177,18 +205,17 @@ export const Question2UserBasic: React.FC<Question2UserBasicProps> = ({
 
           {/* Quick city pills */}
           <div className="flex flex-wrap gap-1.5 mb-3">
-            {["Mumbai", "Delhi NCR", "Bengaluru", "Chennai", "Coimbatore", "Hyderabad", "Madurai"].map((c) => (
+            {["Chennai", "Coimbatore", "Bengaluru", "Mumbai", "Madurai", "Trichy", "Hyderabad", "Delhi NCR", "Salem", "Kochi"].map((c) => (
               <button
                 key={c}
                 type="button"
                 onClick={() => {
                   onUpdate({ city: c });
-                  setCitySearch("");
                   setIsCityOpen(false);
                 }}
-                className={`text-xs px-3 py-1 rounded-full border transition-all ${
+                className={`text-xs px-3 py-1.5 rounded-full border transition-all ${
                   city === c
-                    ? "bg-lavender-100 border-lavender-300 text-ink font-semibold"
+                    ? "bg-lavender-100 border-lavender-300 text-ink font-semibold shadow-xs"
                     : "bg-bg-soft border-hairline text-ink-soft hover:text-ink hover:bg-lavender-100"
                 }`}
               >

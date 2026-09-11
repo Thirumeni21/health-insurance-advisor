@@ -77,25 +77,21 @@ export const Question3FamilyCircle: React.FC<Question3FamilyCircleProps> = ({
         </p>
       </div>
 
-      {/* Quick Add Action Buttons */}
-      <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
-        {[
-          { label: t.step3.addButtons.spouse, rel: "Spouse" as FamilyRelationship },
-          { label: t.step3.addButtons.child, rel: "Child" as FamilyRelationship },
-          { label: t.step3.addButtons.mother, rel: "Mother" as FamilyRelationship },
-          { label: t.step3.addButtons.father, rel: "Father" as FamilyRelationship },
-          { label: t.step3.addButtons.other, rel: "Other Dependent" as FamilyRelationship },
-        ].map((item) => (
-          <button
-            key={item.rel}
-            type="button"
-            onClick={() => openAddModal(item.rel)}
-            className="group inline-flex items-center space-x-2 px-4 py-2.5 rounded-full bg-white hover:bg-bg-soft border border-hairline hover:border-lavender-300 text-xs font-semibold text-ink transition-all shadow-subtle hover:scale-105 min-h-[44px]"
-          >
-            <Plus className="w-3.5 h-3.5 text-lavender-600 group-hover:rotate-90 transition-transform" />
-            <span>{item.label}</span>
-          </button>
-        ))}
+      {/* Single Add Family Member Action Button */}
+      <div className="flex items-center justify-center mb-8">
+        <button
+          type="button"
+          onClick={() => {
+            const hasSpouse = familyMembers.some((m) => m.relationship === "Spouse");
+            openAddModal(hasSpouse ? "Child" : "Spouse");
+          }}
+          className="group inline-flex items-center justify-center space-x-2.5 px-6 py-3.5 rounded-full bg-white hover:bg-bg-soft border border-hairline hover:border-lavender-300 text-xs sm:text-sm font-semibold text-ink transition-all shadow-subtle hover:shadow-elevated hover:scale-105 min-h-[48px] w-full sm:w-auto"
+        >
+          <div className="w-7 h-7 rounded-full bg-lavender-100 border border-lavender-300 flex items-center justify-center text-ink group-hover:scale-110 transition-transform">
+            <Plus className="w-4 h-4 text-lavender-600 group-hover:rotate-90 transition-transform" />
+          </div>
+          <span className="font-sans font-semibold">{t.step3.addFamilyMember || "+ Add Family Member"}</span>
+        </button>
       </div>
 
       {/* Member Cards List */}

@@ -122,6 +122,7 @@ export const en = {
       father: "+ Add Father",
       other: "+ Add Other Dependent",
     },
+    addFamilyMember: "+ Add Family Member",
     youLabel: "Primary Insured (You)",
     youBadge: "Central Pedestal",
     youDesc: "Core Sculpture",
@@ -129,7 +130,7 @@ export const en = {
     familyTag: "Family",
     insuredTag: "Insured",
     noInsuranceTag: "No Active Cover",
-    emptyNotice: "No family members added yet. Click any button above to add a spouse, children, or parents.",
+    emptyNotice: "No family members added yet. Click the '+ Add Family Member' button above to add a spouse, children, or parents.",
     continue: "Confirm Constellation & Continue",
   },
   modal: {

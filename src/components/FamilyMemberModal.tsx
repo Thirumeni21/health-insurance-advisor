@@ -47,6 +47,25 @@ export const FamilyMemberModal: React.FC<FamilyMemberModalProps> = ({
   );
   const [showWhyModal, setShowWhyModal] = useState(false);
 
+  React.useEffect(() => {
+    if (isOpen) {
+      const rel = initialData?.relationship || defaultRelationship;
+      setRelationship(rel);
+      setName(initialData?.name || "");
+      setge(
+        initialData?.age ||
+          (rel === "Child" ? 6 : rel === "Mother" || rel === "Father" ? 61 : 32)
+      );
+      setGender(
+        initialData?.gender ||
+          (rel === "Mother" ? "female" : rel === "Father" ? "male" : "female")
+      );
+      setFinanciallyDependent(initialData?.financiallyDependent || "yes");
+      setExistingInsurance(initialData?.existingInsurance || "no");
+      setShowWhyModal(false);
+    }
+  }, [isOpen, initialData, defaultRelationship]);
+
   if (!isOpen) return null;
 
   const handleSave = (e: React.FormEvent) => {
